@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>http://www.huweihuang.com/article/hello-world/</loc>
+        <lastmod>2019-02-15T01:51:03.083Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>http://www.huweihuang.com/article/hexo-theme-huweihuang/</loc>
         <lastmod>2019-02-14T10:54:33.780Z</lastmod>
         <changefreq>weekly</changefreq>
