@@ -98,6 +98,7 @@
 </script>
 
   <meta name="description" content="类文件说明 1我们知道java sdk里的注释是最好的doc文档。每个源码文件开始都有一大段注释来说明此文件所描述的内容，在这儿我们可以对源码有个大概的了解。 一： 1HashMap和HashTable类似，不同之处在于HashMap是非同步的即不是线程安全的；HashMap允许key、value为null 二： 1HashMap不保证插入元素所存放的顺序，甚至不保证元素的存放顺序会一直保持不变">
+<meta name="keywords" content="HashMap">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java1.8-HashMap">
 <meta property="og:url" content="https://qiaojiande.cn/article/java1-8-HashMap/index.html">
@@ -105,7 +106,9 @@
 <meta property="og:description" content="类文件说明 1我们知道java sdk里的注释是最好的doc文档。每个源码文件开始都有一大段注释来说明此文件所描述的内容，在这儿我们可以对源码有个大概的了解。 一： 1HashMap和HashTable类似，不同之处在于HashMap是非同步的即不是线程安全的；HashMap允许key、value为null 二： 1HashMap不保证插入元素所存放的顺序，甚至不保证元素的存放顺序会一直保持不变">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/hashmap-resize.jpg">
-<meta property="og:updated_time" content="2019-07-31T03:42:56.267Z">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/hashmap-put.jpg">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/hashmap-get.jpg">
+<meta property="og:updated_time" content="2019-07-31T07:28:12.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java1.8-HashMap">
 <meta name="twitter:description" content="类文件说明 1我们知道java sdk里的注释是最好的doc文档。每个源码文件开始都有一大段注释来说明此文件所描述的内容，在这儿我们可以对源码有个大概的了解。 一： 1HashMap和HashTable类似，不同之处在于HashMap是非同步的即不是线程安全的；HashMap允许key、value为null 二： 1HashMap不保证插入元素所存放的顺序，甚至不保证元素的存放顺序会一直保持不变">
@@ -381,7 +384,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-31 11:42:56" itemprop="dateModified" datetime="2019-07-31T11:42:56+08:00">2019-07-31</time>
+                <time title="修改时间：2019-07-31 15:28:12" itemprop="dateModified" datetime="2019-07-31T15:28:12+08:00">2019-07-31</time>
               </span>
             
           
@@ -477,6 +480,22 @@ Fast-Fail Iterator: 在iterator遍历时，不通过iterator的结构修改会�
 Fail-Safe Iterator：在iterator遍历时，可以不通过iterator来修改集合的结构，不会抛异常<br>
 JDK中使用Fast-Fail模式的集合：ArrayList、HashMap、Vector等<br>
 JDK中使用Fail-Safe模式的集合：ConcurrentHashMap、CopyOnWriteAraayList</p>
+<h3 id="put">put</h3>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/hashmap-put.jpg" alt=""></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//LinkedHashMap 移除旧节点示例</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// LinkedHashMap removeEldestEntry() 默认实现返回false，不起作用</span></span><br><span class="line">  <span class="keyword">final</span> <span class="keyword">int</span> MAX = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构造匿名类继承自LinkedHashMap，并实现removeEldestEntry，每次插入节点时检测大小超过阈值，则自动删除旧节点</span></span><br><span class="line">  LinkedHashMap&lt;Integer, String&gt; li_hash_map =</span><br><span class="line">    <span class="keyword">new</span> LinkedHashMap&lt;Integer, String&gt;() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;Integer, String&gt; eldest)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> size() &gt; MAX;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 插入2个节点</span></span><br><span class="line">  li_hash_map.put(<span class="number">1</span>, <span class="string">"One"</span>);</span><br><span class="line">  li_hash_map.put(<span class="number">2</span>, <span class="string">"Two"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">//&#123;1=One, 2=Two&#125;</span></span><br><span class="line">  System.out.println(<span class="string">""</span> + li_hash_map);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 插入第三个节点，超出阈值</span></span><br><span class="line">  li_hash_map.put(<span class="number">3</span>, <span class="string">"Three"</span>);</span><br><span class="line">  <span class="comment">//&#123;2=Two, 3=Three&#125;</span></span><br><span class="line">  System.out.println(<span class="string">""</span> + li_hash_map);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 插入第四个节点，超出阈值</span></span><br><span class="line">  li_hash_map.put(<span class="number">4</span>, <span class="string">"Four"</span>);</span><br><span class="line">  <span class="comment">//&#123;3=Three, 4=Four&#125;</span></span><br><span class="line">  System.out.println(<span class="string">""</span> + li_hash_map);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="get">get</h3>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/hashmap-get.jpg" alt=""></p>
+<p>首先根据key计算hash，然后通过hash与table length取余运算得出key-value所在的table的index，取出index处的key-value，再比较key，若没找到，再遍历链表比较。注意图中1和2处key的比较，使用 == 和 equals，表示HashMap的两个key相等的判断条件是：同样的key对象或者自定义的key.equals相等。由此也可直达作为HashMap的Key对象必须实现hashCode方法和equals方法。hashCode用于确定key-value在数组中的index，equals用于比较查找key-value。</p>
+<h3 id="链表转红黑树">链表转红黑树</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">//链表长度超过8时，转红黑树</span><br><span class="line">final void treeifyBin(java.util.HashMap.Node&lt;K,V&gt;[] tab, int hash) &#123;</span><br><span class="line">    int n, index; java.util.HashMap.Node&lt;K,V&gt; e;</span><br><span class="line">    if (tab == null || (n = tab.length) &lt; MIN_TREEIFY_CAPACITY)</span><br><span class="line">        // 数组大小小于64，则走扩容，扩容数组至2倍原来大小</span><br><span class="line">        resize();</span><br><span class="line">    //找到链表头节点</span><br><span class="line">    else if ((e = tab[index = (n - 1) &amp; hash]) != null) &#123;</span><br><span class="line">        //遍历Node链表，将Node链表元素转TreeNode链表</span><br><span class="line">        java.util.HashMap.TreeNode&lt;K,V&gt; hd = null, tl = null;</span><br><span class="line">        do &#123;</span><br><span class="line">            //调用replacementTreeNode，根据Node链表节点构造TreeNode节点</span><br><span class="line">            java.util.HashMap.TreeNode&lt;K,V&gt; p = replacementTreeNode(e, null);</span><br><span class="line">            if (tl == null)</span><br><span class="line">                //TreeNode链表为空，则将TreeNode节点设置为首节点</span><br><span class="line">                hd = p;</span><br><span class="line">            else &#123;</span><br><span class="line">                //TreeNode链表不为空，则向TreeNode链表后添加TreeNode元素</span><br><span class="line">                p.prev = tl;</span><br><span class="line">                tl.next = p;</span><br><span class="line">            &#125;</span><br><span class="line">            tl = p;</span><br><span class="line">        &#125; while ((e = e.next) != null);</span><br><span class="line">        if ((tab[index] = hd) != null)</span><br><span class="line">            //hd即是TreeNode链表，调用treeify将TreeNode链表转为红黑树</span><br><span class="line">            hd.treeify(tab);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于红黑树：是一颗自平衡二叉树，通过它的5个特性限制确保了红黑树的关键特性：从根到叶子的最长的可能路径不多于最短的可能路径的两倍长。提升查找性能，它可以在O(logn)时间内完成查找，插入和删除，这里的n是树中元素的数目。</p>
+<ol>
+<li>节点是红色或黑色。</li>
+<li>根是黑色。</li>
+<li>所有叶子都是黑色（叶子是NIL节点）。</li>
+<li>每个红色节点必须有两个黑色的子节点。（从每个叶子到根的所有路径上不能有两个连续的红色节点。）</li>
+<li>从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+</ol>
 
       
     </div>
@@ -525,6 +544,15 @@ JDK中使用Fail-Safe模式的集合：ConcurrentHashMap、CopyOnWriteAraayList<
     
 
     <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/HashMap/" rel="tag"># HashMap</a>
+          
+        </div>
       
 
       
@@ -626,6 +654,19 @@ JDK中使用Fail-Safe模式的集合：ConcurrentHashMap、CopyOnWriteAraayList<
     
 
     
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
   </nav>
 
 
@@ -656,7 +697,7 @@ JDK中使用Fail-Safe模式的集合：ConcurrentHashMap、CopyOnWriteAraayList<
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类文件说明"><span class="nav-number">1.</span> <span class="nav-text">&#x7C7B;&#x6587;&#x4EF6;&#x8BF4;&#x660E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#serialversionuid"><span class="nav-number">2.</span> <span class="nav-text">serialVersionUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tablesizefor"><span class="nav-number">3.</span> <span class="nav-text">tableSizeFor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashkey"><span class="nav-number">4.</span> <span class="nav-text">hash(key)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodelt-k-v-gt"><span class="nav-number">5.</span> <span class="nav-text">Node&lt; K ,V &gt;[]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">6.</span> <span class="nav-text">&#x6784;&#x9020;&#x51FD;&#x6570;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resize"><span class="nav-number">7.</span> <span class="nav-text">resize()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modcount"><span class="nav-number">8.</span> <span class="nav-text">modCount</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#类文件说明"><span class="nav-number">1.</span> <span class="nav-text">&#x7C7B;&#x6587;&#x4EF6;&#x8BF4;&#x660E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#serialversionuid"><span class="nav-number">2.</span> <span class="nav-text">serialVersionUID</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tablesizefor"><span class="nav-number">3.</span> <span class="nav-text">tableSizeFor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hashkey"><span class="nav-number">4.</span> <span class="nav-text">hash(key)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nodelt-k-v-gt"><span class="nav-number">5.</span> <span class="nav-text">Node&lt; K ,V &gt;[]</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数"><span class="nav-number">6.</span> <span class="nav-text">&#x6784;&#x9020;&#x51FD;&#x6570;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resize"><span class="nav-number">7.</span> <span class="nav-text">resize()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#modcount"><span class="nav-number">8.</span> <span class="nav-text">modCount</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#put"><span class="nav-number">9.</span> <span class="nav-text">put</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get"><span class="nav-number">10.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链表转红黑树"><span class="nav-number">11.</span> <span class="nav-text">&#x94FE;&#x8868;&#x8F6C;&#x7EA2;&#x9ED1;&#x6811;</span></a></li></ol></div>
             
 
           </div>
