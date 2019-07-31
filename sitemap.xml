@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://qiaojiande.cn/article/%E6%A2%A6/</loc>
+    
+    <lastmod>2019-07-31T03:43:36.334Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://qiaojiande.cn/article/java1-8-HashMap/</loc>
+    
+    <lastmod>2019-07-31T03:42:56.267Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://qiaojiande.cn/baidu_verify_EyoMwitrw4.html</loc>
     
     <lastmod>2019-07-31T03:04:41.196Z</lastmod>
@@ -12,20 +26,6 @@
     <loc>https://qiaojiande.cn/google4b1f3244530cc1bc.html</loc>
     
     <lastmod>2019-07-31T03:03:34.966Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qiaojiande.cn/article/java1-8-HashMap/</loc>
-    
-    <lastmod>2019-07-30T14:51:13.781Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://qiaojiande.cn/article/%E6%A2%A6/</loc>
-    
-    <lastmod>2019-07-30T08:26:34.462Z</lastmod>
     
   </url>
   
