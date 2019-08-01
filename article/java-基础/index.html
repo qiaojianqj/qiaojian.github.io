@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+<meta name="google-site-verification" content="FmCBFeBJWlIl9DVnns-1SQgs2lTet7iXquulOgdsOVY" />
+<meta name="baidu-site-verification" content="EyoMwitrw4" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="数据类型 byte(1字节), short(2字节), int(4字节), long(8字节), float(4字节), double(8字节), char(2字节), boolean(true, false) Java 没有任何无符号(unsigned) 形式的 int、long、short 或 byte 类型。 char 类型描述了 UTF-16 编码中的一个代码单元，占2字节，（有的字符编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="java-基础">
+<meta property="og:url" content="https://qiaojiande.cn/article/java-基础/index.html">
+<meta property="og:site_name" content="谯剑的小站">
+<meta property="og:description" content="数据类型 byte(1字节), short(2字节), int(4字节), long(8字节), float(4字节), double(8字节), char(2字节), boolean(true, false) Java 没有任何无符号(unsigned) 形式的 int、long、short 或 byte 类型。 char 类型描述了 UTF-16 编码中的一个代码单元，占2字节，（有的字符编码">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/java-base-get-return-ref-1.jpg">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/java-base-get-return-ref-2.jpg">
+<meta property="og:updated_time" content="2019-08-01T07:39:27.424Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="java-基础">
+<meta name="twitter:description" content="数据类型 byte(1字节), short(2字节), int(4字节), long(8字节), float(4字节), double(8字节), char(2字节), boolean(true, false) Java 没有任何无符号(unsigned) 形式的 int、long、short 或 byte 类型。 char 类型描述了 UTF-16 编码中的一个代码单元，占2字节，（有的字符编码">
+<meta name="twitter:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/java-base-get-return-ref-1.jpg">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://qiaojiande.cn/article/java-基础/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>java-基础 | 谯剑的小站</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谯剑的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录...</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br/>公益 404</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/java-基础/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qiao.Jian"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谯剑的小站"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">java-基础
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-01 11:27:27 / 修改时间：15:39:27" itemprop="dateCreated datePublished" datetime="2019-08-01T11:27:27+08:00">2019-08-01</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="数据类型">数据类型</h3>
+<p>byte(1字节), short(2字节), int(4字节), long(8字节), float(4字节), double(8字节), char(2字节), boolean(true, false)</p>
+<p>Java 没有任何无符号(unsigned) 形式的 int、long、short 或 byte 类型。</p>
+<p>char 类型描述了 UTF-16 编码中的一个代码单元，占2字节，（有的字符编码占用两个代码单元）建议不要在程序中使用 char 类型。</p>
+<p>整数被 0 除将会产生一个异常， 而浮点数被 0 除将会得到无穷大或 NaN 结果。</p>
+<p>&amp;&amp;和||运算符是按照“ 短路”方式来求值的: 如果第一个操作数已经能够确定表达式的值，第二个操作数就不必计算了。</p>
+<p>&gt;&gt;运算符会用符号位填充高位，&gt;&gt;&gt;运算符会用 0 填充高位。</p>
+<p>移位运算符的右操作数要完成模32的运算(除非左操作数是long类型，在这种情况下需要对右操作数模 64 )。 例如，1&lt;&lt;35 的值等同于 1&lt;&lt;3 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">System.out.println ( <span class="number">1.0</span> / <span class="number">0</span> );</span><br><span class="line"><span class="comment">//output Infinity</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> valInt = <span class="number">1</span>&lt;&lt;<span class="number">35</span>;</span><br><span class="line">System.out.println ( valInt);</span><br><span class="line"><span class="comment">//output 8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> valLong = (<span class="keyword">long</span>)<span class="number">1</span>&lt;&lt;<span class="number">35</span>;</span><br><span class="line">System.out.println ( valLong );</span><br><span class="line"><span class="comment">//output 34359738368</span></span><br></pre></td></tr></table></figure>
+<p>字符串“xxoo”是unicode字符x、x、o、o组成的序列。字符串、String类对象是不可变对象。</p>
+<p>判断字符串内容相等用equals，==运算符是判断字符串的地址是否相等。</p>
+<p>String取length是取的字符串的代码单元的个数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String hehe = <span class="string">"😄"</span>;</span><br><span class="line">System.out.println ( hehe.length () ); <span class="comment">//2</span></span><br></pre></td></tr></table></figure>
+<p>Console类用于输入密码，为了安全起见，返回的密码存放在一维字符数组中， 而不是字符串中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为字符串有字符串常量池，导致密码长期保存在内存中，容易通过jmap+jhat分析出密码来，而使用字符数组，用完即可置为null，相对安全</span><br></pre></td></tr></table></figure>
+<p>在 C++ 中， 可以在嵌套的块中重定义一个变量。 在内层定义的变量会覆盖在外层定义的变量。 但是，在java中不允许嵌套块中重定义外层的变量。</p>
+<p>在 Java 中， 允许数组长度为 0。 在 Java 中， 允许将一个数组变量拷贝给 另一个数组变量。这时， 两个变量将引用同 一个数组。如果希望将 一个数组的所有值拷贝到一个新的数组中去， 就要使用 Arrays 类的 copyOf 方法。可以通过二维数组创建不规则数组（先创建行，再单独创建每行的数组）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//浮点数默认为双精度的（double）</span></span><br><span class="line"><span class="comment">//float i = 1.1;</span></span><br><span class="line"><span class="keyword">float</span> i = (<span class="keyword">float</span>) <span class="number">1.1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">short</span> j = <span class="number">1</span>;</span><br><span class="line"><span class="comment">//整型默认为int</span></span><br><span class="line"><span class="comment">//j = j + 1;</span></span><br><span class="line"><span class="comment">// += 运算自动向下转型 int -&gt; short</span></span><br><span class="line">j += <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不使用临时变量交换两个整数的值</span></span><br><span class="line"><span class="comment">//方法1. 使用异或操作swap a 和 b 的值</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">456</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">123</span>;</span><br><span class="line">a = a ^ b;</span><br><span class="line">b = a ^ b;</span><br><span class="line">a = a ^ b;</span><br><span class="line">System.out.println ( a ); <span class="comment">//123</span></span><br><span class="line">System.out.println ( b ); <span class="comment">//456</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法2. 使用加减法运算</span></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">456</span>;</span><br><span class="line">a = a + b;</span><br><span class="line">b = a - b;</span><br><span class="line">a = a - b;</span><br><span class="line">System.out.println ( a );</span><br><span class="line">System.out.println ( b );</span><br><span class="line"></span><br><span class="line"><span class="comment">//编译时能确定的String对象都放入常量池</span></span><br><span class="line"><span class="comment">//运行时才能确定或者new出的String对象都放入堆</span></span><br><span class="line">String str1 = <span class="string">"I am String1"</span>; <span class="comment">//变量str1引用指向字符串常量池</span></span><br><span class="line"><span class="keyword">final</span> String str2 = <span class="string">"I am String"</span>; <span class="comment">//final修饰，str2是编译期常量</span></span><br><span class="line">String str3 = <span class="string">"I am String"</span>; <span class="comment">//变量str3引用指向字符串常量池</span></span><br><span class="line">String str4 = str2 + <span class="number">1</span>; <span class="comment">// str2 + 1 得到的也是个常量，放在常量池</span></span><br><span class="line">String str5 = str3 + <span class="number">1</span>; <span class="comment">// str3 + 1 得到的是个变量，放在堆上 （因为str3变量在运行时才可以取到它所引用的值）</span></span><br><span class="line">System.out.println ( str1 == str4 );</span><br><span class="line">System.out.println ( str1 == str5 );</span><br><span class="line"></span><br><span class="line"><span class="comment">//try语句带return，finally执行时机</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"> <span class="keyword">if</span> (a == <span class="number">123</span>) &#123;</span><br><span class="line">     System.out.println ( <span class="string">"in try return a = "</span> + a );</span><br><span class="line">     <span class="keyword">return</span>; <span class="comment">// 执行到此处，记录return的值，然后执行finally代码块，再然后return</span></span><br><span class="line"> &#125;</span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"> a = <span class="number">1234</span>;</span><br><span class="line"> System.out.println ( <span class="string">"in finally a = "</span> + a );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="类和对象">类和对象</h3>
+<p>识别类的简单规则是在分析问题的过程中寻找名词， 而方法对应着动词。</p>
+<table>
+<thead>
+<tr>
+<th>关系</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>继承(is a)</td>
+<td>is a，类A扩展自类B</td>
+</tr>
+<tr>
+<td>接口实现</td>
+<td>类实现接口中的方法</td>
+</tr>
+<tr>
+<td>依赖(use a)</td>
+<td>use a，一个类的方法操纵另一个类的对象</td>
+</tr>
+<tr>
+<td>聚合(has a)</td>
+<td>has a，类A的对象包含类B的对象（属性关联）</td>
+</tr>
+<tr>
+<td>关联</td>
+<td>通过属性、方法关联</td>
+</tr>
+</tbody>
+</table>
+<p>构造器总是伴随着 new 操作符的执行被调用。</p>
+<p>不要编写返回引用可变数据域对象的访问器方法。 如果需要返回一个可变数据域的拷贝， 就应该使用 clone。</p>
+<ol>
+<li>Get不使用clone，直接返回引用</li>
+</ol>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/java-base-get-return-ref-1.jpg" alt=""></p>
+<ol start="2">
+<li>Get返回引用对象的clone</li>
+</ol>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/java-base-get-return-ref-2.jpg" alt=""></p>
+<p>对于可变的类， 使用 final 修饰符可能会对读者造成混乱。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"> <span class="keyword">private</span> <span class="keyword">final</span>  StringBuilder evaluations;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">Test</span><span class="params">()</span></span>&#123;</span><br><span class="line">     evaluations = <span class="keyword">new</span> StringBuilder (  );</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//final 关键字只是表示存储在 evaluations 变量中的对象引用不会再指示其他 StringBuilder 对象。 不过这个对象可以更改</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">giveGoldStar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     evaluations.append ( <span class="keyword">new</span> Date () + <span class="string">": Gold Star!\n"</span> );</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">printTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     System.out.println ( evaluations );</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>静态变量使用得比较少， 但静态常量(static final)却使用得比较多。 静态方法是没有this参数的方法，在一个非静态方法中this参数是该方法的隐式参数，代表操作此方法的对象。</p>
+<p>java方法调用参数是按值传递，下面总结一下 Java 中方法参数的使用情况:</p>
+<p>• 一个方法不能修改一个基本数据类型的参数 (即数值型或布尔型)。</p>
+<p>• 一个方法可以改变一个对象参数的状态。</p>
+<p>• 一个方法不能让对象参数引用一个新的对象。</p>
+<p>类属性与局部变量的主要不同点： 必须明确地初始化方法中的局部变量。 但是，如果没有初始化类中的属性， 它将会被自动初始化为默认值(0、false 或 null )，但是，这并不是一种良好的编程习惯。</p>
+<p>仅当类没有提供任何构造器的时候，系统才会提供一个默认的构造器 。</p>
+<p>可以在类定义中， 直接将一个值赋给任何属性。在执行构造器之前，将会先执行赋值操作。</p>
+<p>类构造初始化次序：</p>
+<ol>
+<li>static 属性赋值</li>
+<li>static 初始化块</li>
+<li>实例属性赋值</li>
+<li>实例属性初始化块</li>
+<li>构造函数体</li>
+</ol>
+<p>可以为任何一个类添加 finalize 方法。finalize 方法将在垃圾回收器清除对象之前调用。 在实际应用中， 不要依赖于使用 finalize 方法回收任何短缺的资源，这是因为很难知道这个方法什么时候才能够调用。</p>
+<p>从编译器的角度来看，嵌套的包之间没有任何关系。 例如， java.util 包与 java.util.jar 包毫无关系。每一个都拥有独立的类集合。</p>
+<p>将包中的文件放到与完整的包名匹配的子目录中。</p>
+<p>利用 -classpath 选项设置类路径是首选的方法， 也可以通过设置 CLASSPATH 环境变量 完成这个操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">java -classpath c:\classdir;.;c:\archives\archive.jar MyProg</span><br><span class="line">//或者</span><br><span class="line">export CLASSPATH=/home/user/classdir:.:/home/user/archives/archive.jar</span><br></pre></td></tr></table></figure>
+<h3 id="继承">继承</h3>
+<p>如果子类的构造器没有显式地调用超类的构造器，则将自动地调用超类默认(没有参数 ) 的构造器。 如果超类没有不带参数的构造器，并且在子类的构造器中又没有显式地调用超类的其他构造器， 则 Java 编译器将报告错误。</p>
+<p>是否应该设计为继承关系的一个简单规则： “is-a” 规则。它的另一种表述法是置换法则。它表明程序中出现超类对象的任何地方都可以用子类对象置换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Employee e;</span><br><span class="line">e = <span class="keyword">new</span> Employee();</span><br><span class="line">e = <span class="keyword">new</span> Manager(); <span class="comment">//ok, Manager extends from Employee</span></span><br></pre></td></tr></table></figure>
+<p>在 Java 中，子类数组的引用可以转换成超类数组的引用，而不需要采用强制类型转换。但是一定要注意这种用法会引起以下类型紊乱的错误。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Manager[] managers = <span class="keyword">new</span> Manager[<span class="number">10</span>];</span><br><span class="line">Employee[] staff = managers; <span class="comment">//ok, but now staff and managers reference to the same Objects</span></span><br><span class="line">staff[<span class="number">0</span>] = <span class="keyword">new</span> Employee(); <span class="comment">//ok</span></span><br><span class="line">managers[<span class="number">0</span>].setBonus(<span class="number">1000</span>); <span class="comment">//error, this will arise ArrayStoreException</span></span><br></pre></td></tr></table></figure>
+<p>返回类型不是签名的一部分， 因此，在覆盖方法时，一定要保证返回类型的兼容性。允许子类将覆盖方法的返回类型定义为原返回类型的子类型。</p>
+<p>方法调用的两种方式：静态绑定（private方法、static方法、final方法），动态绑定（其他）</p>
+<p>如果将一个类声明为 final， 只有其中的方法自动地成为 final, 而不包括属性。</p>
+<p>只能在继承层次内进行类型转换。 在将超类转换成子类之前，应该使用 instanceof 进行检查。 但是尽量不要使用类型转换，如果必须使用类型转换，则应该检查超类的设计是否合理。</p>
+<p>包含一个或多个抽象方法的类本身必须被声明为抽象的。 但是，类即使不含抽象方法， 也可以将类声明为抽象类。</p>
+<p>在 Java 中，只有基本类型 ( primitive types ) 不是对象， 所有的数组类型，不管是对象数组还是基本类型的数组都是扩展自Object的类对象。</p>
+<p>为一个类编写equals方法的完美建议：</p>
+<blockquote>
+<ol>
+<li>显示参数命名为otherObject</li>
+<li>检测this与otheObject是否引用同一对象：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">if</span> (<span class="keyword">this</span> == otherObject) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>检测otherObject是否为null</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">if</span> (otherObject == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>检测this与otherObject是否属于同一个类：</li>
+</ol>
+<p>如果equals的语义在每个子类有所改变，则使用getClass检测</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">if</span> (getClass() != otherObject.getClass()) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>如果所有子类使用相同的语义，即由超类决定相等的概念，则使用instanceof检测</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">if</span> (!(otherObject <span class="keyword">instanceof</span> ClassName)) <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ol start="5">
+<li>将otherObject转换为相应的类类型变量</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; ClassName other = (ClassName) otherObject;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<ol start="6">
+<li>开始属性域的比较，使用==比较基本类型，使用Objects.equals比较对象</li>
+</ol>
+</blockquote>
+<p>如果重新定义 equals 方法， 就必须重新定义 hashCode 方法。</p>
+<p>强烈建议为自定义的每一个类增加toString方法。</p>
+<p>对象包装器类（Integer，Long，Float，Double，Short，Byte，Character，Void，Boolean）是final类, 因此不能定义它们的子类。</p>
+<p>自动装箱规范要求 介于 -128 ~ 127 之间的byte,  short , int, char(0~127) 被包装到固定的对象中(ByteCache,ShortCache,IntegerCache,CharacterCache)。 因此</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">1000</span>;</span><br><span class="line">Integer b = <span class="number">1000</span>;</span><br><span class="line"><span class="keyword">if</span> (a == b) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">Integer a = <span class="number">100</span>;</span><br><span class="line">Integer b = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">if</span> (a == b) <span class="comment">// true</span></span><br><span class="line">  </span><br><span class="line">System.out.println ( <span class="string">"--------Short--------"</span> );</span><br><span class="line"></span><br><span class="line">Short s1 = <span class="number">12</span>;</span><br><span class="line">Short s2 = <span class="number">12</span>;</span><br><span class="line">Short s3 = <span class="number">129</span>;</span><br><span class="line">Short s4 = <span class="number">129</span>;</span><br><span class="line">System.out.println ( s1 == s2 ); <span class="comment">//true</span></span><br><span class="line">System.out.println ( s3 == s4 ); <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">System.out.println ( <span class="string">"--------Byte--------"</span> );</span><br><span class="line"></span><br><span class="line">Byte b1 = <span class="number">13</span>;</span><br><span class="line">Byte b2 = <span class="number">13</span>;</span><br><span class="line">Byte b3 = <span class="number">127</span>;</span><br><span class="line">Byte b4 = <span class="number">127</span>;</span><br><span class="line">System.out.println ( b1 == b2 ); <span class="comment">//true</span></span><br><span class="line">System.out.println ( b3 == b4 ); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">System.out.println ( <span class="string">"--------Character--------"</span> );</span><br><span class="line"></span><br><span class="line">Character c1 = <span class="number">56</span>;</span><br><span class="line">Character c2 = <span class="number">56</span>;</span><br><span class="line">Character c3 = <span class="number">156</span>;</span><br><span class="line">Character c4 = <span class="number">156</span>;</span><br><span class="line">System.out.println ( c1 == c2 ); <span class="comment">//true</span></span><br><span class="line">System.out.println ( c3 == c4 ); <span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>自动装箱拆箱陷阱</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">1</span>;</span><br><span class="line">Integer b = <span class="number">2</span>;</span><br><span class="line">Integer c = <span class="number">3</span>;</span><br><span class="line">Integer e = <span class="number">321</span>;</span><br><span class="line">Integer e1 = <span class="number">300</span>;</span><br><span class="line">Integer e2 = <span class="number">21</span>;</span><br><span class="line">Long g = <span class="number">3L</span>;</span><br><span class="line">System.out.println ( e == (e1+e2) ); <span class="comment">//true == 在遇到算术运算后，自动拆箱，比较值相等</span></span><br><span class="line">System.out.println ( c.equals ( a+b ) ); <span class="comment">//true a+b 算术运算后，自动装箱为Integer</span></span><br><span class="line">System.out.println ( g == (a+b) ); <span class="comment">// true a+b 算术运算后，自动拆箱为 3</span></span><br><span class="line">System.out.println ( g.equals ( a+b ) ); <span class="comment">//false equals方法不会处理数据类型转换的关系</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>Good for you!</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="Qiao.Jian 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/article/java1-8-HashMap/" rel="next" title="java1.8-HashMap">
+                <i class="fa fa-chevron-left"></i> java1.8-HashMap
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="Qiao.Jian"/>
+  
+  <p class="site-author-name" itemprop="name">Qiao.Jian</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+        
+        
+          
+        
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span>
+        
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.</span> <span class="nav-text">&#x6570;&#x636E;&#x7C7B;&#x578B;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类和对象"><span class="nav-number">2.</span> <span class="nav-text">&#x7C7B;&#x548C;&#x5BF9;&#x8C61;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">3.</span> <span class="nav-text">&#x7EE7;&#x627F;</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qiao.Jian</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.4.3</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>
