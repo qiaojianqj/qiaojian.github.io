@@ -9,13 +9,6 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/java/</loc>
-        <lastmod>2019-08-01T15:52:38.221Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://qiaojiande.cn/tags/v2ray/</loc>
         <lastmod>2019-08-10T12:35:51.682Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -32,6 +25,13 @@
     <url>
         <loc>https://qiaojiande.cn/tags/access-log/</loc>
         <lastmod>2019-08-15T07:43:02.870Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/java/</loc>
+        <lastmod>2019-08-16T10:04:55.817Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
