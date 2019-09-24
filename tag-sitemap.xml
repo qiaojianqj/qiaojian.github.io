@@ -9,13 +9,6 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/v2ray/</loc>
-        <lastmod>2019-08-10T12:35:51.682Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://qiaojiande.cn/tags/linux/</loc>
         <lastmod>2019-08-13T09:09:29.991Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -37,8 +30,22 @@
     </url>
 
     <url>
+        <loc>https://qiaojiande.cn/tags/btrace/</loc>
+        <lastmod>2019-08-29T10:00:17.159Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://qiaojiande.cn/tags/caddy/</loc>
-        <lastmod>2019-08-29T03:09:41.521Z</lastmod>
+        <lastmod>2019-08-31T01:32:19.568Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/v2ray/</loc>
+        <lastmod>2019-09-24T09:26:39.501Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
