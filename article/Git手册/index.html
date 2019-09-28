@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="谯剑的小站">
 <meta property="og:description" content="Git基础   什么是版本控制系统（VCS）？ 记录文件的变化状态，以便查阅特定节点的文件和对特定节点文件进行修改。   集中化的版本控制系统 例如SVN，Perforce等，以C/S的方式进行工作，服务器部署在远端，记录了所有的版本历史和状态，客户端可以从服务器拉取某个特定节点的快照，并作修改和提交。最大的特点是：客户端只拉取到特定节点的快照，不包含整个项目的版本历史和状态。   分布式的版本控">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-28T23:52:38.984Z">
+<meta property="og:updated_time" content="2019-09-28T23:54:43.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git手册">
 <meta name="twitter:description" content="Git基础   什么是版本控制系统（VCS）？ 记录文件的变化状态，以便查阅特定节点的文件和对特定节点文件进行修改。   集中化的版本控制系统 例如SVN，Perforce等，以C/S的方式进行工作，服务器部署在远端，记录了所有的版本历史和状态，客户端可以从服务器拉取某个特定节点的快照，并作修改和提交。最大的特点是：客户端只拉取到特定节点的快照，不包含整个项目的版本历史和状态。   分布式的版本控">
@@ -381,7 +381,7 @@
                 
               
 
-              <time title="创建时间：2019-09-29 07:46:42 / 修改时间：07:52:38" itemprop="dateCreated datePublished" datetime="2019-09-29T07:46:42+08:00">2019-09-29</time>
+              <time title="创建时间：2019-09-29 07:46:42 / 修改时间：07:54:43" itemprop="dateCreated datePublished" datetime="2019-09-29T07:46:42+08:00">2019-09-29</time>
             </span>
           
 
@@ -517,7 +517,7 @@
 <p>查看提交历史：git log</p>
 </li>
 <li>
-<h6 id="修改最近一次提交git-commit-amend比如先git-commit发现还有未提交文件git-add-忘提交文件再次执行git-commit-amend会覆盖上次的commitgit-log中只会记录最近这次的commit-注意不能修改已经push的commit会导致再次push冲突">修改最近一次提交：git commit --amend（比如：先git commit，发现还有未提交文件，git add 忘提交文件，再次执行git commit --amend，会覆盖上次的commit，git log中只会记录最近这次的commit。注意不能修改已经push的commit，会导致再次push冲突）</h6>
+<p><strong>修改最近一次提交：git commit --amend（比如：先git commit，发现还有未提交文件，git add 忘提交文件，再次执行git commit --amend，会覆盖上次的commit，git log中只会记录最近这次的commit。注意不能修改已经push的commit，会导致再次push冲突）</strong></p>
 </li>
 <li>
 <p>取消保存到暂存区的文件：git reset HEAD file，此操作会将git add的文件还原回修改待添加的状态</p>
@@ -869,7 +869,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git基础"><span class="nav-number">1.</span> <span class="nav-text">Git&#x57FA;&#x7840;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git安装"><span class="nav-number">2.</span> <span class="nav-text">Git&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git配置"><span class="nav-number">3.</span> <span class="nav-text">Git&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-help"><span class="nav-number">4.</span> <span class="nav-text">Git help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git项目获取"><span class="nav-number">5.</span> <span class="nav-text">Git&#x9879;&#x76EE;&#x83B7;&#x53D6;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忽略部分文件"><span class="nav-number">6.</span> <span class="nav-text">&#x5FFD;&#x7565;&#x90E8;&#x5206;&#x6587;&#x4EF6;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-命令自动补全"><span class="nav-number">7.</span> <span class="nav-text">git &#x547D;&#x4EE4;&#x81EA;&#x52A8;&#x8865;&#x5168;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">8.</span> <span class="nav-text">&#x5E38;&#x7528;&#x547D;&#x4EE4;</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#修改最近一次提交git-commit-amend比如先git-commit发现还有未提交文件git-add-忘提交文件再次执行git-commit-amend会覆盖上次的commitgit-log中只会记录最近这次的commit-注意不能修改已经push的commit会导致再次push冲突"><span class="nav-number">8.0.0.0.1.</span> <span class="nav-text">&#x4FEE;&#x6539;&#x6700;&#x8FD1;&#x4E00;&#x6B21;&#x63D0;&#x4EA4;&#xFF1A;git commit --amend&#xFF08;&#x6BD4;&#x5982;&#xFF1A;&#x5148;git commit&#xFF0C;&#x53D1;&#x73B0;&#x8FD8;&#x6709;&#x672A;&#x63D0;&#x4EA4;&#x6587;&#x4EF6;&#xFF0C;git add &#x5FD8;&#x63D0;&#x4EA4;&#x6587;&#x4EF6;&#xFF0C;&#x518D;&#x6B21;&#x6267;&#x884C;git commit --amend&#xFF0C;&#x4F1A;&#x8986;&#x76D6;&#x4E0A;&#x6B21;&#x7684;commit&#xFF0C;git log&#x4E2D;&#x53EA;&#x4F1A;&#x8BB0;&#x5F55;&#x6700;&#x8FD1;&#x8FD9;&#x6B21;&#x7684;commit&#x3002;&#x6CE8;&#x610F;&#x4E0D;&#x80FD;&#x4FEE;&#x6539;&#x5DF2;&#x7ECF;push&#x7684;commit&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;&#x518D;&#x6B21;push&#x51B2;&#x7A81;&#xFF09;</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-hook"><span class="nav-number">9.</span> <span class="nav-text">git hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-svn"><span class="nav-number">10.</span> <span class="nav-text">git svn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-手册"><span class="nav-number">11.</span> <span class="nav-text">git &#x624B;&#x518C;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git基础"><span class="nav-number">1.</span> <span class="nav-text">Git&#x57FA;&#x7840;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git安装"><span class="nav-number">2.</span> <span class="nav-text">Git&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git配置"><span class="nav-number">3.</span> <span class="nav-text">Git&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-help"><span class="nav-number">4.</span> <span class="nav-text">Git help</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git项目获取"><span class="nav-number">5.</span> <span class="nav-text">Git&#x9879;&#x76EE;&#x83B7;&#x53D6;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#忽略部分文件"><span class="nav-number">6.</span> <span class="nav-text">&#x5FFD;&#x7565;&#x90E8;&#x5206;&#x6587;&#x4EF6;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-命令自动补全"><span class="nav-number">7.</span> <span class="nav-text">git &#x547D;&#x4EE4;&#x81EA;&#x52A8;&#x8865;&#x5168;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用命令"><span class="nav-number">8.</span> <span class="nav-text">&#x5E38;&#x7528;&#x547D;&#x4EE4;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-hook"><span class="nav-number">9.</span> <span class="nav-text">git hook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-svn"><span class="nav-number">10.</span> <span class="nav-text">git svn</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-手册"><span class="nav-number">11.</span> <span class="nav-text">git &#x624B;&#x518C;</span></a></li></ol></div>
             
 
           </div>
