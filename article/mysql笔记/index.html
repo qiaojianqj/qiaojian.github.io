@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+<meta name="google-site-verification" content="FmCBFeBJWlIl9DVnns-1SQgs2lTet7iXquulOgdsOVY" />
+<meta name="baidu-site-verification" content="EyoMwitrw4" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0"/>
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0"/>
+
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="查看mysql 用户的连接权限 123456789101112131415mysql&amp;gt; use mysql;Reading table information for completion of table and column namesYou can turn off this feature to get a quicker startup with -ADatabase change">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysql笔记">
+<meta property="og:url" content="https://qiaojiande.cn/article/mysql笔记/index.html">
+<meta property="og:site_name" content="谯剑的小站">
+<meta property="og:description" content="查看mysql 用户的连接权限 123456789101112131415mysql&amp;gt; use mysql;Reading table information for completion of table and column namesYou can turn off this feature to get a quicker startup with -ADatabase change">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-15T15:05:12.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysql笔记">
+<meta name="twitter:description" content="查看mysql 用户的连接权限 123456789101112131415mysql&amp;gt; use mysql;Reading table information for completion of table and column namesYou can turn off this feature to get a quicker startup with -ADatabase change">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://qiaojiande.cn/article/mysql笔记/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  
+  <title>mysql笔记 | 谯剑的小站</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">谯剑的小站</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">记录...</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-commonweal">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/404.html" rel="section"><i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br/>公益 404</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/mysql笔记/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Qiao.Jian"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/avatar.png"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="谯剑的小站"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mysql笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-15 22:59:11 / 修改时间：23:05:12" itemprop="dateCreated datePublished" datetime="2019-10-15T22:59:11+08:00">2019-10-15</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon"
+              >
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          
+
+          <br/>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="查看mysql-用户的连接权限">查看mysql 用户的连接权限</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; use mysql;</span><br><span class="line">Reading table information for completion of table and column names</span><br><span class="line">You can turn off this feature to get a quicker startup with -A</span><br><span class="line"></span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; select host , user  from user;</span><br><span class="line">+-----------+---------------+</span><br><span class="line">| host      | user          |</span><br><span class="line">+-----------+---------------+</span><br><span class="line">| %         | root          |</span><br><span class="line">| localhost | mysql.session |</span><br><span class="line">| localhost | mysql.sys     |</span><br><span class="line">| localhost | root          |</span><br><span class="line">+-----------+---------------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+<p>可见允许root用户在任何IP段下连接数据库实例</p>
+<h3 id="mysql连接方式">mysql连接方式</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. TCP/IP方式：本地或远程登录</span><br><span class="line">mysql -hhost -uname -ppassword</span><br><span class="line">2. socket方式：本地登录</span><br><span class="line">[root@localhost ~]# ps -ef | grep mysql</span><br><span class="line">root      3076     1  0 Oct14 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql</span><br><span class="line">mysql -uname -S/var/lib/mysql/mysql.sock</span><br></pre></td></tr></table></figure>
+<h3 id="innodb-存储结构b树">InnoDB 存储结构：B+树</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">InnoDB的一张表的数据和索引都存在表空间，一个表空间对应一个ibd文件</span><br><span class="line"></span><br><span class="line">表空间由段、区、页组成</span><br><span class="line">段由多个区组成</span><br><span class="line">区由连续的多个页组成（页大小默认为16KB）</span><br><span class="line">页存放table的行数据</span><br><span class="line"></span><br><span class="line">B+树叶子节点：存储 数据段</span><br><span class="line">B+树非叶子节点：存储 索引段</span><br></pre></td></tr></table></figure>
+<h3 id="索引">索引</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. 聚集索引：</span><br><span class="line">一张表只有一个聚集索引，因为InnoDB的数据存储就是按照主键顺序存放的一颗B+树，此时B+树的叶子节点存放的是整张表的行记录数据。</span><br><span class="line">聚集索引，适合基于主键的排序查找和范围查找</span><br><span class="line">2. 辅助索引：</span><br><span class="line">辅助索引的叶子节点不存储数据，而是存储聚集索引的主键值（因此主键不宜是占太大的空间的字段）。</span><br><span class="line">当通过辅助索引查找数据时，需要先在辅助索引B+树找到对应的聚集索引的主键值，再到聚集索引B+树查找指定主键值所对应的数据</span><br><span class="line">3. 建立索引的原则：</span><br><span class="line">选择取值重复度低（高选择性）的字段建立索引，比如用户名适合建立索引，性别就不适合建立索引</span><br><span class="line">不要重复创建索引</span><br><span class="line">尽量扩展已有索引，而不是添加新的多余的索引</span><br><span class="line">4. 只select 需要的字段（可能会用到覆盖索引，只需要从辅助索引检索即可查到所需数据，更快），不要select *</span><br></pre></td></tr></table></figure>
+<h3 id="事务查询">事务查询</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show full processlist;</span><br><span class="line">mysql&gt; select * from information_schema.innodb_trx\G;</span><br><span class="line">mysql&gt; select * from information_schema.innodb_locks\G;</span><br><span class="line">mysql&gt; select * from information_schema.innodb_lock_waits\G;</span><br></pre></td></tr></table></figure>
+<p>InnoDB在Repeatable Read事务隔离级别下，使用<strong>快照读</strong>，快照堵不会占用和等待表锁</p>
+<p>应该显示的使用事务，不要使用autocommit</p>
+<h3 id="数据库更新丢失问题">数据库更新丢失问题</h3>
+<p>并发事务中进行查询并更新可能会导致更新丢失</p>
+<p>例如：mysql 事务级别Repeatable Read下：</p>
+<p>SET AUTOCOMMIT=0;</p>
+<p>CREATE TABLE <code>bank</code> (<br>
+<code>id</code> int(10) NOT NULL AUTO_INCREMENT,<br>
+<code>money</code> int(10) NOT NULL,<br>
+PRIMARY KEY (<code>id</code>)<br>
+);</p>
+<p>INSERT INTO <code>bank</code> VALUES (1, 900);</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事务1（存100元）</th>
+<th style="text-align:center">事务2（取100元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">begin;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">begin;</td>
+</tr>
+<tr>
+<td style="text-align:center">select * from bank where id=1;（900）</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">select * from bank where id=1; （900）</td>
+</tr>
+<tr>
+<td style="text-align:center">update bank set money=1000 where id=1;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">update bank set money=800 where id=1;（阻塞直到事务1commit）</td>
+</tr>
+<tr>
+<td style="text-align:center">commit;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">commit; (事务1的更新被覆盖)</td>
+</tr>
+</tbody>
+</table>
+<p>解决办法1：悲观锁（select for update）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事务1（存100元）</th>
+<th style="text-align:center">事务2（取100元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">begin;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">begin;</td>
+</tr>
+<tr>
+<td style="text-align:center">select * from bank where id=1 for update;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">select * from bank where id=1 for update;（阻塞直到事务1commit）（1000）</td>
+</tr>
+<tr>
+<td style="text-align:center">update bank set money=1000 where id=1;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">update bank set money=900 where id=1;（基于1000减去100）</td>
+</tr>
+<tr>
+<td style="text-align:center">commit;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">commit;</td>
+</tr>
+</tbody>
+</table>
+<p>解决办法2：乐观锁-旧值判断</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事务1（存100元）</th>
+<th style="text-align:center">事务2（取100元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">begin;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">begin;</td>
+</tr>
+<tr>
+<td style="text-align:center">select * from bank where id=1;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">select * from bank where id=1;</td>
+</tr>
+<tr>
+<td style="text-align:center">update bank set money=1000 where id=1 and money=900;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">update bank set money=800 where id=1 and money=900;（阻塞直到事务1commit，但是此条更新会失败）</td>
+</tr>
+<tr>
+<td style="text-align:center">commit;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">commit;</td>
+</tr>
+</tbody>
+</table>
+<p>解决办法3：乐观锁-表上增加版本字段</p>
+<p>CREATE TABLE <code>bank</code> (<br>
+<code>id</code> int(10) NOT NULL AUTO_INCREMENT,<br>
+<code>money</code> int(10) NOT NULL,<br>
+<code>timeStamp</code> int(10) DEFAULT NULL,<br>
+PRIMARY KEY (<code>id</code>)<br>
+);</p>
+<p>INSERT INTO <code>bank</code> VALUES (1, 900, 1571129028);</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">事务1（存100元）</th>
+<th style="text-align:center">事务2（取100元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">begin;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">begin;</td>
+</tr>
+<tr>
+<td style="text-align:center">select * from bank where id=1;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">select * from bank where id=1;</td>
+</tr>
+<tr>
+<td style="text-align:center">update bank set money=1000, timeStamp=1571129243 where id=1 and timeStamp=1571129028;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">update bank set money=800, timeStamp=1571129246 where id=1 and timeStamp=1571129028;（阻塞直到事务1commit，但是此条更新会失败）</td>
+</tr>
+<tr>
+<td style="text-align:center">commit;</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">commit;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="清空表">清空表</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">truncate vs delete</span><br><span class="line">truncate 是ddl操作，不能回滚</span><br><span class="line">delete 是dql操作，可以回滚</span><br></pre></td></tr></table></figure>
+<h3 id="慢查询日志配置">慢查询日志配置</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 查看mysql配置文件</span><br><span class="line">mysql --help | grep my.cnf</span><br><span class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf</span><br><span class="line"></span><br><span class="line">2. 修改配置文件：vim /etc/my.cnf</span><br><span class="line">slow_query_log=ON</span><br><span class="line">slow_query_log_file=/var/log/slowmysql.log</span><br><span class="line">long_query_time=10</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+      <div>
+        <div id="reward-container">
+  <div>Good for you!</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+    
+      
+      
+        
+      
+      <div style="display: inline-block">
+        <img src="/images/wechatpay.png" alt="Qiao.Jian 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/article/maven项目部署实践/" rel="next" title="maven项目部署实践">
+                <i class="fa fa-chevron-left"></i> maven项目部署实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="Qiao.Jian"/>
+  
+  <p class="site-author-name" itemprop="name">Qiao.Jian</p>
+  <div class="site-description motion-element" itemprop="description"></div>
+</div>
+
+
+  <nav class="site-state motion-element">
+    
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+
+    
+
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看mysql-用户的连接权限"><span class="nav-number">1.</span> <span class="nav-text">&#x67E5;&#x770B;mysql &#x7528;&#x6237;&#x7684;&#x8FDE;&#x63A5;&#x6743;&#x9650;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql连接方式"><span class="nav-number">2.</span> <span class="nav-text">mysql&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb-存储结构b树"><span class="nav-number">3.</span> <span class="nav-text">InnoDB &#x5B58;&#x50A8;&#x7ED3;&#x6784;&#xFF1A;B+&#x6811;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">4.</span> <span class="nav-text">&#x7D22;&#x5F15;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务查询"><span class="nav-number">5.</span> <span class="nav-text">&#x4E8B;&#x52A1;&#x67E5;&#x8BE2;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库更新丢失问题"><span class="nav-number">6.</span> <span class="nav-text">&#x6570;&#x636E;&#x5E93;&#x66F4;&#x65B0;&#x4E22;&#x5931;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空表"><span class="nav-number">7.</span> <span class="nav-text">&#x6E05;&#x7A7A;&#x8868;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慢查询日志配置"><span class="nav-number">8.</span> <span class="nav-text">&#x6162;&#x67E5;&#x8BE2;&#x65E5;&#x5FD7;&#x914D;&#x7F6E;</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qiao.Jian</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.4.3</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// GET RESPONSIVE HEIGHT PASSED FROM IFRAME
+
+window.addEventListener("message", function(e) {
+  var data = e.data;
+  if ((typeof data === 'string') && (data.indexOf('ciu_embed') > -1)) {
+    var featureID = data.split(':')[1];
+    var height = data.split(':')[2];
+    $(`iframe[data-feature=${featureID}]`).height(parseInt(height) + 30);
+  }
+}, false);
+</script>
+
+
+
+
+
+
+
+
+  
+
+</body>
+</html>
