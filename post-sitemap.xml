@@ -7,6 +7,30 @@
     </url>
 
     <url>
+        <loc>https://qiaojiande.cn/article/Git%E6%89%8B%E5%86%8C/</loc>
+        <lastmod>2019-10-15T15:22:35.660Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/mysql%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2019-10-15T15:05:12.929Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/maven%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E5%AE%9E%E8%B7%B5/</loc>
+        <lastmod>2019-10-10T09:45:51.718Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://qiaojiande.cn/article/godaddy%E5%9F%9F%E5%90%8D-cloudflare-CDN-v2ray-caddy%E7%BA%AA%E5%AE%9E/</loc>
         <lastmod>2019-09-24T09:33:02.968Z</lastmod>
         <changefreq>weekly</changefreq>
