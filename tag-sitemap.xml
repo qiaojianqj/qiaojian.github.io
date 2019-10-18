@@ -58,15 +58,22 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/mysql/</loc>
-        <lastmod>2019-10-15T15:05:12.929Z</lastmod>
+        <loc>https://qiaojiande.cn/tags/git/</loc>
+        <lastmod>2019-10-15T15:22:35.660Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/git/</loc>
-        <lastmod>2019-10-15T15:22:35.660Z</lastmod>
+        <loc>https://qiaojiande.cn/tags/AccessController-doPrivileged/</loc>
+        <lastmod>2019-10-18T05:48:37.961Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/mysql/</loc>
+        <lastmod>2019-10-18T06:20:13.184Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
