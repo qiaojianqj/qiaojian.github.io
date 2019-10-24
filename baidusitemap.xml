@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://qiaojiande.cn/article/mysql%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2019-10-18</lastmod>
-  </url>  <url>
     <loc>https://qiaojiande.cn/article/java%E6%B2%99%E7%AE%B1/</loc>
+    <lastmod>2019-10-24</lastmod>
+  </url>  <url>
+    <loc>https://qiaojiande.cn/article/mysql%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2019-10-18</lastmod>
   </url>  <url>
     <loc>https://qiaojiande.cn/article/Git%E6%89%8B%E5%86%8C/</loc>
