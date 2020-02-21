@@ -44,13 +44,6 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/v2ray/</loc>
-        <lastmod>2019-09-24T09:33:02.968Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://qiaojiande.cn/tags/maven/</loc>
         <lastmod>2019-10-10T09:45:51.718Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -65,15 +58,36 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/AccessController-doPrivileged/</loc>
-        <lastmod>2019-10-18T05:48:37.961Z</lastmod>
+        <loc>https://qiaojiande.cn/tags/mysql/</loc>
+        <lastmod>2019-10-18T06:20:13.184Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/mysql/</loc>
-        <lastmod>2019-10-18T06:20:13.184Z</lastmod>
+        <loc>https://qiaojiande.cn/tags/AccessController-doPrivileged/</loc>
+        <lastmod>2019-10-24T08:49:52.300Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/v2ray/</loc>
+        <lastmod>2019-11-20T07:12:00.903Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
+        <lastmod>2020-02-07T03:26:50.671Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/%E7%AE%97%E6%B3%95/</loc>
+        <lastmod>2020-02-21T13:05:53.120Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
