@@ -97,22 +97,18 @@
   };
 </script>
 
-  <meta name="description" content="BTrace BTrace可用于动态跟踪正在运行的Java程序。BTrace官网：https://github.com/btraceio/btrace 安装 12345678#下载安装包wget https://github.com/btraceio/btrace/releases/download/v1.3.11.3/btrace-bin-1.3.11.3.tgz#解压tar -xzvf btr">
-<meta name="keywords" content="btrace">
+  <meta name="description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
+<meta name="keywords" content="面试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java线上实时debug利器">
-<meta property="og:url" content="https://qiaojiande.cn/article/java线上实时debug利器/index.html">
+<meta property="og:title" content="面试知识整理">
+<meta property="og:url" content="https://qiaojiande.cn/article/面试知识整理/index.html">
 <meta property="og:site_name" content="谯剑的小站">
-<meta property="og:description" content="BTrace BTrace可用于动态跟踪正在运行的Java程序。BTrace官网：https://github.com/btraceio/btrace 安装 12345678#下载安装包wget https://github.com/btraceio/btrace/releases/download/v1.3.11.3/btrace-bin-1.3.11.3.tgz#解压tar -xzvf btr">
+<meta property="og:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/btrace-run.jpg">
-<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/arthas-telnet-remote.jpg">
-<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/arthas-http-remote.jpg">
-<meta property="og:updated_time" content="2019-08-29T10:00:17.159Z">
+<meta property="og:updated_time" content="2020-02-07T03:26:50.671Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java线上实时debug利器">
-<meta name="twitter:description" content="BTrace BTrace可用于动态跟踪正在运行的Java程序。BTrace官网：https://github.com/btraceio/btrace 安装 12345678#下载安装包wget https://github.com/btraceio/btrace/releases/download/v1.3.11.3/btrace-bin-1.3.11.3.tgz#解压tar -xzvf btr">
-<meta name="twitter:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/btrace-run.jpg">
+<meta name="twitter:title" content="面试知识整理">
+<meta name="twitter:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
 
 
 
@@ -120,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="https://qiaojiande.cn/article/java线上实时debug利器/"/>
+  <link rel="canonical" href="https://qiaojiande.cn/article/面试知识整理/"/>
 
 
 
@@ -131,7 +127,7 @@
 </script>
 
   
-  <title>java线上实时debug利器 | 谯剑的小站</title>
+  <title>面试知识整理 | 谯剑的小站</title>
   
 
 
@@ -342,7 +338,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/java线上实时debug利器/"/>
+    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/面试知识整理/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qiao.Jian"/>
@@ -359,7 +355,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java线上实时debug利器
+          <h1 class="post-title" itemprop="name headline">面试知识整理
 
               
             
@@ -385,13 +381,23 @@
                 
               
 
-              <time title="创建时间：2019-08-29 14:59:08 / 修改时间：18:00:17" itemprop="dateCreated datePublished" datetime="2019-08-29T14:59:08+08:00">2019-08-29</time>
+              <time title="创建时间：2019-11-26 17:19:11" itemprop="dateCreated datePublished" datetime="2019-11-26T17:19:11+08:00">2019-11-26</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-02-07 11:26:50" itemprop="dateModified" datetime="2020-02-07T11:26:50+08:00">2020-02-07</time>
+              </span>
             
           
 
@@ -438,48 +444,72 @@
       
 
       
-        <h2 id="btrace">BTrace</h2>
-<p>BTrace可用于动态跟踪正在运行的Java程序。BTrace官网：<a href="https://github.com/btraceio/btrace" target="_blank" rel="noopener">https://github.com/btraceio/btrace</a></p>
-<h3 id="安装">安装</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#下载安装包</span><br><span class="line">wget https://github.com/btraceio/btrace/releases/download/v1.3.11.3/btrace-bin-1.3.11.3.tgz</span><br><span class="line">#解压</span><br><span class="line">tar -xzvf btrace-bin-1.3.11.3.tgz</span><br><span class="line">#添加PATH和JAVA_HOME环境变量</span><br><span class="line">vim ~/.bashrc</span><br><span class="line">export PATH=$PATH:/root/btrace/bin</span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.el7_6.x86_64</span><br></pre></td></tr></table></figure>
-<h3 id="编写btrace脚本">编写BTrace脚本</h3>
-<p>BTrace脚本是纯java代码，主要使用BTrace提供的工具btrace.BTraceUtils和注解btrace.annotations来实现对监控对象的实时打印统计。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">import com.sun.btrace.annotations.*;</span><br><span class="line">import static com.sun.btrace.BTraceUtils.*;</span><br><span class="line"></span><br><span class="line">@BTrace</span><br><span class="line">public class V2RTrace &#123;</span><br><span class="line">        @OnMethod(</span><br><span class="line">            clazz=&quot;com.serverbase.controller.V2RForClientController&quot;,</span><br><span class="line">            method=&quot;sendSms&quot;,</span><br><span class="line">            location=@Location(Kind.RETURN)</span><br><span class="line">    )</span><br><span class="line">    public static void traceExecute(String mobile , @Return Object result)&#123;</span><br><span class="line">        println(&quot;call V2RForClientController.&quot;);</span><br><span class="line">        println(strcat(&quot;param mobile is:&quot;,(mobile)));</span><br><span class="line">        println(strcat(&quot;return status is:&quot;,str(get(field(&quot;com.serverbase.common.dto.ServerReturn&quot;, &quot;status&quot;), result))));</span><br><span class="line">        println(strcat(&quot;return msg is:&quot;,str(get(field(&quot;com.serverbase.common.dto.ServerReturn&quot;, &quot;msg&quot;), result))));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="运行btrace">运行btrace</h3>
-<p>btrace运行命令如下所示：</p>
-<blockquote>
-<p>btrace -cp /root/btrace/build  -p 16111 4634 ./V2RTrace.java</p>
-</blockquote>
-<p>-cp 指定classpath包含btrace的jar包路径</p>
-<p>-p 指定btrace运行的端口</p>
-<p>4634 被监控的Java进程号</p>
-<p>V2RTrace.java btrace监控脚本java代码文件</p>
-<p>监控效果如图所示：</p>
-<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/btrace-run.jpg" alt=""></p>
-<h2 id="arthas">Arthas</h2>
-<p>Arthas 可以说是BTrace的进阶版，提供了操作更方便的命令行界面，不需要再编写脚本，通过Arthas提供的命令即可实现在线debug。使用方式详见官网：<a href="https://github.com/alibaba/arthas" target="_blank" rel="noopener">https://github.com/alibaba/arthas</a></p>
-<p>实践中<strong>远程debug</strong>搞了好久，以免踩坑记录一下。</p>
-<blockquote>
-<p>一键脚本安装arthas</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://alibaba.github.io/arthas/install.sh | sh</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>修改as.sh脚本，让执行as.sh脚本时，只attach，不进入交互debug界面</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># target process id to attach</span><br><span class="line"># 此默认配置表示arthas server只允许本机可访问，要允许远程debug，修改为：0.0.0.0</span><br><span class="line">TARGET_IP=&quot;127.0.0.1&quot;</span><br><span class="line"></span><br><span class="line"># telnet port</span><br><span class="line"># 此默认配置表示arthas server telnet端口为3685</span><br><span class="line">TELNET_PORT=&quot;3658&quot;</span><br><span class="line"></span><br><span class="line"># http port</span><br><span class="line">#此默认配置表示arthas server http端口为8563</span><br><span class="line">HTTP_PORT=&quot;8563&quot;</span><br><span class="line"># attach only, do not telnet connect</span><br><span class="line">#此配置默认为false，改为true表示执行as.sh脚本时，只attach java process，不进入交互debug界面</span><br><span class="line">ATTACH_ONLY=true</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>启动arthas server，attach要debug 的java进程</p>
-</blockquote>
-<p><a href="http://as.sh" target="_blank" rel="noopener">as.sh</a> PID</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@qiaojian ~]# as.sh 32431</span><br><span class="line">Arthas script version: 3.1.1</span><br><span class="line">[INFO] JAVA_HOME: /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.el7_6.i386</span><br><span class="line">Arthas home: /root/.arthas/lib/3.1.1/arthas</span><br><span class="line">Calculating attach execution time...</span><br><span class="line">Attaching to 32431 using version /root/.arthas/lib/3.1.1/arthas...</span><br><span class="line"></span><br><span class="line">real    0m1.109s</span><br><span class="line">user    0m0.200s</span><br><span class="line">sys     0m0.025s</span><br><span class="line">Attach success.</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>远程telnet连接</p>
-</blockquote>
-<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/arthas-telnet-remote.jpg" alt=""></p>
-<blockquote>
-<p>远程http连接</p>
-</blockquote>
-<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/arthas-http-remote.jpg" alt=""></p>
+        <p>语言：java</p>
+<p>知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM</p>
+<p>协议：TCP/IP、HTTP、WEBSOCKET</p>
+<p>编程：设计模式</p>
+<h3 id="基础">基础</h3>
+<p><strong>自动装箱和拆箱</strong></p>
+<p>部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…）</p>
+<p>int对应包装类Integer会缓存-128～127范围的整型</p>
+<p>short对应包装类Short会缓存-128～127范围的短整型</p>
+<p>long对应包装类Long会缓存-128～127范围的长整型</p>
+<p>char对应包装类Character会缓存0～127范围的字符（java的char占两个字节存的是unicode码，表示数据范围0～65525）</p>
+<p>byte对应包装类Byte会缓存-128～127范围的字节，即byte所表示的数据范围都会被缓存</p>
+<p>boolean、float和double没有缓存</p>
+<p><strong>JVM</strong></p>
+<p>自动内存管理：</p>
+<h3 id="springboot启动流程">SpringBoot启动流程</h3>
+<p><strong>SpringBoot 自动化配置</strong>：SpringFactoriesLoader类的loadFactoryNames方法，入参为factoryClass和classLoader，根据指定的classLoader，加载该类加器搜索路径下的META_INF/spring.factories文件，传入的工厂类为接口，而文件中对应的类则是接口的实现类；loadFactoryNames方法返回类名集合，方法调用方得到这些集合后，再通过反射获取这些类的类对象、构造方法，最终生成实例</p>
+<h3 id="redis">Redis</h3>
+<p><strong>HyperLogLog</strong>：redis-HyperLogLog 不精确（0.81%的错误率）的去重统计，比如：网站UV数、访问IP数等</p>
+<p>原理：基数估算算法-伯努利实验-根据n次独立实验：抛掷硬币首次出现正面（或反面）所需要的最大次数k_max来估算实验的总次数n：<br>
+$$<br>
+n = 2^kmax<br>
+$$<br>
+分桶平均：将统计数据划分为m个桶，每个桶分别统计各自的k_max并能得到各自的基数预估值 n ，最终对这些 n 求调和平均得到整体的基数估计值：<br>
+$$<br>
+n = m * \frac{m}{\sum_{i=1}^{m}{\frac{1}{2^(k_m)}}}<br>
+$$</p>
+<p>16384=2^14个桶数组，每个桶6bit，一共16384*6/8/1024=12KB，一个key占用内存12KB</p>
+<p>pfadd key value：将value取hash生成64bit的字符串，取hash值的前14位来计算桶数组下标，取hash的后50位中首次出现1的位数（0～50之间，6bit可存放到数值64，因此够用），然后放入对应的桶中</p>
+<p>pfcount key：根据估算公式：修正因子 * 桶数 * 调和平均数；m为桶的个数16384，得到估算值<br>
+$$<br>
+const * m * \frac{m}{\sum_{i=1}^{m}{\frac{1}{2^(k_m)}}}<br>
+$$<br>
+为了节省内存空间，redis不会直接用16384个6bit桶存储1个HyperLogLog对象，而是先用稀疏存储（针对连续多个桶的计数为0进行存储优化，针对连续多个桶的计数都不为0且相等也进行存储优化），再用密集存储（12K，设定稀疏存储转密集存储的阈值）的方式</p>
+<h3 id="日志框架使用">日志框架使用</h3>
+<p>面向程序员的只是日志门面，具体需要哪个日志框架，选择相应的桥接器和日志实现框架。</p>
+<ol>
+<li>刚开始： 第三方日志系统：log4j等</li>
+<li>JDK自带log： JUL（Java Util Log）加入</li>
+<li>日志门面JCL（Java Common Logging）问世，其他日志实现自己桥接到JCL(桥接器)</li>
+<li>日志门面SLF4J问世，加上自带日志实现Logback，其他日志实现自己桥接到SLF4J（桥接器 xxx-over-slf4j）</li>
+<li>Log4j2问世，自带日志门面log4j2-api，加上日志实现log4j2-core</li>
+</ol>
+<p>至此，日志门面有三个了：JCL、SLF4J、log4j2-api，日志实现有4个：JUL、log4j、logback、log4j2-core</p>
+<p>一个字：乱</p>
+<p>实际项目中使用日志，应该遵循以下规则：</p>
+<ol>
+<li>总是使用日志门面：推荐SLF4J</li>
+<li>只添加一个日志实现的依赖：推荐log4j2</li>
+<li>使用第三方库，有必要排出第三方库中的日志实现依赖</li>
+<li>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件；比如使用slf4j+log4j2，则需要的配置文件为log4j2.xml</strong></li>
+</ol>
+<p>Spring-boot项目默认使用：SLF4J + logback，且把其他的日志都替换成了slf4j</p>
+<p>SpringBoot项目使用slf4j+log4j2配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-logging<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-log4j2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="单点登录">单点登录</h3>
+<h3 id="秒杀平台设计">秒杀平台设计</h3>
+<h3 id="算法">算法</h3>
+<p>单链表反转</p>
+<p>动态规划-完全背包问题</p>
+<p>排序-归并排序merge sort、插入排序insertion sort</p>
+<p><strong>面试</strong></p>
+<p>JVM之类加载：java虚拟机是字节码执行引擎，提供跨平台特性。虚拟机读入二进制字节码流（类加载阶段），默认是双亲委托加载模型，SPI接口定义需要bootstrap类加载器去加载第三方接口实现类，但是双亲委托加载模型限制了bootstrap类加载器不可以加载用户类，因此引入了线程上下文类加载器（默认为App类加载器），将第三方类加载到线程上下文加载器中去</p>
+<p>JVM之内存模型：每个线程独享的工作内存、所有线程共享的主内存、并发控制提供语言层面的volatile、synchronized</p>
+<p>JVM之内存区域划分：线程共享：堆内存、直接内存、元数据区；线程独享：线程栈、本地方法栈、程序计数器</p>
+<p>JVM之内存管理：垃圾回收算法：CMS算法、G1算法；堆内存划分：年轻代（eden区，survivor1、2区）、老年代</p>
 
       
     </div>
@@ -534,7 +564,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/btrace/" rel="tag"># btrace</a>
+            <a href="/tags/面试/" rel="tag"># 面试</a>
           
         </div>
       
@@ -547,8 +577,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/article/Caddy代替Nginx/" rel="next" title="Caddy代替Nginx">
-                <i class="fa fa-chevron-left"></i> Caddy代替Nginx
+              <a href="/article/java沙箱/" rel="next" title="java沙箱">
+                <i class="fa fa-chevron-left"></i> java沙箱
               </a>
             
           </div>
@@ -557,8 +587,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/article/godaddy域名-cloudflare-CDN-v2ray-caddy纪实/" rel="prev" title="godaddy域名+cloudflare_CDN+v2ray+caddy纪实">
-                godaddy域名+cloudflare_CDN+v2ray+caddy纪实 <i class="fa fa-chevron-right"></i>
+              <a href="/article/算法-归并排序/" rel="prev" title="算法-归并排序">
+                算法-归并排序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -713,7 +743,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#btrace"><span class="nav-number">1.</span> <span class="nav-text">BTrace</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.1.</span> <span class="nav-text">&#x5B89;&#x88C5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写btrace脚本"><span class="nav-number">1.2.</span> <span class="nav-text">&#x7F16;&#x5199;BTrace&#x811A;&#x672C;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行btrace"><span class="nav-number">1.3.</span> <span class="nav-text">&#x8FD0;&#x884C;btrace</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arthas"><span class="nav-number">2.</span> <span class="nav-text">Arthas</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">&#x57FA;&#x7840;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot启动流程"><span class="nav-number">2.</span> <span class="nav-text">SpringBoot&#x542F;&#x52A8;&#x6D41;&#x7A0B;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis"><span class="nav-number">3.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志框架使用"><span class="nav-number">4.</span> <span class="nav-text">&#x65E5;&#x5FD7;&#x6846;&#x67B6;&#x4F7F;&#x7528;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单点登录"><span class="nav-number">5.</span> <span class="nav-text">&#x5355;&#x70B9;&#x767B;&#x5F55;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#秒杀平台设计"><span class="nav-number">6.</span> <span class="nav-text">&#x79D2;&#x6740;&#x5E73;&#x53F0;&#x8BBE;&#x8BA1;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">7.</span> <span class="nav-text">&#x7B97;&#x6CD5;</span></a></li></ol></div>
             
 
           </div>
