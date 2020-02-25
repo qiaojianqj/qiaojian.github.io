@@ -7,8 +7,16 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/article/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</loc>
-        <lastmod>2020-02-21T13:05:53.120Z</lastmod>
+        <loc>https://qiaojiande.cn/article/Controller-vs-RestController/</loc>
+        <lastmod>2020-02-25T09:48:53.330Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/Redis%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2020-02-24T15:13:59.545Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +24,15 @@
 
     <url>
         <loc>https://qiaojiande.cn/article/%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E6%95%B4%E7%90%86/</loc>
-        <lastmod>2020-02-07T03:26:50.671Z</lastmod>
+        <lastmod>2020-02-23T07:05:23.106Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/%E7%AE%97%E6%B3%95-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</loc>
+        <lastmod>2020-02-22T03:19:10.805Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
