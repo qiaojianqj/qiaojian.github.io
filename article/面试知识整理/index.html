@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="谯剑的小站">
 <meta property="og:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-23T07:05:23.106Z">
+<meta property="og:updated_time" content="2020-03-01T02:23:55.129Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试知识整理">
 <meta name="twitter:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
@@ -396,7 +396,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-23 15:05:23" itemprop="dateModified" datetime="2020-02-23T15:05:23+08:00">2020-02-23</time>
+                <time title="修改时间：2020-03-01 10:23:55" itemprop="dateModified" datetime="2020-03-01T10:23:55+08:00">2020-03-01</time>
               </span>
             
           
@@ -461,6 +461,7 @@
 <p>自动内存管理：</p>
 <h3 id="springboot启动流程">SpringBoot启动流程</h3>
 <p>**SpringBoot 监听器：**SpringApplicationRunListeners</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">EventPublishingRunListener 类在SpringBoot启动时读取AppClassLoader加载目录下的SpringBoot框架JAR包的META-INF/spring.factories文件实例化的</span><br><span class="line"></span><br><span class="line">EventPublishingRunListener类实例化的时候会初始化它的两个属性：</span><br><span class="line">初始化事件多播器：SimpleApplicationEventMulticaster</span><br><span class="line">并向此多播器添加实现了接口SpringApplicationRunListener的监听器</span><br><span class="line"></span><br><span class="line">然后使用实例化的EventPublishingRunListener初始化类SpringApplicationRunListeners并生成其实例</span><br><span class="line"></span><br><span class="line">类SpringApplicationRunListeners实例化后，调用其方法starting，starting方法又会调用其属性EventPublishingRunListener的starting方法</span><br><span class="line"></span><br><span class="line">EventPublishingRunListener的starting方法调用其属性初始化事件多播器的multicastEvent方法，此方法会遍历初始化EventPublishingRunListener时添加的监听器，通知他们事件</span><br></pre></td></tr></table></figure>
 <p><strong>SpringBoot配置环境：</strong> ConfigurableEnvironment</p>
 <p>**SpringBoot应用配置上下文：**ConfigurableApplicationContext</p>
 <p><strong>SpringBoot 自动化配置</strong>：SpringFactoriesLoader类的loadFactoryNames方法，入参为factoryClass和classLoader，根据指定的classLoader，加载该类加器搜索路径下的META_INF/spring.factories文件，传入的工厂类为接口，而文件中对应的类则是接口的实现类；loadFactoryNames方法返回类名集合，方法调用方得到这些集合后，再通过反射获取这些类的类对象、构造方法，最终生成实例</p>
@@ -669,7 +670,7 @@ $$<br>
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
