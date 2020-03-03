@@ -86,13 +86,6 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
-        <lastmod>2020-02-23T07:05:23.106Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://qiaojiande.cn/tags/redis/</loc>
         <lastmod>2020-02-24T15:13:59.545Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -102,6 +95,20 @@
     <url>
         <loc>https://qiaojiande.cn/tags/%E6%B3%A8%E8%A7%A3/</loc>
         <lastmod>2020-02-25T09:48:53.330Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
+        <lastmod>2020-03-01T02:23:55.129Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
+        <lastmod>2020-03-03T03:42:07.132Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
