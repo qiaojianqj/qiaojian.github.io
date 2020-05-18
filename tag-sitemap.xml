@@ -107,13 +107,6 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/mysql/</loc>
-        <lastmod>2020-05-09T07:42:17.518Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://qiaojiande.cn/tags/volatile/</loc>
         <lastmod>2020-05-09T07:52:32.011Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -121,8 +114,29 @@
     </url>
 
     <url>
+        <loc>https://qiaojiande.cn/tags/mysql/</loc>
+        <lastmod>2020-05-12T02:40:09.538Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://qiaojiande.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
-        <lastmod>2020-05-09T15:09:56.437Z</lastmod>
+        <lastmod>2020-05-12T10:34:20.752Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/spring-boot/</loc>
+        <lastmod>2020-05-18T09:45:42.418Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/</loc>
+        <lastmod>2020-05-18T09:46:37.592Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

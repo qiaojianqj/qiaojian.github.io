@@ -97,18 +97,18 @@
   };
 </script>
 
-  <meta name="description" content="工厂模式包括：工厂方法模式和抽象工厂模式，可以说抽象工厂模式是在工厂方法模式基础上演变而来的。  工厂方法的作用就是： 原来我们要new一个产品A，则直接new ProductA(); 又来一个新需求要new一个产品B，则直接new ProductB();  依此类推… 工厂的作用就是提供一个工厂类，由工厂类负责new ProductA()和new ProductB()，而我们只需要传入类型参数n">
-<meta name="keywords" content="设计模式">
+  <meta name="description" content="启动类 SpringBoot应用启动类SpringApplication，提供了两种启动方式（其实底层是一种），如下： 第一种：提供了静态run方法，传入main函数所在类class作为参数 1SpringApplication.run(Main.class); //底层调用 new SpringApplication(primarySources).run(args); 第二种：提供实例run方">
+<meta name="keywords" content="spring-boot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式-工厂模式">
-<meta property="og:url" content="https://qiaojiande.cn/article/设计模式-工厂模式/index.html">
+<meta property="og:title" content="SpringBoot启动流程">
+<meta property="og:url" content="https://qiaojiande.cn/article/SpringBoot启动流程/index.html">
 <meta property="og:site_name" content="谯剑的小站">
-<meta property="og:description" content="工厂模式包括：工厂方法模式和抽象工厂模式，可以说抽象工厂模式是在工厂方法模式基础上演变而来的。  工厂方法的作用就是： 原来我们要new一个产品A，则直接new ProductA(); 又来一个新需求要new一个产品B，则直接new ProductB();  依此类推… 工厂的作用就是提供一个工厂类，由工厂类负责new ProductA()和new ProductB()，而我们只需要传入类型参数n">
+<meta property="og:description" content="启动类 SpringBoot应用启动类SpringApplication，提供了两种启动方式（其实底层是一种），如下： 第一种：提供了静态run方法，传入main函数所在类class作为参数 1SpringApplication.run(Main.class); //底层调用 new SpringApplication(primarySources).run(args); 第二种：提供实例run方">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-02-28T15:48:20.431Z">
+<meta property="og:updated_time" content="2020-05-18T09:45:42.418Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式-工厂模式">
-<meta name="twitter:description" content="工厂模式包括：工厂方法模式和抽象工厂模式，可以说抽象工厂模式是在工厂方法模式基础上演变而来的。  工厂方法的作用就是： 原来我们要new一个产品A，则直接new ProductA(); 又来一个新需求要new一个产品B，则直接new ProductB();  依此类推… 工厂的作用就是提供一个工厂类，由工厂类负责new ProductA()和new ProductB()，而我们只需要传入类型参数n">
+<meta name="twitter:title" content="SpringBoot启动流程">
+<meta name="twitter:description" content="启动类 SpringBoot应用启动类SpringApplication，提供了两种启动方式（其实底层是一种），如下： 第一种：提供了静态run方法，传入main函数所在类class作为参数 1SpringApplication.run(Main.class); //底层调用 new SpringApplication(primarySources).run(args); 第二种：提供实例run方">
 
 
 
@@ -116,7 +116,7 @@
 
   
   
-  <link rel="canonical" href="https://qiaojiande.cn/article/设计模式-工厂模式/"/>
+  <link rel="canonical" href="https://qiaojiande.cn/article/SpringBoot启动流程/"/>
 
 
 
@@ -127,7 +127,7 @@
 </script>
 
   
-  <title>设计模式-工厂模式 | 谯剑的小站</title>
+  <title>SpringBoot启动流程 | 谯剑的小站</title>
   
 
 
@@ -369,7 +369,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/设计模式-工厂模式/"/>
+    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/SpringBoot启动流程/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qiao.Jian"/>
@@ -386,7 +386,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">设计模式-工厂模式
+          <h1 class="post-title" itemprop="name headline">SpringBoot启动流程
 
               
             
@@ -412,13 +412,23 @@
                 
               
 
-              <time title="创建时间：2020-02-28 10:07:09 / 修改时间：23:48:20" itemprop="dateCreated datePublished" datetime="2020-02-28T10:07:09+08:00">2020-02-28</time>
+              <time title="创建时间：2020-05-12 18:53:58" itemprop="dateCreated datePublished" datetime="2020-05-12T18:53:58+08:00">2020-05-12</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-18 17:45:42" itemprop="dateModified" datetime="2020-05-18T17:45:42+08:00">2020-05-18</time>
+              </span>
             
           
 
@@ -465,25 +475,94 @@
       
 
       
-        <p>工厂模式包括：工厂方法模式和抽象工厂模式，可以说抽象工厂模式是在工厂方法模式基础上演变而来的。</p>
-<hr>
-<p>工厂方法的作用就是：</p>
-<p>原来我们要new一个产品A，则直接new ProductA(); 又来一个新需求要new一个产品B，则直接new ProductB();  依此类推…</p>
-<p>工厂的作用就是提供一个工厂类，由工厂类负责new ProductA()和new ProductB()，而我们只需要传入类型参数new一个工厂类就可以了，工厂类会根据类型来new相应的产品并返回。</p>
-<p>注意在工厂方法中，产品A和产品B一般是没有关联的。</p>
-<p>用类表示如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Product接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Product</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//ProductA</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductA</span> <span class="keyword">implements</span> <span class="title">Product</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//ProductB</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductB</span> <span class="keyword">implements</span> <span class="title">Product</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">getProduct</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (<span class="string">"A"</span>.equalsIgnoreCase ( type )) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ProductA ();</span><br><span class="line">       &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">"B"</span>.equalsIgnoreCase ( type ) ) &#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="keyword">new</span> ProductB ();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>那什么是抽象工厂呢？抽象工厂要解决的问题是：要生成ProductA需要经过三个流程：选购原材料，加工原材料，组装，要生成ProductB也需要经过三个流程：选购原材料，加工原材料，组装，但是各自的流程处理方式都不一样，怎么办呢？</p>
-<p>原来的做法是：直接在new Product里添加各自的流程，ProducA和ProductB的流程各自独立，客户端要使用时都是和具体的产品A或B打交道，紧耦合。</p>
-<p>抽象工厂就是将生成ProductA的流程封装到一个工厂类ProductA中，将生成ProductB的流程也封装到一个工厂类ProductB中，然后将生成产品的流程抽象到共同的接口Product中，让ProductA和ProductB实现此接口，这么做的前提是工厂生产不同产品的流程是一样的。</p>
-<p>现在需要生成产品的客户端只需要提供接口Product属性，具体需要生成ProductA则将此接口属性实例化为ProducA工厂，由具体工厂来执行具体的产品流程。</p>
-<p>如果需要新增生成一个产品ProductC，只需要新增具体工厂类ProductC就可以了。</p>
-<p>用类表示如下：</p>
-<p>接着上面工厂方法的产品类，增加三个流程处理</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//原材料类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Material</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//组装成的模块类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Model</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//抽象工厂接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AbstractProductFactory</span> </span>&#123;</span><br><span class="line">   <span class="function">Material <span class="title">buyMaterial</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function">Model <span class="title">process</span><span class="params">(Material material)</span></span>;</span><br><span class="line">   <span class="function">Product <span class="title">assemble</span><span class="params">(Model model)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//生产产品A的工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductAFactory</span> <span class="keyword">implements</span> <span class="title">AbstractProductFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Material <span class="title">buyMaterial</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Model <span class="title">process</span><span class="params">(Material material)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">assemble</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//生产产品B的工厂类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductBFactory</span> <span class="keyword">implements</span>  <span class="title">AbstractProductFactory</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Material <span class="title">buyMaterial</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Model <span class="title">process</span><span class="params">(Material material)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">assemble</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//抽象工厂的使用类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UsageApp</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> AbstractProductFactory factory;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UsageApp</span><span class="params">(AbstractProductFactory factory)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.factory = factory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//UsageApp初始化时传入具体的工厂类，此方法即生产出相应的产品</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">genProduct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.factory.assemble (</span><br><span class="line">                <span class="keyword">this</span>.factory.process (</span><br><span class="line">                        <span class="keyword">this</span>.factory.buyMaterial ()</span><br><span class="line">                )</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<p>区别：工厂方法是对产品的扩展，抽象工厂是对生成产品的工厂的扩展</p>
+        <h3 id="启动类">启动类</h3>
+<p>SpringBoot应用启动类SpringApplication，提供了两种启动方式（其实底层是一种），如下：</p>
+<p>第一种：提供了静态run方法，传入main函数所在类class作为参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SpringApplication.run(Main.class); <span class="comment">//底层调用 new SpringApplication(primarySources).run(args);</span></span><br></pre></td></tr></table></figure>
+<p>第二种：提供实例run方法，实例化SpringApplication时传入main函数所在类class作为参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SpringApplication application = <span class="keyword">new</span> SpringApplication(App.class);</span><br><span class="line">application.run(args); <span class="comment">// 同 application.run();</span></span><br></pre></td></tr></table></figure>
+<p>先分析SpringApplication的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SpringApplication</span><span class="params">(ResourceLoader resourceLoader, Class&lt;?&gt;... primarySources)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.resourceLoader = resourceLoader;</span><br><span class="line">		Assert.notNull(primarySources, <span class="string">"PrimarySources must not be null"</span>);</span><br><span class="line">		<span class="keyword">this</span>.primarySources = <span class="keyword">new</span> LinkedHashSet&lt;&gt;(Arrays.asList(primarySources));</span><br><span class="line">    <span class="comment">// step 1</span></span><br><span class="line">		<span class="keyword">this</span>.webApplicationType = WebApplicationType.deduceFromClasspath();</span><br><span class="line">    <span class="comment">// step 2</span></span><br><span class="line">		setInitializers((Collection)    getSpringFactoriesInstances(ApplicationContextInitializer.class));</span><br><span class="line">  	<span class="comment">// step 3</span></span><br><span class="line">		setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));</span><br><span class="line">    <span class="comment">// step 4</span></span><br><span class="line">		<span class="keyword">this</span>.mainApplicationClass = deduceMainApplicationClass();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>
+<p>根据classpath下是否包含web相关类推断web环境：reactive、servlet、none</p>
+</li>
+<li>
+<p>根据classpath下jar包资源路径下META-INF/spring.factories文件得到工厂类全路径名称并缓存到String[] cache，后续需要从cache里根据key（接口全路径名称）找到实现类全路径名称并实例化实现类</p>
+</li>
+<li>
+<p>从2中cache查找接口org.springframework.context.ApplicationContextInitializer的所有实现类全路径名称并实例化存入initializers列表</p>
+</li>
+<li>
+<p>从2中cache查找接口org.springframework.context.ApplicationListener的所有实现类全路径名称并实例化存入listeners列表</p>
+</li>
+<li>
+<p>从RuntimeException().getStackTrace()推断出main函数所在类并实例化</p>
+</li>
+</ol>
+<h3 id="run方法">Run方法</h3>
+<ol>
+<li>
+<p>从上一步2中cache查找接口org.springframework.boot.SpringApplicationRunListener的所有实现类全路径名称并实例化（只有1个实现类EventPublishingRunListener），然后用实例化的EventPublishingRunListener类List实例化类SpringApplicationRunListeners</p>
+<p>⚠️：实例化EventPublishingRunListener类时，会将上一步4中的listeners加入到EventPublishingRunListener的多播列表中来</p>
+</li>
+<li>
+<p>运行SpringApplicationRunListeners.starting方法，遍历执行上一步的org.springframework.boot.SpringApplicationRunListener的所有实现类（只有1个实现类：EventPublishingRunListener）的starting方法</p>
+<p>⚠️：EventPublishingRunListener的starting方法执行多播，通知多播列表的所有Listeners事件ApplicationStartingEvent，相应的listener（getListener的时候通过事件类型判断listener是否支持此事件类型）对ApplicationStartingEvent事件作出相应（回调onApplicationEvent方法）</p>
+</li>
+<li>
+<p>根据web环境类型实例化Environment：StandardServletEnvironment，并多播通知相应的Listeners事件ApplicationEnvironmentPreparedEvent</p>
+<p>⚠️：ConfigFileApplicationListener响应ApplicationEnvironmentPreparedEvent事件，从上一步2中cache查找接口org.springframework.boot.env.EnvironmentPostProcessor的所有实现类全路径名称并实例化，然后依次调用每个实现类的postProcessEnvironment方法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">实现类SystemEnvironmentPropertySourceEnvironmentPostProcessor负责读取系统环境变量，存入StandardServletEnvironment实例</span><br><span class="line">ConfigFileApplicationListener实例化PropertiesLoader和YamlLoader来读取配置文件参数存入StandardServletEnvironment实例</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>打印Banner</p>
+</li>
+<li>
+<p>根据web环境类型实例化ApplicationContext：class org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext</p>
+<p>注意：实例化AnnotationConfigServletWebServerApplicationContext时，会传入AnnotatedBeanDefinitionReader实例和ClassPathBeanDefinitionScanner实例，用于注解、类路径配置文件描述的bean注入</p>
+</li>
+<li>
+<p>实例化ExceptionReporter类用于异常报告处理</p>
+</li>
+<li>
+<p>prepareContext，向AnnotationConfigServletWebServerApplicationContext实例应用Initializer并设置环境变量Environment实例，然后多播通知ApplicationContextInitializedEvent事件</p>
+</li>
+<li>
+<p>logStartupProfileInfo，打印日志记录启动使用的profile</p>
+</li>
+<li>
+<p>通过AnnotationConfigServletWebServerApplicationContext.beanFactory注册两个单例实例SpringApplicationArguments和SpringBootBanner</p>
+</li>
+<li>
+<p>loadContext，注册启动类bean实例到ApplicationContext，然后添加监听器到ApplicationContext，多播通知ApplicationPreparedEvent事件</p>
+</li>
+<li>
+<p>refreshContext，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 执行context refreshing前的准备工作比如一些属性的初始化</span><br><span class="line">prepareRefresh()</span><br><span class="line">// 配置BeanFactory的上下文环境特性如类加载器、后置处理器</span><br><span class="line">prepareBeanFactory()</span><br><span class="line">// 注册Bean</span><br><span class="line">postProcessBeanFactory()</span><br><span class="line">invokeBeanFactoryPostProcessors()</span><br><span class="line">registerBeanPostProcessors()</span><br><span class="line">// 初始化事件多播器到ApplicationContext</span><br><span class="line">initApplicationEventMulticaster()</span><br><span class="line">// 注册特定环境相关bean（此处初始化web容器）</span><br><span class="line">OnRefresh()</span><br><span class="line">// 添加监听器到事件多播器</span><br><span class="line">registerListeners()</span><br><span class="line">// 初始化所有剩下的单例bean</span><br><span class="line">beanfactory.preInstantiateSingletons()</span><br><span class="line">// 多播通知ContextRefreshedEvent事件</span><br><span class="line">publishEvent()</span><br><span class="line">// 在此处启动web容器，web容器启动完成后，多播通知ServletWebServerInitializedEvent事件</span><br><span class="line">finishRefresh()</span><br><span class="line">// 向JVM注册优雅停机钩子函数，用于单例释放等操作</span><br><span class="line">Runtime.getRuntime().addShutdownHook(hook_thread)</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>afterRefresh，默认实现为空，可以继承自SpringApplication自定义实现</p>
+</li>
+<li>
+<p>多播通知ApplicationStartedEvent事件</p>
+</li>
+<li>
+<p>callRunner，调用ApplicationRunner接口和CommandLineRunner接口的实现类</p>
+</li>
+</ol>
+<pre><code> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CommandLineRunner和ApplicationRunner的区别仅仅是run方法的入参类型不一样，ApplicationRunner中run方法的参数为ApplicationArguments，而CommandLineRunner接口中run方法的参数为String数组</span><br></pre></td></tr></table></figure>
+
+15. 多播通知ApplicationReadyEvent事件
+</code></pre>
+<p>另外SpringBoot启动起来怎么没退出？</p>
+<h3 id="jvm退出机制">JVM退出机制</h3>
+<pre><code>1. 所有的非daemon线程退出
+2. 某个线程显式的调用了System.exit()或Runtime.exit()
+</code></pre>
+<p>所以一定有非daemon线程在运行，当启动tomcat容器时，会启动线程监听端口，因为有这个线程一直在运行，所以JVM不会退出</p>
+<h3 id="线程池异常处理">线程池异常处理</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">线程池对任务异常默认不作处理</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -549,7 +628,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+            <a href="/tags/spring-boot/" rel="tag"># spring-boot</a>
           
         </div>
       
@@ -562,8 +641,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/article/设计模式-模板方法/" rel="next" title="设计模式-模板方法">
-                <i class="fa fa-chevron-left"></i> 设计模式-模板方法
+              <a href="/article/正确使用volatile/" rel="next" title="正确使用volatile">
+                <i class="fa fa-chevron-left"></i> 正确使用volatile
               </a>
             
           </div>
@@ -572,8 +651,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/article/设计模式-观察者模式/" rel="prev" title="设计模式-观察者模式">
-                设计模式-观察者模式 <i class="fa fa-chevron-right"></i>
+              <a href="/article/分布式锁/" rel="prev" title="分布式锁">
+                分布式锁 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -618,8 +697,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
 
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -722,6 +810,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动类"><span class="nav-number">1.</span> <span class="nav-text">&#x542F;&#x52A8;&#x7C7B;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#run方法"><span class="nav-number">2.</span> <span class="nav-text">Run&#x65B9;&#x6CD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jvm退出机制"><span class="nav-number">3.</span> <span class="nav-text">JVM&#x9000;&#x51FA;&#x673A;&#x5236;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池异常处理"><span class="nav-number">4.</span> <span class="nav-text">&#x7EBF;&#x7A0B;&#x6C60;&#x5F02;&#x5E38;&#x5904;&#x7406;</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
