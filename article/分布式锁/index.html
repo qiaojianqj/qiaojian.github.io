@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="谯剑的小站">
 <meta property="og:description" content="为什么使用锁 两个原因：   效率 避免多个客户端重复相同的工作，此时对共享资源的操作需要满足幂等性，操作多次的结果是一样的。这种情况下加锁就是为了避免重复相同的工作。   正确性 避免多个客户端操作同一份共享资源时由于环境原因导致数据不一致，此时对共享资源的操作不满足幂等性，这种情况下加锁就是为了业务逻辑的正确性。   锁的作用的就是确保同一时间只有一个线程可以进入临界区执行代码 什么是锁 Li">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-18T09:46:37.592Z">
+<meta property="og:updated_time" content="2020-05-18T10:02:13.400Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁">
 <meta name="twitter:description" content="为什么使用锁 两个原因：   效率 避免多个客户端重复相同的工作，此时对共享资源的操作需要满足幂等性，操作多次的结果是一样的。这种情况下加锁就是为了避免重复相同的工作。   正确性 避免多个客户端操作同一份共享资源时由于环境原因导致数据不一致，此时对共享资源的操作不满足幂等性，这种情况下加锁就是为了业务逻辑的正确性。   锁的作用的就是确保同一时间只有一个线程可以进入临界区执行代码 什么是锁 Li">
@@ -412,7 +412,7 @@
                 
               
 
-              <time title="创建时间：2020-05-18 17:43:13 / 修改时间：17:46:37" itemprop="dateCreated datePublished" datetime="2020-05-18T17:43:13+08:00">2020-05-18</time>
+              <time title="创建时间：2020-05-18 17:43:13 / 修改时间：18:02:13" itemprop="dateCreated datePublished" datetime="2020-05-18T17:43:13+08:00">2020-05-18</time>
             </span>
           
 
@@ -552,7 +552,7 @@
 <h3 id="分布式锁-mysql">分布式锁-Mysql</h3>
 <p>创建一张资源表，获取锁则插入一条记录，释放锁则删除相应的记录。</p>
 <p>有两种方式：</p>
-<p>悲观锁：select for update + insert （一定要加事务）</p>
+<p>悲观锁：select for update + insert （一定要加事务）【事务是保证多个SQL语句要么都执行成功提交，要么任意一个失败都全部回滚，for updte是对要更新的行加锁保证更新的逻辑正确性】</p>
 <p>乐观锁：select + update where version=xx  + while循环直到成功</p>
 <p>优点：不引入第三方组件，减少单点失败概率</p>
 <p>缺点：数据库性能较低，支持的并发不高</p>
