@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="谯剑的小站">
 <meta property="og:description" content="为什么使用锁 两个原因：   效率 避免多个客户端重复相同的工作，此时对共享资源的操作需要满足幂等性，操作多次的结果是一样的。这种情况下加锁就是为了避免重复相同的工作。   正确性 避免多个客户端操作同一份共享资源时由于环境原因导致数据不一致，此时对共享资源的操作不满足幂等性，这种情况下加锁就是为了业务逻辑的正确性。   锁的作用的就是确保同一时间只有一个线程可以进入临界区执行代码 什么是锁 Li">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-18T10:02:13.400Z">
+<meta property="og:updated_time" content="2020-05-19T02:36:31.638Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁">
 <meta name="twitter:description" content="为什么使用锁 两个原因：   效率 避免多个客户端重复相同的工作，此时对共享资源的操作需要满足幂等性，操作多次的结果是一样的。这种情况下加锁就是为了避免重复相同的工作。   正确性 避免多个客户端操作同一份共享资源时由于环境原因导致数据不一致，此时对共享资源的操作不满足幂等性，这种情况下加锁就是为了业务逻辑的正确性。   锁的作用的就是确保同一时间只有一个线程可以进入临界区执行代码 什么是锁 Li">
@@ -412,13 +412,23 @@
                 
               
 
-              <time title="创建时间：2020-05-18 17:43:13 / 修改时间：18:02:13" itemprop="dateCreated datePublished" datetime="2020-05-18T17:43:13+08:00">2020-05-18</time>
+              <time title="创建时间：2020-05-18 17:43:13" itemprop="dateCreated datePublished" datetime="2020-05-18T17:43:13+08:00">2020-05-18</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-19 10:36:31" itemprop="dateModified" datetime="2020-05-19T10:36:31+08:00">2020-05-19</time>
+              </span>
             
           
 
@@ -556,6 +566,9 @@
 <p>乐观锁：select + update where version=xx  + while循环直到成功</p>
 <p>优点：不引入第三方组件，减少单点失败概率</p>
 <p>缺点：数据库性能较低，支持的并发不高</p>
+<p>另外Mysql提供了get_lock &amp; release_lock函数也可以用于分布式锁，加锁释放锁操作都必须是同一个SqlSession，连接断开Mysql还会自动释放锁。这种锁机制是基于单机数据库的，所以存在单点失败问题。</p>
+<p>基本用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#加锁</span><br><span class="line">SELECT GET_LOCK(key, timeout);</span><br><span class="line">#释放锁</span><br><span class="line">SELECT RELEASE_LOCK(key);</span><br></pre></td></tr></table></figure>
 <h3 id="参考文章">参考文章</h3>
 <h6 id="浅谈分布式锁"><a href="http://www.linkedkeeper.com/1023.html" target="_blank" rel="noopener">浅谈分布式锁</a></h6>
 <h6 id="分布式之抉择分布式锁"><a href="https://www.cnblogs.com/rjzheng/p/9310976.html" target="_blank" rel="noopener">分布式之抉择分布式锁</a></h6>
