@@ -97,20 +97,21 @@
   };
 </script>
 
-  <meta name="description" content="什么是线程池 线程池 = worker线程 + 任务队列 worker线程 继承自AQS，并且实现了Runnable接口。worker线程不断从任务队列里获取任务并执行，当任务队列里面没有任务可执行了或者任务执行途中抛出异常时，线程退出，销毁线程。 AQS AQS为那些基于FIFO等待队列的同步器和阻塞锁提供了一个框架 AQS为那些用单个原子int值表示状态的同步器，提供了状态的原子操作（getS">
-<meta name="keywords" content="java">
+  <meta name="description" content="什么是事务 事务是数据库的术语，表示事务范围内的操作不成功便成仁【要么成功，要么失败，没有中间状态】。单条sql的执行默认都是事务的，也即单条sql的执行要么成功，要么失败，不存在中间状态。对于多条sql的事务，则需要显式的开启和关闭事务。比如下单减库存的操作： 12345678#开启事务begin;#新增订单insert into order values (...);#修改库存update s">
+<meta name="keywords" content="分布式事务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java-线程池">
-<meta property="og:url" content="https://qiaojiande.cn/article/java-线程池/index.html">
+<meta property="og:title" content="分布式事务">
+<meta property="og:url" content="https://qiaojiande.cn/article/分布式事务/index.html">
 <meta property="og:site_name" content="谯剑的小站">
-<meta property="og:description" content="什么是线程池 线程池 = worker线程 + 任务队列 worker线程 继承自AQS，并且实现了Runnable接口。worker线程不断从任务队列里获取任务并执行，当任务队列里面没有任务可执行了或者任务执行途中抛出异常时，线程退出，销毁线程。 AQS AQS为那些基于FIFO等待队列的同步器和阻塞锁提供了一个框架 AQS为那些用单个原子int值表示状态的同步器，提供了状态的原子操作（getS">
+<meta property="og:description" content="什么是事务 事务是数据库的术语，表示事务范围内的操作不成功便成仁【要么成功，要么失败，没有中间状态】。单条sql的执行默认都是事务的，也即单条sql的执行要么成功，要么失败，不存在中间状态。对于多条sql的事务，则需要显式的开启和关闭事务。比如下单减库存的操作： 12345678#开启事务begin;#新增订单insert into order values (...);#修改库存update s">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/threadpool-bit-operation.jpg">
-<meta property="og:updated_time" content="2019-08-16T10:04:55.817Z">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/Mysql%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81-XA%E5%AE%9E%E7%8E%B0.jpg">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/RocketMQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF.jpg">
+<meta property="og:updated_time" content="2020-05-21T09:18:14.488Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java-线程池">
-<meta name="twitter:description" content="什么是线程池 线程池 = worker线程 + 任务队列 worker线程 继承自AQS，并且实现了Runnable接口。worker线程不断从任务队列里获取任务并执行，当任务队列里面没有任务可执行了或者任务执行途中抛出异常时，线程退出，销毁线程。 AQS AQS为那些基于FIFO等待队列的同步器和阻塞锁提供了一个框架 AQS为那些用单个原子int值表示状态的同步器，提供了状态的原子操作（getS">
-<meta name="twitter:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/threadpool-bit-operation.jpg">
+<meta name="twitter:title" content="分布式事务">
+<meta name="twitter:description" content="什么是事务 事务是数据库的术语，表示事务范围内的操作不成功便成仁【要么成功，要么失败，没有中间状态】。单条sql的执行默认都是事务的，也即单条sql的执行要么成功，要么失败，不存在中间状态。对于多条sql的事务，则需要显式的开启和关闭事务。比如下单减库存的操作： 12345678#开启事务begin;#新增订单insert into order values (...);#修改库存update s">
+<meta name="twitter:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/Mysql%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81-XA%E5%AE%9E%E7%8E%B0.jpg">
 
 
 
@@ -118,7 +119,7 @@
 
   
   
-  <link rel="canonical" href="https://qiaojiande.cn/article/java-线程池/"/>
+  <link rel="canonical" href="https://qiaojiande.cn/article/分布式事务/"/>
 
 
 
@@ -129,7 +130,7 @@
 </script>
 
   
-  <title>java-线程池 | 谯剑的小站</title>
+  <title>分布式事务 | 谯剑的小站</title>
   
 
 
@@ -371,7 +372,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/java-线程池/"/>
+    <link itemprop="mainEntityOfPage" href="https://qiaojiande.cn/article/分布式事务/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Qiao.Jian"/>
@@ -388,7 +389,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java-线程池
+          <h1 class="post-title" itemprop="name headline">分布式事务
 
               
             
@@ -414,7 +415,7 @@
                 
               
 
-              <time title="创建时间：2019-08-01 16:10:50" itemprop="dateCreated datePublished" datetime="2019-08-01T16:10:50+08:00">2019-08-01</time>
+              <time title="创建时间：2020-05-19 11:12:47" itemprop="dateCreated datePublished" datetime="2020-05-19T11:12:47+08:00">2020-05-19</time>
             </span>
           
 
@@ -429,7 +430,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-08-16 18:04:55" itemprop="dateModified" datetime="2019-08-16T18:04:55+08:00">2019-08-16</time>
+                <time title="修改时间：2020-05-21 17:18:14" itemprop="dateModified" datetime="2020-05-21T17:18:14+08:00">2020-05-21</time>
               </span>
             
           
@@ -477,44 +478,130 @@
       
 
       
-        <h3 id="什么是线程池">什么是线程池</h3>
-<p>线程池 = worker线程 + 任务队列</p>
-<h3 id="worker线程">worker线程</h3>
-<p>继承自AQS，并且实现了Runnable接口。worker线程不断从任务队列里获取任务并执行，当任务队列里面没有任务可执行了或者任务执行途中抛出异常时，线程退出，销毁线程。</p>
-<h4 id="aqs">AQS</h4>
-<p>AQS为那些基于FIFO等待队列的同步器和阻塞锁提供了一个框架<br>
-AQS为那些用单个原子int值表示状态的同步器，提供了状态的原子操作（getState、setState、compareAndSetState）<br>
-同步器要继承自AQS，并作为非public的内部helper类，具体的public同步方法由外围包装类提供<br>
-AQS支持互斥、共享两种获取锁的模式，子类同步器一般实现其中一种模式，也可以实现两种模式供用户选择，如ReadWriteLock<br>
-AQS定义了嵌套类ConditionObject 实现了Condition接口，支持互斥模式的子类同步器可以使用此对象来实现Object内置的wait-notify语义<br>
-子类同步器需要实现以下方法，且要保证实现方法的线程安全，修改或者获取状态使用AQS提供的方法getState、setState、compareAndSetState<br>
-tryAcquire<br>
-tryRelease<br>
-tryAcquireShared<br>
-tryReleaseShared<br>
-isHeldExclusively</p>
-<p>AQS内部的FIFO队列的使用方式如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Acquire:</span><br><span class="line">    while (!tryAcquire(arg)) &#123; //尝试获取锁</span><br><span class="line">        enqueue thread if it is not already queued; //获取失败则，将当前线程入队列</span><br><span class="line">        possibly block current thread; //当前线程在FIFO队列阻塞等待</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">Release:</span><br><span class="line">    if (tryRelease(arg)) //尝试释放锁</span><br><span class="line">        unblock the first queued thread; //释放成功则，将FIFO队首线程出队列</span><br></pre></td></tr></table></figure>
-<p>如果AQS不能满足你的同步器需求，你可以基于更底层的java.util.concurrent.atomic类、java.util.Queue类和LockSupport类来实现自定义的同步器</p>
-<p>AQS使用举例：<br>
-Mutex类：互斥锁，状态0代表unlock，状态1代表locked</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mutex</span> <span class="keyword">implements</span> <span class="title">Lock</span>, <span class="title">java</span>.<span class="title">io</span>.<span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 内部Helper类继承自 AQS</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Sync</span> <span class="keyword">extends</span> <span class="title">AbstractQueuedSynchronizer</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 查看锁是否已被占用</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">isHeldExclusively</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> getState() == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取锁，将state由 0 修改为 1</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryAcquire</span><span class="params">(<span class="keyword">int</span> acquires)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">assert</span> acquires == <span class="number">1</span>; <span class="comment">// Otherwise unused</span></span><br><span class="line">      <span class="keyword">if</span> (compareAndSetState(<span class="number">0</span>, <span class="number">1</span>)) &#123;</span><br><span class="line">        setExclusiveOwnerThread(Thread.currentThread());</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 释放锁，将state由 1 修改为 0</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">tryRelease</span><span class="params">(<span class="keyword">int</span> releases)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">assert</span> releases == <span class="number">1</span>; <span class="comment">// Otherwise unused</span></span><br><span class="line">      <span class="keyword">if</span> (getState() == <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> IllegalMonitorStateException();</span><br><span class="line">      setExclusiveOwnerThread(<span class="keyword">null</span>);</span><br><span class="line">      setState(<span class="number">0</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 提供Conditon接口实现等待通知机制</span></span><br><span class="line">    <span class="function">Condition <span class="title">newCondition</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="keyword">new</span> ConditionObject(); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Deserializes properly</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">readObject</span><span class="params">(ObjectInputStream s)</span></span></span><br><span class="line"><span class="function">      <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">      s.defaultReadObject();</span><br><span class="line">      setState(<span class="number">0</span>); <span class="comment">// reset to unlocked state</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 属性实例化同步器（初始化线程安全），并将同步器置为final（操作线程安全）</span></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> Sync sync = <span class="keyword">new</span> Sync();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 外围包装类Mutex提供用户使用接口</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span>                </span>&#123; sync.acquire(<span class="number">1</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">()</span>          </span>&#123; <span class="keyword">return</span> sync.tryAcquire(<span class="number">1</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">unlock</span><span class="params">()</span>              </span>&#123; sync.release(<span class="number">1</span>); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> Condition <span class="title">newCondition</span><span class="params">()</span>   </span>&#123; <span class="keyword">return</span> sync.newCondition(); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLocked</span><span class="params">()</span>         </span>&#123; <span class="keyword">return</span> sync.isHeldExclusively(); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">hasQueuedThreads</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> sync.hasQueuedThreads(); &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lockInterruptibly</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    sync.acquireInterruptibly(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">tryLock</span><span class="params">(<span class="keyword">long</span> timeout, TimeUnit unit)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sync.tryAcquireNanos(<span class="number">1</span>, unit.toNanos(timeout));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>CLH队列：基于链表的确保无饥饿的、提供先来先服务的，公平的自旋锁，申请线程只在本地变量上自旋，它【不断轮询前驱的状态，如果发现前驱释放了锁就结束自旋，获得锁】<br>
-当一个线程获取锁时：<br>
-1. 创建Node节点：封装线程+状态，状态置为：获取锁， 加入FIFO队列队尾<br>
-2. 获取队列里的前驱节点，自旋检查前驱节点的状态，直到前驱节点状态为：释放锁 时，自己获取到锁，并回收前驱节点</p>
-<p>当一个线程释放锁时：<br>
-1. 释放锁的节点必然是队列头节点，设置自己的状态为：释放锁</p>
-<p>等待队列：CLH队列的变种 用于阻塞同步<br>
-当一个线程获取锁时： 没获取到，会加入队尾，并且使用LockSupport.park 阻塞当前线程，进入睡眠状态</p>
-<p>当上一个节点释放锁时，使用LockSupport.unpark 去通知后继节点，唤醒相应的线程</p>
-<h3 id="任务队列">任务队列</h3>
-<p>任务队列实现BlockingQueue接口，细分为：</p>
-<p>无界队列：DelayedWorkQueue、LinkedBlockingQueue</p>
-<p>有界队列：ArrayBlockingQueue</p>
-<p>直接递交给worker线程型队列（队列不存放任务）：SynchronousQueue</p>
-<h3 id="线程池中的位运算">线程池中的位运算</h3>
-<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/threadpool-bit-operation.jpg" alt=""></p>
+        <h3 id="什么是事务">什么是事务</h3>
+<p>事务是数据库的术语，表示事务范围内的操作不成功便成仁【要么成功，要么失败，没有中间状态】。单条sql的执行默认都是事务的，也即单条sql的执行要么成功，要么失败，不存在中间状态。对于多条sql的事务，则需要显式的开启和关闭事务。比如下单减库存的操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#开启事务</span><br><span class="line">begin;</span><br><span class="line">#新增订单</span><br><span class="line">insert into order values (...);</span><br><span class="line">#修改库存</span><br><span class="line">update stock set amount = amount -1 where goods_name = &apos;xxoo&apos;;</span><br><span class="line">#提交 或 根据业务逻辑主动失败回滚</span><br><span class="line">commit; # rollback;</span><br></pre></td></tr></table></figure>
+<p>和事务密切关联的是数据库的隔离级别。数据库的隔离级别定义了不同事务中看到的数据的差异。Mysql有四种隔离级别：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">隔离级别</th>
+<th style="text-align:center">脏读</th>
+<th style="text-align:center">不可重复读</th>
+<th style="text-align:center">幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">读未提交</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">读已提交</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">可重复读</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是</td>
+</tr>
+<tr>
+<td style="text-align:center">串行化</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">否</td>
+</tr>
+</tbody>
+</table>
+<p>不同的隔离级别下，不同事务的数据一致性不一样。Mysql默认隔离级别是可重复读。可以通过【show variables like ‘%transaction%’;】查看默认隔离级别。此隔离级别下的语义是多次select的结果对其他事务的update屏蔽（可重复读），但是其他事务的insert、delete是可以看到的（幻读）。</p>
+<p>因此对于一个涉及查询更新的多条sql事务，由于查询的结果对其他事务的update屏蔽，因此有可能更新后的结果并不是我们想要的。比如：业务逻辑：执行当库存大于0时减库存，如果按以下查询更新执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">begin;</span><br><span class="line">select * from stock where goods_name = &apos;xxoo&apos; and amount &gt; 0;</span><br><span class="line">#业务逻辑判断select结果不为空，则递减amount</span><br><span class="line">update stock set amount = amount -1 where goods_name = &apos;xxoo&apos;;</span><br><span class="line">commit;</span><br></pre></td></tr></table></figure>
+<p>此时，如果amount字段类型可以为负数，则事务执行成功，但是由于其他事务也执行了相同的操作并且先一步递减了amount，则此时amount变成了负值，不符合我们的业务逻辑。</p>
+<p>因此事务并不能保证多条sql语句的执行在业务逻辑上的正确性。</p>
+<p>如果只是sql操作，可以通过sql语句层面的悲观锁和乐观锁来解决。</p>
+<p>悲观锁：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">begin;</span><br><span class="line">select * from stock where goods_name = &apos;xxoo&apos; and amount &gt; 0 for update;</span><br><span class="line">#业务逻辑判断select结果不为空，则递减amount</span><br><span class="line">update stock set amount = amount -1 where goods_name = &apos;xxoo&apos;;</span><br><span class="line">commit;</span><br></pre></td></tr></table></figure>
+<p>此时，其他事务的select for update操作会被阻塞直到此事务提交或回滚，由此可以保证业务逻辑的正确性。</p>
+<p>乐观锁：旧值判断或者新增版本号、时间戳字段来判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">begin;</span><br><span class="line">select * from stock where goods_name = &apos;xxoo&apos; and amount &gt; 0;</span><br><span class="line">#业务逻辑判断select结果不为空，则递减amount</span><br><span class="line">update stock set amount = amount -1 where goods_name = &apos;xxoo&apos; and amount &gt; 0;</span><br><span class="line">commit;</span><br></pre></td></tr></table></figure>
+<p>此时，其他事务的update操作会被阻塞直到此事务提交或回滚，由此保证业务逻辑的正确性。</p>
+<p>如果sql操作中间还有业务逻辑，比如下面的对Account.amount的累加操作放在业务代码里执行而不是sql语句中执行，则要另外加语言层面的锁保证多线程下的安全性。</p>
+<h3 id="transactional注解">Transactional注解</h3>
+<p>Transactional注解基于AOP，通过动态代理，生成代理类，在执行Transactional注解标注的方法前开启事务，在执行Transactional注解标注的方法后提交事务。并提供了方法执行过程中碰到何种异常执行回滚的属性rollbackFor，所以方法中如果有try-catch捕获异常会导致事务无法正确回滚。</p>
+<p>问题：在Transactional注解标注的方法内加锁，导致锁失效的问题</p>
+<p>描述：有个递增更新amount字段的操作如下，为了保证递增操作在多线程下的安全，加了锁。但是测试的时候发现amount的更新值不对，锁住的代码块还是并发执行了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span>(rollbackFor = Throwable.class)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">updateLoginInfo</span><span class="params">(String deviceString, String packageFlag,String version, AccountParam param)</span> </span>&#123;</span><br><span class="line">    Account update = <span class="keyword">new</span> Account();</span><br><span class="line">    update.setLoginpackageflag(packageFlag);</span><br><span class="line">    update.setPackageType(<span class="number">0</span>);</span><br><span class="line">    update.setLastLoginTime( LocalDateTime.now().format( DateTimeFormatter.ofPattern(<span class="string">"yyyy/MM/dd HH:mm:ss"</span>)));</span><br><span class="line">    update.setLoginDevString(deviceString);</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">        Account oldAccount = <span class="keyword">this</span>.accountMapper.getByUserName(deviceString);</span><br><span class="line">        <span class="keyword">int</span> oldAmount = oldAccount.getAmount() == <span class="keyword">null</span> ? <span class="number">0</span> : oldAccount.getAmount();</span><br><span class="line">        update.setAccid(oldAmount + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">int</span> count = <span class="keyword">this</span>.accountMapper.updateByExampleSelective(update, param);</span><br><span class="line">        <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>分析：由于Transactional注解是基于Spring的AOP，会在执行方法之前开启事务，之后再加锁，当锁住的代码执行完成后，再提交事务，因此锁住的代码块执行是在事务之内执行的，因此在synchronized代码块执行完后，事务还未提交，锁已经被释放，此时其他线程可以开启新的事务并拿到锁之后执行锁住的代码块，导致并发问题。</p>
+<p>解决：将锁放到Transactional标注的方法外面</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">updateLoginInfo</span><span class="params">(String deviceString, String packageFlag,String version, AccountParam param)</span> </span>&#123;</span><br><span class="line">    Account update = <span class="keyword">new</span> Account();</span><br><span class="line">    update.setLoginpackageflag(packageFlag);</span><br><span class="line">    update.setPackageType(<span class="number">0</span>);</span><br><span class="line">    update.setLastLoginTime( LocalDateTime.now().format( DateTimeFormatter.ofPattern(<span class="string">"yyyy/MM/dd HH:mm:ss"</span>)));</span><br><span class="line">    update.setLoginDevString(deviceString);</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">        amountMapper.transactionalUpdate(deviceString, update, param);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span>(rollbackFor = Throwable.class)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">transactionalUpdate</span><span class="params">(String deviceString, Account update, AccountParam param)</span> </span>&#123;</span><br><span class="line">    Account oldAccount = <span class="keyword">this</span>.accountMapper.getByUserName ( deviceString );</span><br><span class="line">    <span class="keyword">int</span> oldAcid = oldAccount.getAccid () == <span class="keyword">null</span> ? <span class="number">0</span> : oldAccount.getAccid ();</span><br><span class="line">    update.setAccid ( oldAcid + <span class="number">1</span> );</span><br><span class="line">    <span class="keyword">int</span> count = <span class="keyword">this</span>.accountMapper.updateByExampleSelective ( update, param );</span><br><span class="line">    <span class="keyword">if</span> (count == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UpdateException();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分布式事务">分布式事务</h3>
+<p>分布式事务就是为了保证不同数据库的数据一致性。</p>
+<p>分布式环境下的系统不可能同时满足C（一致性）、A（可用性）、P（分区容错性）；而分布式环境下P是必然要保证的。 所以分布式系统要么侧重于AP，要么侧重于CP。</p>
+<p>由于CAP理论对一致性、可用性的定义太精准，现实的系统不可能同时满足100%的一致性和可用性，又提出了BASE（基本可用、软状态、最终一致性）理论。</p>
+<h4 id="mysql-xa">Mysql XA</h4>
+<p>mysql 5.7及以上提供对分布式事务的支持，实现了XA规范，XA规范定义了分布式事务：</p>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/Mysql%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E6%94%AF%E6%8C%81-XA%E5%AE%9E%E7%8E%B0.jpg" alt=""></p>
+<p>RM：资源管理者，要具备commit/rollback的能力。</p>
+<p>TM：事务管理者，要具备协调通知各个RM是执行commit还是rollback的能力。</p>
+<p>一个全局事务是由若干个本地事务分支组成的，每个RM内部的操作就是一个本地事务分支。</p>
+<p>TM通过XID来协调各个本地事务的操作。</p>
+<p>TM和RMs之间使用两阶段提交协议来运行：</p>
+<p>第一阶段：</p>
+<p>TM向所有RMs发起prepare commit请求，每个RM根据自身情况回复TM是否可以commit，如果可以则预留本地事务需要的资源然后回复OK，如果不可以则回复FAIL</p>
+<p>第二阶段：</p>
+<p>TM根据回复情况，如果全部回复OK则向所有RMs发起commit请求，每个RM执行commit并回复TM操作结果。如果有一个回复FAIL则向所有RMs发起rollback请求，每个RM执行rollback并回复TM操作结果。</p>
+<p>由于Mysql XA强依赖于数据库版本，所以实际上应用很少。更多是通过中间件来实现分布式事务。</p>
+<h4 id="两阶段提交2pc">两阶段提交2PC</h4>
+<p>定义来自维基百科：</p>
+<h5 id="第一阶段提交请求阶段">第一阶段(提交请求阶段)</h5>
+<ol>
+<li>协调者节点向所有参与者节点询问是否可以执行提交操作，并开始等待各参与者节点的响应。</li>
+<li>参与者节点执行询问发起为止的所有事务操作，并将<a href="https://zh.wikipedia.org/w/index.php?title=Undo%E4%BF%A1%E6%81%AF&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">Undo信息</a>和<a href="https://zh.wikipedia.org/w/index.php?title=Redo%E4%BF%A1%E6%81%AF&amp;action=edit&amp;redlink=1" target="_blank" rel="noopener">Redo信息</a>写入日志。</li>
+<li>各参与者节点响应协调者节点发起的询问。如果参与者节点的事务操作实际执行成功，则它返回一个&quot;同意&quot;消息；如果参与者节点的事务操作实际执行失败，则它返回一个&quot;中止&quot;消息。</li>
+</ol>
+<p>有时候，第一阶段也被称作<strong>投票阶段</strong>，即各参与者投票是否要继续接下来的提交操作。</p>
+<h5 id="第二阶段提交执行阶段">第二阶段(提交执行阶段)</h5>
+<h6 id="成功">成功</h6>
+<p>当协调者节点从所有参与者节点获得的响应消息都为&quot;同意&quot;时：</p>
+<ol>
+<li>协调者节点向所有参与者节点发出&quot;正式提交&quot;的请求。</li>
+<li>参与者节点正式执行提交，并释放在整个事务期间内占用的资源。</li>
+<li>参与者节点向协调者节点发送&quot;完成&quot;消息。</li>
+<li>协调者节点收到所有参与者节点反馈的&quot;完成&quot;消息后，完成事务。</li>
+</ol>
+<h6 id="失败">失败</h6>
+<p>如果任一参与者节点在第一阶段返回的响应消息为&quot;终止&quot;，或者协调者节点在第一阶段的询问超时之前无法获取所有参与者节点的响应消息时：</p>
+<ol>
+<li>协调者节点向所有参与者节点发出&quot;回滚操作&quot;的请求。</li>
+<li>参与者节点利用之前写入的Undo信息执行回滚，并释放在整个事务期间内占用的资源。</li>
+<li>参与者节点向协调者节点发送&quot;回滚完成&quot;消息。</li>
+<li>协调者节点收到所有参与者节点反馈的&quot;回滚完成&quot;消息后，取消事务。</li>
+</ol>
+<p>有时候，第二阶段也被称作<strong>完成阶段</strong>，因为无论结果怎样，协调者都必须在此阶段结束当前事务。</p>
+<p>缺点：</p>
+<ol>
+<li>执行过程中第一阶段和第二阶段参与节点均处于阻塞状态。【解决：阿里Fescar的解决方案，直接在第一阶段执行commit并写undo log；然后在第二阶段：如果第一阶段commit成功，则异步删除相应的undo log即可；如果第一阶段commit失败，则根据undo log异步执行rollback并删除相应的undo log】</li>
+<li>在第二阶段部分参与者执行失败时，数据会不一致。【解决：在协调者引入重试机制】</li>
+<li>协调者单点失败问题。【解决：由第三方集群部署的中间件来充当协调者】</li>
+<li>协调者崩溃后或者网络问题参与者和协调者失联后，导致参与者一直阻塞。【解决：在参与者引入重试机制】</li>
+</ol>
+<h4 id="tcc">TCC</h4>
+<p>TCC(Try-Confirm-Cancle)又叫补偿事务。相当于把2PC第二阶段的成功、失败两种情况拆分成Confirm和Cancle两个阶段。因此它存在的问题和2PC存在的问题一样。</p>
+<h4 id="rocketmq分布式事务消息方案">RocketMQ分布式事务消息方案</h4>
+<p>在分布式环境下，多个服务之间通过消息队列进行异步调用，在这种环境下如何保证多个上下游消息调用之间的事务性（ACID）。由于异步解耦，通常会采用可靠消息最终一致性方案。</p>
+<p>RocketMQ事务消息的原理图大致如下，RocketMQ充当了分布式事务中的协调者，并且在协调者中引入了重试机制，在消费者侧也引入了重试机制，所以整个分布式事务的一致性可用性最后就只取决于RocketMQ中间件的高可用性。</p>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/RocketMQ%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF.jpg" alt=""></p>
+<h3 id="参考">参考</h3>
+<p><a href="https://segmentfault.com/a/1190000018057083" target="_blank" rel="noopener">阿里开源分布式事务解决方案 Fescar 全解析</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/91263461" target="_blank" rel="noopener">面试官：了解分布式事务？讲讲你理解的2PC和3PC原理</a></p>
+<p><a href="https://juejin.im/post/5bf201f7f265da610f63528a" target="_blank" rel="noopener">拜托，面试请不要再问我TCC分布式事务的实现原理</a></p>
+<p><a href="https://www.javazhiyin.com/31853.html" target="_blank" rel="noopener">分布式事务之如何基于RocketMQ的事务消息特性实现分布式系统的最终一致性</a></p>
 
       
     </div>
@@ -580,7 +667,7 @@ Mutex类：互斥锁，状态0代表unlock，状态1代表locked</p>
         
         <div class="post-tags">
           
-            <a href="/tags/java/" rel="tag"># java</a>
+            <a href="/tags/分布式事务/" rel="tag"># 分布式事务</a>
           
         </div>
       
@@ -593,8 +680,8 @@ Mutex类：互斥锁，状态0代表unlock，状态1代表locked</p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/article/java-基础/" rel="next" title="java-基础">
-                <i class="fa fa-chevron-left"></i> java-基础
+              <a href="/article/分布式锁/" rel="next" title="分布式锁">
+                <i class="fa fa-chevron-left"></i> 分布式锁
               </a>
             
           </div>
@@ -602,10 +689,6 @@ Mutex类：互斥锁，状态0代表unlock，状态1代表locked</p>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/article/java-注解/" rel="prev" title="java-注解">
-                java-注解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -775,7 +858,7 @@ Mutex类：互斥锁，状态0代表unlock，状态1代表locked</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是线程池"><span class="nav-number">1.</span> <span class="nav-text">&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;&#x6C60;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#worker线程"><span class="nav-number">2.</span> <span class="nav-text">worker&#x7EBF;&#x7A0B;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#aqs"><span class="nav-number">2.1.</span> <span class="nav-text">AQS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#任务队列"><span class="nav-number">3.</span> <span class="nav-text">&#x4EFB;&#x52A1;&#x961F;&#x5217;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池中的位运算"><span class="nav-number">4.</span> <span class="nav-text">&#x7EBF;&#x7A0B;&#x6C60;&#x4E2D;&#x7684;&#x4F4D;&#x8FD0;&#x7B97;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是事务"><span class="nav-number">1.</span> <span class="nav-text">&#x4EC0;&#x4E48;&#x662F;&#x4E8B;&#x52A1;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transactional注解"><span class="nav-number">2.</span> <span class="nav-text">Transactional&#x6CE8;&#x89E3;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式事务"><span class="nav-number">3.</span> <span class="nav-text">&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-xa"><span class="nav-number">3.1.</span> <span class="nav-text">Mysql XA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两阶段提交2pc"><span class="nav-number">3.2.</span> <span class="nav-text">&#x4E24;&#x9636;&#x6BB5;&#x63D0;&#x4EA4;2PC</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一阶段提交请求阶段"><span class="nav-number">3.2.1.</span> <span class="nav-text">&#x7B2C;&#x4E00;&#x9636;&#x6BB5;(&#x63D0;&#x4EA4;&#x8BF7;&#x6C42;&#x9636;&#x6BB5;)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二阶段提交执行阶段"><span class="nav-number">3.2.2.</span> <span class="nav-text">&#x7B2C;&#x4E8C;&#x9636;&#x6BB5;(&#x63D0;&#x4EA4;&#x6267;&#x884C;&#x9636;&#x6BB5;)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#成功"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">&#x6210;&#x529F;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#失败"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">&#x5931;&#x8D25;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tcc"><span class="nav-number">3.3.</span> <span class="nav-text">TCC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rocketmq分布式事务消息方案"><span class="nav-number">3.4.</span> <span class="nav-text">RocketMQ&#x5206;&#x5E03;&#x5F0F;&#x4E8B;&#x52A1;&#x6D88;&#x606F;&#x65B9;&#x6848;</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">&#x53C2;&#x8003;</span></a></li></ol></div>
             
 
           </div>

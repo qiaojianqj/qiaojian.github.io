@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="谯剑的小站">
 <meta property="og:description" content="查看mysql 用户的连接权限 123456789101112131415mysql&amp;gt; use mysql;Reading table information for completion of table and column namesYou can turn off this feature to get a quicker startup with -ADatabase change">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-19T02:03:54.169Z">
+<meta property="og:updated_time" content="2020-05-20T04:04:47.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql笔记">
 <meta name="twitter:description" content="查看mysql 用户的连接权限 123456789101112131415mysql&amp;gt; use mysql;Reading table information for completion of table and column namesYou can turn off this feature to get a quicker startup with -ADatabase change">
@@ -427,7 +427,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-19 10:03:54" itemprop="dateModified" datetime="2020-05-19T10:03:54+08:00">2020-05-19</time>
+                <time title="修改时间：2020-05-20 12:04:47" itemprop="dateModified" datetime="2020-05-20T12:04:47+08:00">2020-05-20</time>
               </span>
             
           
@@ -481,6 +481,8 @@
 <h3 id="mysql连接方式">mysql连接方式</h3>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. TCP/IP方式：本地或远程登录</span><br><span class="line">mysql -hhost -uname -ppassword</span><br><span class="line">2. socket方式：本地登录</span><br><span class="line">[root@localhost ~]# ps -ef | grep mysql</span><br><span class="line">root      3076     1  0 Oct14 ?        00:00:00 /bin/sh /usr/bin/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/run/mysqld/mysqld.pid --basedir=/usr --user=mysql</span><br><span class="line">mysql -uname -S/var/lib/mysql/mysql.sock</span><br></pre></td></tr></table></figure>
 <h3 id="innodb-存储结构b树">InnoDB 存储结构：B+树</h3>
+<p>MyIsam引擎是默认存储引擎，对应磁盘上三个文件：.frm（存储表定义） .MYD（存储数据） .MYI（存储索引）</p>
+<p>InnoDB引擎，对应磁盘上两个文件：.frm（存储表定义）.ibd（存储聚集索引，叶子节点即数据）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">InnoDB的一张表的数据和索引都存在表空间，一个表空间对应一个ibd文件</span><br><span class="line"></span><br><span class="line">表空间由段、区、页组成</span><br><span class="line">段由多个区组成</span><br><span class="line">区由连续的多个页组成（页大小默认为16KB）</span><br><span class="line">页存放table的行数据</span><br><span class="line"></span><br><span class="line">B+树叶子节点：存储 数据段</span><br><span class="line">B+树非叶子节点：存储 索引段</span><br></pre></td></tr></table></figure>
 <h3 id="索引">索引</h3>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">1. 聚集索引：</span><br><span class="line">一张表只有一个聚集索引，因为InnoDB的数据存储就是按照主键顺序存放的一颗B+树，此时B+树的叶子节点存放的是整张表的行记录数据。</span><br><span class="line">聚集索引，适合基于主键的排序查找和范围查找</span><br><span class="line"></span><br><span class="line">2. 辅助索引：</span><br><span class="line">辅助索引的叶子节点不存储数据，而是存储聚集索引的主键值（因此主键不宜是占太大的空间的字段）。</span><br><span class="line">当通过辅助索引查找数据时，需要先在辅助索引B+树找到对应的聚集索引的主键值，再到聚集索引B+树查找指定主键值所对应的数据</span><br><span class="line"></span><br><span class="line">3. 建立索引的原则：</span><br><span class="line">选择取值重复度低（区分度高）的字段建立索引，比如用户名适合建立索引，性别就不适合建立索引</span><br><span class="line">不要重复创建索引</span><br><span class="line">尽量扩展已有索引，而不是添加新的多余的索引</span><br><span class="line">mysql优化器会对使用索引对语句进行判断，当使用辅助索引的语句扫描行数超过30%（大概值）时，mysql优化器会选择走聚集索引的全表扫描</span><br><span class="line"></span><br><span class="line">4. 只select 需要的字段（可能会用到覆盖索引，只需要从辅助索引检索即可查到所需数据，更快），不要select *</span><br><span class="line"></span><br><span class="line">5. 联合索引依照最左匹配的顺序来检索B+树，直到遇到范围查询（&gt; &lt; between like）停止匹配，所以经常进行范围查询的字段在联合索引中要放在最后。比如a = 1 and b = 2 and c &gt; 3 and d = 4 如果建立(a,b,c,d)顺序的索引，d是用不到索引的，如果建立(a,b,d,c)的索引则都可以用到，a,b,d的顺序可以任意调整</span><br><span class="line"></span><br><span class="line">6. 使用explain/desc 查看执行计划，找出扫描行很多（rows）的语句，修改sql语句使得扫描行尽量少即可</span><br></pre></td></tr></table></figure>
@@ -737,7 +739,7 @@ PRIMARY KEY (<code>id</code>)<br>
 </tbody>
 </table>
 <h3 id="清空表">清空表</h3>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">truncate vs delete</span><br><span class="line">truncate 是ddl操作，不能回滚</span><br><span class="line">delete 是dql操作，可以回滚</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">truncate vs delete vs drop</span><br><span class="line">truncate 是ddl操作，仅删除数据，不支持条件过滤，不能回滚，较快</span><br><span class="line">delete 是dql操作，仅删除数据，支持条件过滤，可以回滚，慢</span><br><span class="line">drop 是ddl操作，删除数据同时删除表结构，最快</span><br></pre></td></tr></table></figure>
 <h3 id="慢查询日志配置">慢查询日志配置</h3>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. 查看mysql配置文件</span><br><span class="line">mysql --help | grep my.cnf</span><br><span class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf</span><br><span class="line"></span><br><span class="line">2. 修改配置文件：vim /etc/my.cnf</span><br><span class="line">slow_query_log=ON</span><br><span class="line">slow_query_log_file=/var/log/slowmysql.log</span><br><span class="line">long_query_time=10</span><br></pre></td></tr></table></figure>
 <h3 id="分库分表">分库分表</h3>
@@ -775,6 +777,45 @@ PRIMARY KEY (<code>id</code>)<br>
 <p>先select * from role where name=‘xxoo’;判断是否存在，不存在，再insert into role (id, name, no, type, remark ) values (…);</p>
 <p>使用DUAL表一条语句搞定：</p>
 <p>insert into role  (id, name, no, type, remark ) select 123, ‘test-dual’, 456, 1, ‘test-dual’ from dual where not exists (select * from role where name=‘test-dual’);</p>
+<h3 id="日志">日志</h3>
+<p>Mysql日志类型：</p>
+<ol>
+<li>redo log： 在事务开始的时候先写redo log，以防发生故障时，在恢复的时候根据redo log进行重做日志，保证数据的一致性</li>
+<li>undo log：在事务开始前将当前数据库版本生成undo log，用于事务回滚操作</li>
+<li>bin log：用于主从复制，从库连接到主库，读取binlog进行主从同步。在事务提交的时候会刷新bin log</li>
+</ol>
+<h3 id="查看某个操作的语法">查看某个操作的语法</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ? create table</span><br><span class="line">Name: &apos;CREATE TABLE&apos;</span><br><span class="line">Description:</span><br><span class="line">Syntax:</span><br><span class="line">CREATE [TEMPORARY] TABLE [IF NOT EXISTS] tbl_name</span><br><span class="line">    (create_definition,...)</span><br><span class="line">    [table_options]</span><br><span class="line">    [partition_options]</span><br></pre></td></tr></table></figure>
+<h3 id="字符集和校对规则">字符集和校对规则</h3>
+<p>字符集指定字符的编码方式。比如Mysql推荐使用的字符集为：utf8mb4</p>
+<p>校对规则制定字符如何排序及比较大小。比如Mysql推荐使用的校对规则为：utf8mb4_unicode_ci （ci结尾表示case insensitive）</p>
+<p>Mysql对字符集的转换处理流程如下：</p>
+<ol>
+<li>客户端请求数据库数据，发送的数据使用character_set_client字符集</li>
+<li>MySQL实例收到客户端发送的数据后，将其转换为character_set_connection字符集</li>
+<li>进行内部操作时，将数据字符集转换为内部操作字符集：</li>
+<li>使用每个数据字段的character set设定值</li>
+<li>若不存在，使用对应数据表的default character set设定值</li>
+<li>若不存在，使用对应数据库的default character set设定值</li>
+<li>若不存在，使用character_set_server设定值</li>
+<li>将操作结果值从内部操作字符集转换为character_set_results</li>
+</ol>
+<p>以防中文显示乱码，将character_set_client、character_set_connection、character_set_results、character_set_server都设置为utf8mb4；</p>
+<p><strong>查看默认字符集和校对规则</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW VARIABLES LIKE &quot;%char%&quot;;</span><br><span class="line">mysql&gt; SHOW VARIABLES LIKE &quot;%coll%&quot;;</span><br></pre></td></tr></table></figure>
+<p><strong>设置字符集和校对规则</strong></p>
+<ol>
+<li>启动mysql时设置：修改配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">character-set-server=utf8mb4</span><br><span class="line">collation-server=utf8mb4_unicode_ci</span><br><span class="line">[client]</span><br><span class="line">default-character-set=utf8mb4</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>创建数据库时指定</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE myDb</span><br><span class="line">  DEFAULT CHARACTER SET utf8mb4</span><br><span class="line">  DEFAULT COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>创建表时指定</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE myTb () ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -939,7 +980,7 @@ PRIMARY KEY (<code>id</code>)<br>
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -998,7 +1039,9 @@ PRIMARY KEY (<code>id</code>)<br>
         
           
         
-        <span class="site-state-item-count">20</span>
+          
+        
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -1033,7 +1076,7 @@ PRIMARY KEY (<code>id</code>)<br>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看mysql-用户的连接权限"><span class="nav-number">1.</span> <span class="nav-text">&#x67E5;&#x770B;mysql &#x7528;&#x6237;&#x7684;&#x8FDE;&#x63A5;&#x6743;&#x9650;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql连接方式"><span class="nav-number">2.</span> <span class="nav-text">mysql&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb-存储结构b树"><span class="nav-number">3.</span> <span class="nav-text">InnoDB &#x5B58;&#x50A8;&#x7ED3;&#x6784;&#xFF1A;B+&#x6811;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">4.</span> <span class="nav-text">&#x7D22;&#x5F15;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务查询"><span class="nav-number">5.</span> <span class="nav-text">&#x4E8B;&#x52A1;&#x67E5;&#x8BE2;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库更新丢失问题"><span class="nav-number">6.</span> <span class="nav-text">&#x6570;&#x636E;&#x5E93;&#x66F4;&#x65B0;&#x4E22;&#x5931;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空表"><span class="nav-number">7.</span> <span class="nav-text">&#x6E05;&#x7A7A;&#x8868;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慢查询日志配置"><span class="nav-number">8.</span> <span class="nav-text">&#x6162;&#x67E5;&#x8BE2;&#x65E5;&#x5FD7;&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分库分表"><span class="nav-number">9.</span> <span class="nav-text">&#x5206;&#x5E93;&#x5206;&#x8868;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区"><span class="nav-number">10.</span> <span class="nav-text">&#x5206;&#x533A;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-repication"><span class="nav-number">11.</span> <span class="nav-text">mysql repication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-fabric"><span class="nav-number">12.</span> <span class="nav-text">mysql fabric</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-cluster"><span class="nav-number">13.</span> <span class="nav-text">mysql cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dual表"><span class="nav-number">14.</span> <span class="nav-text">DUAL&#x8868;</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看mysql-用户的连接权限"><span class="nav-number">1.</span> <span class="nav-text">&#x67E5;&#x770B;mysql &#x7528;&#x6237;&#x7684;&#x8FDE;&#x63A5;&#x6743;&#x9650;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql连接方式"><span class="nav-number">2.</span> <span class="nav-text">mysql&#x8FDE;&#x63A5;&#x65B9;&#x5F0F;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#innodb-存储结构b树"><span class="nav-number">3.</span> <span class="nav-text">InnoDB &#x5B58;&#x50A8;&#x7ED3;&#x6784;&#xFF1A;B+&#x6811;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">4.</span> <span class="nav-text">&#x7D22;&#x5F15;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务查询"><span class="nav-number">5.</span> <span class="nav-text">&#x4E8B;&#x52A1;&#x67E5;&#x8BE2;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库更新丢失问题"><span class="nav-number">6.</span> <span class="nav-text">&#x6570;&#x636E;&#x5E93;&#x66F4;&#x65B0;&#x4E22;&#x5931;&#x95EE;&#x9898;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空表"><span class="nav-number">7.</span> <span class="nav-text">&#x6E05;&#x7A7A;&#x8868;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慢查询日志配置"><span class="nav-number">8.</span> <span class="nav-text">&#x6162;&#x67E5;&#x8BE2;&#x65E5;&#x5FD7;&#x914D;&#x7F6E;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分库分表"><span class="nav-number">9.</span> <span class="nav-text">&#x5206;&#x5E93;&#x5206;&#x8868;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区"><span class="nav-number">10.</span> <span class="nav-text">&#x5206;&#x533A;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-repication"><span class="nav-number">11.</span> <span class="nav-text">mysql repication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-fabric"><span class="nav-number">12.</span> <span class="nav-text">mysql fabric</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-cluster"><span class="nav-number">13.</span> <span class="nav-text">mysql cluster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dual表"><span class="nav-number">14.</span> <span class="nav-text">DUAL&#x8868;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志"><span class="nav-number">15.</span> <span class="nav-text">&#x65E5;&#x5FD7;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看某个操作的语法"><span class="nav-number">16.</span> <span class="nav-text">&#x67E5;&#x770B;&#x67D0;&#x4E2A;&#x64CD;&#x4F5C;&#x7684;&#x8BED;&#x6CD5;</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符集和校对规则"><span class="nav-number">17.</span> <span class="nav-text">&#x5B57;&#x7B26;&#x96C6;&#x548C;&#x6821;&#x5BF9;&#x89C4;&#x5219;</span></a></li></ol></div>
             
 
           </div>
