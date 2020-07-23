@@ -1460,7 +1460,7 @@ void
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-02-24 23:13:59" itemprop="dateModified" datetime="2020-02-24T23:13:59+08:00">2020-02-24</time>
+                <time title="修改时间：2020-07-08 09:37:50" itemprop="dateModified" datetime="2020-07-08T09:37:50+08:00">2020-07-08</time>
               </span>
             
           
@@ -1502,11 +1502,10 @@ void
         
           
             <p>
-              Redis数据类型
-字符串String
-Hash表
-List列表：
-LPUSH + BRPOP 实现消息队列，支持消息持久化，保证消息顺序性；不足的地方：不支持消息的消费确认，不能做广播模式，不能重复
+              SDS
+SDS是Redis里的动态字符串表示方式，但是，查看Redis6.0.5源码SDS定义：
+typedef char *sds;
+what？这不就是简单的字符串指针吗？怎么就动态了？且慢，往后看
               ...
             </p>
           <!--noindex-->
@@ -1815,7 +1814,7 @@ LPUSH + BRPOP 实现消息队列，支持消息持久化，保证消息顺序性
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-08 11:13:46" itemprop="dateModified" datetime="2020-06-08T11:13:46+08:00">2020-06-08</time>
+                <time title="修改时间：2020-07-22 18:15:32" itemprop="dateModified" datetime="2020-07-22T18:15:32+08:00">2020-07-22</time>
               </span>
             
           

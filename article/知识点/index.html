@@ -105,15 +105,20 @@
 <meta property="og:site_name" content="谯剑的小站">
 <meta property="og:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/ThreadLocal%E8%A7%A3%E6%9E%90%E5%9B%BE.jpg">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/image-20200416163440212.png">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/jvm-gc-flags.png">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/image-20200420163224499.png">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/image-20200420170520211.png">
-<meta property="og:updated_time" content="2020-06-08T03:13:46.960Z">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E9%80%9A%E7%94%A8.jpg">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%BC%82%E5%9C%B0%E5%AE%B9%E7%81%BE.jpg">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E%E5%AE%B9%E7%81%BE.jpg">
+<meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E&%E5%BC%82%E5%9C%B0.jpg">
+<meta property="og:updated_time" content="2020-07-22T10:15:32.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识点">
 <meta name="twitter:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
-<meta name="twitter:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/image-20200416163440212.png">
+<meta name="twitter:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/ThreadLocal%E8%A7%A3%E6%9E%90%E5%9B%BE.jpg">
 
 
 
@@ -430,7 +435,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-08 11:13:46" itemprop="dateModified" datetime="2020-06-08T11:13:46+08:00">2020-06-08</time>
+                <time title="修改时间：2020-07-22 18:15:32" itemprop="dateModified" datetime="2020-07-22T18:15:32+08:00">2020-07-22</time>
               </span>
             
           
@@ -482,6 +487,107 @@
 <p>char对应包装类Character会缓存0～127范围的字符（java的char占两个字节存的是unicode码，表示数据范围0～65525）</p>
 <p>byte对应包装类Byte会缓存-128～127范围的字节，即byte所表示的数据范围都会被缓存</p>
 <p>boolean、float和double没有缓存</p>
+<h4 id="集合">集合</h4>
+<h5 id="list">List</h5>
+<p>ArrayList与LinkedList</p>
+<h5 id="map">Map</h5>
+<p>HashMap、LinkedHashMap、TreeMap</p>
+<p>LinkedHashMap：了解基本原理、哪两种有序、如何用它实现LRU</p>
+<p>TreeMap：了解数据结构、了解其key对象为什么必须要实现Compare接口、如何用它实现一致性哈希</p>
+<h5 id="set">Set</h5>
+<p>由对应的map实现</p>
+<h5 id="threadlocal">ThreadLocal</h5>
+<ol>
+<li>魔数</li>
+</ol>
+<p>魔数：0x61c88647 （32bit无符号数：2654435769，32bit有符号数：-1640531527），是2^32*0.618（黄金分割点）</p>
+<p>目的：使用非波拉契散列法，是的散列出的值更均匀</p>
+<ol start="2">
+<li>ThreadLocalMap</li>
+</ol>
+<p>ThreadLocaMap存储的key-value是key为ThreadLocal对象的弱引用，在ThreadLocal被设置为null后，在下次gc时ThreadLocal被回收掉，但是value还被线程的ThreadLocalMap强引用，导致内存泄露。</p>
+<p>​	2.1 ThreadLocalMap在扩容的时候会将entry的key为null所对应的value设为null，help the gc（减轻内存泄露）</p>
+<p>​    2.2 在每次get、set时都会清除key为null所对应的value为null，减轻内存泄露</p>
+<p>​	2.3 不再使用set进ThreadLocal的值后，调用ThreadLocal的remove方法显式地从ThreadLocalMap删除掉，避免内存泄露</p>
+<ol start="3">
+<li>
+<p>ThreadLocal和InheritableThreadLocal区别</p>
+<p>3.1 InheritableThreadLocal里设置的值在子线程可以get到（创建子线程时会从父线程拷贝到子线程）</p>
+</li>
+<li>
+<p>ThreadLocalMap采用数组保存Map.Entry，插入查找值时采用开放地址法</p>
+</li>
+<li>
+<p>由于采用开放地址法，在hash冲突是默认查找相邻下一个位置是否可用，因此在清除null key时会有特别的移动操作来保证hash的顺序正确性（参考方法replaceStaleEntry）</p>
+</li>
+<li>
+<p>ThreadLocal、ThreadLocalMap之间关系图</p>
+</li>
+</ol>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/ThreadLocal%E8%A7%A3%E6%9E%90%E5%9B%BE.jpg" alt=""></p>
+<h4 id="异常">异常</h4>
+<p>checked异常：必须被捕获或抛出，例如IOException。因此这类异常在编写代码时就可以提醒程序员会出错的地方，程序员可以根据实际情况选择捕获或者抛出。</p>
+<p>unchecked异常：例如NPE，运行时异常，不需要被捕获，减少try-catch，代码可读性增强</p>
+<p>自定义异常：</p>
+<p>​	继承自Exception：checked异常，必须被捕获或抛出</p>
+<p>​	继承自RuntimeException：unchecked异常，不需要被捕获，如果抛出异常则静默报错</p>
+<h4 id="spring">Spring</h4>
+<p>bean的生命周期、循环依赖问题、spring cloud 全家桶、AOP的实现、spring事务传播<br>
+常见问题</p>
+<p>java动态代理和cglib动态代理的区别（经常结合spring一起问所以就放这里了）<br>
+属性注入和构造器注入哪种会有循环依赖的问题？</p>
+<p>BeanFactory与FactoryBean的区别</p>
+<h4 id="dubbo或其他rpc框架">Dubbo（或其他Rpc框架）</h4>
+<p>了解一个常用RPC框架如Dubbo的实现：服务发现、路由、异步调用、限流降级、失败重试</p>
+<p>常见问题</p>
+<p>Dubbo如何做负载均衡？<br>
+Dubbo如何做限流降级？<br>
+Dubbo如何优雅的下线服务？<br>
+Dubbo如何实现异步调用的？</p>
+<h4 id="rocketmq或其他消息中间件">RocketMq（或其他消息中间件）</h4>
+<p>了解一个常用消息中间件如RocketMq的实现：如何保证高可用和高吞吐、消息顺序、重复消费、事务消息、延迟消息、死信队列<br>
+常见问题</p>
+<p>RocketMq如何保证高可用的？<br>
+RocketMq如何保证高吞吐的？<br>
+RocketMq的消息是有序的吗？<br>
+RocketMq的消息局部顺序是如何保证的?<br>
+RocketMq事务消息的实现机制？<br>
+RocketMq会有重复消费的问题吗？如何解决？<br>
+RocketMq支持什么级别的延迟消息？如何实现的？<br>
+RocketMq是推模型还是拉模型？<br>
+Consumer的负载均衡是怎么样的？</p>
+<h4 id="redis或其他缓存系统">Redis（或其他缓存系统）</h4>
+<p>redis工作模型、redis持久化、redis过期淘汰机制、redis分布式集群的常见形式、分布式锁、缓存击穿、缓存雪崩、缓存一致性问题<br>
+常见问题</p>
+<p>redis性能为什么高?<br>
+单线程的redis如何利用多核cpu机器？<br>
+redis的缓存淘汰策略？<br>
+redis如何持久化数据？<br>
+redis有哪几种数据结构？<br>
+redis集群有哪几种形式？<br>
+有海量key和value都比较小的数据，在redis中如何存储才更省内存？<br>
+如何保证redis和DB中的数据一致性？<br>
+如何解决缓存穿透和缓存雪崩？<br>
+如何用redis实现分布式锁？</p>
+<h4 id="mysql">Mysql</h4>
+<p>事务隔离级别、锁、索引的数据结构、聚簇索引和非聚簇索引、最左匹配原则、查询优化（explain等命令）<br>
+推荐文章：<br>
+<a href="http://hedengcheng.com/?p=771" target="_blank" rel="noopener">http://hedengcheng.com/?p=771</a><br>
+<a href="https://tech.meituan.com/2014/06/30/mysql-index.html" target="_blank" rel="noopener">https://tech.meituan.com/2014/06/30/mysql-index.html</a><br>
+<a href="http://hbasefly.com/2017/08/19/mysql-transaction/" target="_blank" rel="noopener">http://hbasefly.com/2017/08/19/mysql-transaction/</a><br>
+常见问题</p>
+<p>Mysql(innondb 下同) 有哪几种事务隔离级别？<br>
+不同事务隔离级别分别会加哪些锁？<br>
+mysql的行锁、表锁、间隙锁、意向锁分别是做什么的？<br>
+说说什么是最左匹配？<br>
+如何优化慢查询？<br>
+mysql索引为什么用的是b+ tree而不是b tree、红黑树<br>
+分库分表如何选择分表键<br>
+分库分表的情况下，查询时一般是如何做排序的？<br>
+zk</p>
+<p>zk大致原理（可以了解下原理相近的Raft算法）、zk实现分布式锁、zk做集群master选举<br>
+常见问题</p>
+<p>如何用zk实现分布式锁，与redis分布式锁有和优缺点</p>
 <h4 id="java传参方式">java传参方式</h4>
 <ol>
 <li>
@@ -595,6 +701,9 @@
 <li>
 <p>打印GC日志：-XX:PrintGCDetails、-XX:+PrintGCDateStamps、-Xloggc:path</p>
 </li>
+<li>
+<p>关闭显示GC：-XX:+DisableExplicitGC</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -659,6 +768,84 @@
 <p>java -XX:+PrintCommandLineFlags -version 只打印JVM启动时有修改的参数</p>
 <p>java -XX:+PrintFlagsInitial -version 打印JVM所有默认的初始参数</p>
 <p>java -XX:+PrintFlagsFinal -version 打印JVM启动后的最终设置的所有参数</p>
+<h4 id="jvm命令行参数">JVM命令行参数</h4>
+<p>标准选项： - 开头</p>
+<p>非标准选项： -X开头</p>
+<p>开发选项：-XX开头</p>
+<p>命令行参数指定值的三种方式：</p>
+<p>-XX:+<em>OptionName</em></p>
+<p>-XX:-<em>OptionName</em></p>
+<p>and -XX:<em>OptionName</em>=</p>
+<p>命令行参数指定整数大小比如内存大小时可以在数值后加上后缀表示单位如k、m、g</p>
+<h4 id="jvm生命周期">JVM生命周期</h4>
+<ol>
+<li>
+<p>Launcher</p>
+<p>典型的Launcher：java命令</p>
+<p>Launcher的作用：</p>
+<ul>
+<li>解析命令行参数</li>
+<li>建立堆空间，设置编译模式（client 或 server）</li>
+<li>读取环境变量设置，如CLASSPATH</li>
+<li>读取Main-Class</li>
+<li>创建并初始化VM（JNI_CreateJavaVM）</li>
+<li>加载Main-Class（CallStaticVoidMethod）</li>
+<li>执行完main方法后，检查并清除可能出现的pending exceptions，然后返回相应的exit status</li>
+<li>销毁VM（DestroyJavaVM）</li>
+</ul>
+</li>
+</ol>
+<h5 id="jni_createjavavm执行流程">JNI_CreateJavaVM执行流程</h5>
+<ol>
+<li>1个java进程只能创建1个VM实例，确保不会有两个线程调用JNI_CreateJavaVM方法</li>
+<li>检查支持的JNI版本，初始化gc logging输出流，初始化用到的OS模块如随机数生成器、内存页等</li>
+<li>解析传入的命令行参数</li>
+<li>根据传入的参数进一步创建和初始化相关OS模块，加载相应的lib库</li>
+<li>gc logging输出流初始化完成，代理库hprof、jdi初始化完成</li>
+<li>初始化线程相关数据结构</li>
+<li>初始化全局数据结构如event log，synchronization primitives等</li>
+<li>创建Java main 线程，初始化Java级别的同步器</li>
+<li>初始化剩余的全局模块</li>
+<li>初始化VMThread线程（执行VM关键操作的线程）</li>
+<li>加载Java系统类</li>
+<li>开启Signal Handler线程等。准备好VM环境了，提高JNI服务</li>
+</ol>
+<h5 id="destroyjavavm执行流程">DestroyJavaVM执行流程</h5>
+<p>Launcher和VM自己都可以调用此方法来结束VM</p>
+<ol>
+<li>等待直到最后个non-daemon线程执行完成</li>
+<li>调用Java层面的优雅关机接口shutdown hook</li>
+<li>调用finalizers</li>
+<li>调用VM层面的优雅关机接口shutdown hook</li>
+<li>关闭各种统计线程、信号处理线程、GC线程等</li>
+<li>释放JNI调用处理模块，至此，不能再执行Java代码</li>
+<li>停止编译线程，停止VM线程</li>
+<li>释放IO、内存资源</li>
+<li>返回调用者</li>
+</ol>
+<h5 id="类加载">类加载</h5>
+<p>类加载的作用：映射全路径类名或接口名到相应的Class对象</p>
+<p>JVM会在启动时预先加载核心类如Object、Thread等</p>
+<p>VM和特定的ClassLoader类一起配合完成类的加载</p>
+<p>类加载阶段：</p>
+<ol>
+<li>加载阶段：根据类或接口名称查找符合类文件格式的二进制流</li>
+<li>连接阶段：检查类文件格式，给类静态字段赋值类型默认值</li>
+<li>初始化阶段：开始执行Java代码，先执行静态初始化</li>
+</ol>
+<p>一般只有主动使用类的时候才会出发类的加载和初始化。</p>
+<p>类加载委托模型：</p>
+<p>Java SE的类加载顺序依次是： the bootstrap class loader, the extension class loader and the system class loader 。</p>
+<p>其中bootstrap是JVM实现的类加载器，它负责加载bootpath下的类比如rt.jar包</p>
+<p>其中extension class loader加载JRE目录/lib/ext下的类。</p>
+<p>其中system class loader是默认的应用类加载器，它负责加载main函数所在类和classpath下的类。</p>
+<p>类加载器和类的全路径限定名一起唯一确定一个类。</p>
+<p>JVM保证类加载是串行化的，因此类加载也是线程安全的。</p>
+<p>JVM锁：java对象锁：java monitor，java对象头：mark word（锁信息、gc年龄、对象hashcode）、类指针、[数组长度]</p>
+<p>JVM内部线程：单例VMThread、单例WacherThread、多个GC threads、多个Compiler threads、单例Signal Dispatcher Thread、Finalizer线程和Reference Handler线程</p>
+<p>C10K： <a href="http://www.kegel.com/c10k.html" target="_blank" rel="noopener">http://www.kegel.com/c10k.html</a></p>
+<p>BIO、NIO、Netty</p>
+<p>nc、strace</p>
 <h4 id="netty">Netty</h4>
 <p>高性能特性：</p>
 <ol>
@@ -679,6 +866,16 @@
 <p>提供各种开箱即用的Handler （编解码Codec，流分割LengthFieldBasedFrameDecoder等，空闲检测IdleStateHandler，序列化）</p>
 </li>
 </ol>
+<h4 id="epoll惊群">epoll惊群</h4>
+<p>​	惊群：多个线程等待同一个事件发生，在事件到来时，所有线程都被唤醒来竞争事件的处理，最后只有1个线程成功获得事件处理，其他线程又回到等待状态，等待下次事件的发生。</p>
+<p>epoll_wait设计为等待多种类型事件（accept、read、write、connect）的发生，accept事件只能由1个线程处理，但其他事件比如read事件是可以由多个线程处理的，所以内核对此不做处理，由用户程序处理。</p>
+<p>所以在epoll_wait处理accept事件时依然会有惊群问题，netty自己限制只有1个boss线程来处理accept事件，避免了惊群问题。</p>
+<ul>
+<li>accept 不会有惊群，epoll_wait 才会。</li>
+<li>Nginx 的 accept_mutex，并不是解决 accept 惊群问题，而是解决 epoll_wait 惊群问题。</li>
+<li>说Nginx 解决了 epoll_wait 惊群问题，也是不对的，它只是控制是否将监听套接字加入到 epoll 中。监听套接字只在一个子进程的 epoll 中，当新的连接来到时，其他子进程当然不会惊醒了。</li>
+</ul>
+<p>参考文章https://pureage.info/2015/12/22/thundering-herd.html</p>
 <h4 id="springboot启动流程">SpringBoot启动流程</h4>
 <p>**SpringBoot 监听器：**SpringApplicationRunListeners</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">EventPublishingRunListener 类在SpringBoot启动时读取AppClassLoader加载目录下的SpringBoot框架JAR包的META-INF/spring.factories文件实例化的</span><br><span class="line"></span><br><span class="line">EventPublishingRunListener类实例化的时候会初始化它的两个属性：</span><br><span class="line">初始化事件多播器：SimpleApplicationEventMulticaster</span><br><span class="line">并向此多播器添加实现了接口SpringApplicationRunListener的监听器</span><br><span class="line"></span><br><span class="line">然后使用实例化的EventPublishingRunListener初始化类SpringApplicationRunListeners并生成其实例</span><br><span class="line"></span><br><span class="line">类SpringApplicationRunListeners实例化后，调用其方法starting，starting方法又会调用其属性EventPublishingRunListener的starting方法</span><br><span class="line"></span><br><span class="line">EventPublishingRunListener的starting方法调用其属性初始化事件多播器的multicastEvent方法，此方法会遍历初始化EventPublishingRunListener时添加的监听器，通知他们事件</span><br></pre></td></tr></table></figure>
@@ -692,7 +889,7 @@
 <p>SpringFactoriesLoader类的loadFactoryNames方法，入参为factoryClass和classLoader，根据指定的classLoader，加载该类加器搜索路径下的META_INF/spring.factories文件，传入的工厂类为接口，而文件中对应的类则是接口的实现类；loadFactoryNames方法返回类名集合，方法调用方得到这些集合后，再通过反射获取这些类的类对象、构造方法，最终生成实例</p>
 <h4 id="springmvc执行流程">SpringMVC执行流程</h4>
 <p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/image-20200420163224499.png" alt=""></p>
-<h3 id="redis">Redis</h3>
+<h3 id="redis-hyperloglog">Redis-HyperLogLog</h3>
 <p><strong>HyperLogLog</strong>：redis-HyperLogLog 不精确（0.81%的错误率）的去重统计，比如：网站UV数、访问IP数等</p>
 <p>原理：基数估算算法-伯努利实验-根据n次独立实验：抛掷硬币首次出现正面（或反面）所需要的最大次数k_max来估算实验的总次数n：<br>
 $$<br>
@@ -709,6 +906,14 @@ $$<br>
 const * m * \frac{m}{\sum_{i=1}^{m}{\frac{1}{2^(k_m)}}}<br>
 $$<br>
 为了节省内存空间，redis不会直接用16384个6bit桶存储1个HyperLogLog对象，而是先用稀疏存储（针对连续多个桶的计数为0进行存储优化，针对连续多个桶的计数都不为0且相等也进行存储优化），再用密集存储（12K，设定稀疏存储转密集存储的阈值）的方式</p>
+<h3 id="去重数据结构">去重数据结构</h3>
+<p>布隆过滤器Bloom Filter：存在判断不精确、不支持删除</p>
+<p>原理：当一个元素被加入集合时，通过K个<strong>相互独立</strong>的Hash函数将这个元素映射成一个位阵列（Bit array）中的K个点，把它们置为1。</p>
+<p>计数式布隆过滤器Counting Bloom Filter：存在判断不精确、支持删除</p>
+<p>原理：将位阵列扩展成byte阵列，用多余的bit要存储设置为1的计数器以支持删除操作</p>
+<p>布谷鸟过滤器Cuckoo Filter：存在判断精确，支持删除</p>
+<p>原理：有两个<strong>相关</strong>的hash算法将新来的元素映射到数组的两个位置。如果两个位置中有一个位置为空，那么就可以把元素放进去；但是如果这两个位置都满了，那么会随机踢走一个，然后自己霸占这个位置。</p>
+<p>bitmap：存在判断精确，支持删除</p>
 <h3 id="日志框架使用">日志框架使用</h3>
 <p>面向程序员的只是日志门面，具体需要哪个日志框架，选择相应的桥接器和日志实现框架。</p>
 <ol>
@@ -750,8 +955,116 @@ $$<br>
 <h3 id="集群与分布式">集群与分布式</h3>
 <p>集群：多台服务器运行同一个服务，处理同一件事</p>
 <p>分布式：多台服务器各自运行不同的服务，不同的服务之间有相互调用</p>
+<h4 id="分布式技术">分布式技术</h4>
+<p><strong>初期</strong></p>
+<p>单体应用：（nginx + server + redis + mysql）一台机器</p>
+<p><strong>数据越来越大</strong></p>
+<p>单体应用+应用数据分离+mysql主从高可用部署+redis集群高可用部署： （nginx） + （server）+ （redis）+ （mysql）</p>
+<p><strong>QPS越来越高</strong></p>
+<p>集群应用： （nginx）+ 负载均衡  + （servers）+ （redis）+ （mysql）</p>
+<p><strong>应用越来越复杂</strong></p>
+<p>应用拆分：（nginx）+ 负载均衡  + （server1s）+ （server2s）+ （server…s）+ （redis）+ （mysql）</p>
+<p>应用拆分后就需要：</p>
+<p>跨服务调用：RPC、服务统一注册和发现、负载均衡、</p>
+<p>服务统一入口：网关和路由</p>
+<p>服务容错：熔断、限流、降级</p>
+<p>服务间的解耦和异步：消息队列</p>
+<p>应用拆分后服务设计原则：无状态、分布式事务、分布式锁</p>
+<p>dubbo = RPC + 服务统一注册和发现 + 软负载均衡 + 监控</p>
+<h4 id="分布式一致性">分布式一致性</h4>
+<p>分布式一致性通过共识算法来达成</p>
+<p>共识算法有个拜占庭问题</p>
+<p>共识算法分两类：</p>
+<ul>
+<li>
+<p><strong>非拜占庭容错类算法</strong>:  Paxos、Raft（<a href="http://thesecretlivesofdata.com/raft/%EF%BC%89" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft/）</a></p>
+</li>
+<li>
+<p><strong>拜占庭容错类算法</strong>: 实用拜占庭容错算法PBFT（Practical Byzantine Fault Tolerance）、代理拜占庭容错算法DBFT(Delegated Byzantine Fault Tolerant)、工作量证明PoW（Proof of Work）、股权证明PoS（Proof of Stake）、代理股权证明DPoS（Delegated Proof of Stake）</p>
+</li>
+</ul>
+<p>区块链【电子签名、工作量证明（拜占庭容错）、密码哈希函数；分布式一致性、去中心化】：sha256、Merkle 哈希树、非对称加密、签名验签</p>
+<h4 id="云上容灾架构">云上容灾架构</h4>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E9%80%9A%E7%94%A8.jpg" alt=""></p>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%BC%82%E5%9C%B0%E5%AE%B9%E7%81%BE.jpg" alt=""></p>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E%E5%AE%B9%E7%81%BE.jpg" alt=""></p>
+<p><img src="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E&amp;%E5%BC%82%E5%9C%B0.jpg" alt=""></p>
 <h3 id="linkedhashmap实现lru算法">LinkedHashMap实现LRU算法</h3>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 继承LinkedHashMap</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; <span class="keyword">extends</span> <span class="title">LinkedHashMap</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_CACHE_SIZE;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">LRUCache</span><span class="params">(<span class="keyword">int</span> cacheSize)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 使用构造方法 public LinkedHashMap(int initialCapacity, float loadFactor, boolean accessOrder)</span></span><br><span class="line">		<span class="comment">// initialCapacity、loadFactor都不重要</span></span><br><span class="line">		<span class="comment">// accessOrder要设置为true，按访问排序</span></span><br><span class="line">		<span class="keyword">super</span>((<span class="keyword">int</span>) Math.ceil(cacheSize / <span class="number">0.75</span>) + <span class="number">1</span>, <span class="number">0.75f</span>, <span class="keyword">true</span>);</span><br><span class="line">		MAX_CACHE_SIZE = cacheSize;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry eldest)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 超过阈值时返回true，进行LRU淘汰</span></span><br><span class="line">		<span class="keyword">return</span> size() &gt; MAX_CACHE_SIZE;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="springboot-java-jar-执行原理">Springboot java -jar 执行原理</h3>
+<p>JVM实例创建成功后，判断执行方式是jar方式还是class方式，jar方式则会读取jar包META-INF/MANIFEST.MF文件的Main-Class主类名，然后加载并执行</p>
+<p>SpringBoot  Jar包 Manifest文件如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Manifest-Version: 1.0</span><br><span class="line">Implementation-Title: webadmin-server</span><br><span class="line">Implementation-Version: 1.0.0</span><br><span class="line">Start-Class: com.App</span><br><span class="line">Spring-Boot-Classes: BOOT-INF/classes/</span><br><span class="line">Spring-Boot-Lib: BOOT-INF/lib/</span><br><span class="line">Build-Jdk-Spec: 1.8</span><br><span class="line">Spring-Boot-Version: 2.1.6.RELEASE</span><br><span class="line">Created-By: Maven Archiver 3.4.0</span><br><span class="line">Main-Class: org.springframework.boot.loader.JarLauncher</span><br></pre></td></tr></table></figure>
+<p>可知Springboot  jar包执行的入口main函数在org.springframework.boot.loader.JarLauncher类</p>
+<p>JarLuancher类 main函数读取jar包的Manifest文件指定的Start-Class，然后执行真正的Start-Class类的main函数</p>
+<h3 id="springmvc-执行流程">SpringMVC 执行流程</h3>
+<ol>
+<li>Spring容器启动时注册Filter到Spring容器，初始化Filter（调用init方法）；注册Interceptor到Spring容器</li>
+<li>web容器（tomcat）接收请求时，首先调用servlet的init方法，此处创建WebApplicationContext，初始化HandlerMappings、HandlerAdapters、ViewResolvers等</li>
+<li>创建FilterChain，并将Filter加入FilterChain</li>
+<li>Filter过滤链前置处理</li>
+<li>DispatcherServlet.doService</li>
+<li>Interceptor.preHandle拦截器前置处理</li>
+<li>Controller业务处理</li>
+<li>Interceptor.postHandle拦截器后置处理</li>
+<li>Interceptor.afterCompletion拦截器完成处理</li>
+<li>Filter过滤链后置处理</li>
+</ol>
+<h3 id="高性能队列disruptor">高性能队列Disruptor</h3>
+<p>ArrayBlockingQueue，入队列和出队列都要加锁。</p>
+<p>Disruptor：</p>
+<ol>
+<li>使用环形数组<strong>RingBuffer</strong>+利用缓存行64KB的特性用空间换时间让不变的值尽量留在缓存中提供效率</li>
+<li>数组长度为2的n次方，利用位运算提高效率</li>
+<li>出队列和入队列通过CAS操作，避免锁开销</li>
+</ol>
+<h3 id="caffeine本地缓存">Caffeine本地缓存</h3>
+<p>原理：</p>
+<ol>
+<li>Window-TinyLFU</li>
+</ol>
+<p>LFU：Least Frequently Used 一段时间周期内最少使用，淘汰最少访问频率的数据（基于访问频率）</p>
+<p>LRU：Least Recently Used 最近最少使用，淘汰最旧的数据（基于访问时间）</p>
+<p>Window-TinyLFU：分段 LRU（三级LRU队列：Eden, Probation, Protected; 应对突发流量） + Count-Min Sketch（类似布隆过滤器，频率统计）</p>
+<ol start="2">
+<li>三级LRU队列</li>
+<li>读写队列分开，使用RingBuffer作为队列</li>
+<li>过期策略：
+<ol>
+<li>expireAfterWrite：写后多久过期</li>
+<li>expireAfterAccess：最后一次访问过后多久过期</li>
+<li>expireAfter：自由指定过期时间</li>
+</ol>
+</li>
+<li>更新策略：refreshAfterWrite：写后多久再次访问时会去刷新该缓存</li>
+<li>以上基于时间的策略都是基于<strong>时间轮</strong>实现的延时任务</li>
+<li>实时监控：recordStats，参考 <a href="https://github.com/ben-manes/caffeine/tree/master/examples/stats-metrics/" target="_blank" rel="noopener">https://github.com/ben-manes/caffeine/tree/master/examples/stats-metrics/</a></li>
+<li>淘汰监听：removalListener</li>
+</ol>
+<h3 id="java类加载与卸载">java类加载与卸载</h3>
+<ol>
+<li>
+<p>类加载器：Bootstrap ClassLoader、ExtClassLoader、AppClassLoader、自定义ClassLoader</p>
+</li>
+<li>
+<p>类加载默认模型：双亲委托模型</p>
+</li>
+<li>
+<p>系统类加载用户类：线程上下文类加载器（SPI机制就会使用到）</p>
+</li>
+<li>
+<p>Tomcat类加载模型：Common ClassLoader（加载各个webapp和tomcat共同使用的class）、Shared ClassLoader（加载各个webapp共同使用的class）、WebApp ClassLoader（加载每个webapp自己的class）、JasperClassLoader（每个jsp文件对应一个JasperClassLoader）。 JSP热更新就是通过卸载旧的JSP文件的JasperClassLoader，创建新的JasperCLassLoader来加载更新后的JSP文件的。</p>
+</li>
+<li>
+<p>类卸载(GC回收类的Class对象)：必须满足条件：</p>
+<ol>
+<li>不存在引用该Class对象的实例对象</li>
+<li>该Class对象没在任何地方被引用</li>
+<li>加载该Class对象的ClassLoader已经被回收</li>
+</ol>
+<p>由此可见类卸载条件是很苛刻的，尤其是条件3，很多类都是AppClassLoader加载的，而AppClassLoader在应用程序生命周期内都是一直存在的。只有一些由自定义的ClassLoader加载的类才有可能会被卸载。而且GC时间不可控，即使三个条件都满足，类Class对象也不一定能被及时卸载。</p>
+</li>
+</ol>
 <h3 id="面试">面试</h3>
 <hr>
 <ol>
@@ -830,7 +1143,22 @@ $$<br>
 <p>自己完成的最有挑战性、最难忘、最成功的事</p>
 </li>
 </ol>
-<p>​</p>
+<h4 id="linux-cmd">Linux CMD</h4>
+<p>pcstat</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go get golang.org/x/sys/unix</span><br><span class="line">go get github.com/tobert/pcstat/pcstat</span><br></pre></td></tr></table></figure>
+<p>strace</p>
+<p>nc</p>
+<p>lsof</p>
+<p>netstat</p>
+<p>tcpdump</p>
+<p>pidof</p>
+<p>pidstat</p>
+<p>sysctl -a ｜ grep xxoo</p>
+<p>系统文件描述符限制查看修改：</p>
+<p>查看系统配置项意义：man 5 proc</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 1. 系统级</span><br><span class="line">系统内所有进程可打开的fd总限制（一般设置为内存Kb大小的10%）：/proc/sys/fs/file-max （echo 123456 &gt; /proc/sys/fs/file-max）</span><br><span class="line">sysctl fs.file-max</span><br><span class="line">//系统当前已使用fd：</span><br><span class="line">sysctl fs.file-nr</span><br><span class="line">cat /proc/sys/fs/file-nr</span><br><span class="line">// 2. 进程级</span><br><span class="line">ulimit -SHn</span><br><span class="line">vim /etc/security/limits.conf</span><br><span class="line">//单个进程可分配的最大fd数目</span><br><span class="line">sysctl fs.nr_open</span><br><span class="line">cat /proc/sys/fs/nr_open</span><br><span class="line">// 3. 应用级</span><br></pre></td></tr></table></figure>
+<h3 id="docker-停止restart-always容器">docker 停止restart  always容器</h3>
+<p>docker update --restart=no container-name</p>
 
       
     </div>
@@ -1095,7 +1423,7 @@ $$<br>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自动装箱和拆箱"><span class="nav-number">1.1.</span> <span class="nav-text">自动装箱和拆箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java传参方式"><span class="nav-number">1.2.</span> <span class="nav-text">java传参方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qps估算"><span class="nav-number">1.3.</span> <span class="nav-text">QPS估算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电脑部件处理时间数量级对比"><span class="nav-number">1.4.</span> <span class="nav-text">电脑部件处理时间数量级对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-hashmap多线程不安全"><span class="nav-number">1.5.</span> <span class="nav-text">1.8 HashMap多线程不安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-concurrenthashmap-bug"><span class="nav-number">1.6.</span> <span class="nav-text">1.8 ConcurrentHashMap Bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程"><span class="nav-number">1.7.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程池"><span class="nav-number">1.8.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm"><span class="nav-number">1.9.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#netty"><span class="nav-number">1.10.</span> <span class="nav-text">Netty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springboot启动流程"><span class="nav-number">1.11.</span> <span class="nav-text">SpringBoot启动流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springmvc执行流程"><span class="nav-number">1.12.</span> <span class="nav-text">SpringMVC执行流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis"><span class="nav-number">2.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志框架使用"><span class="nav-number">3.</span> <span class="nav-text">日志框架使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单点登录"><span class="nav-number">4.</span> <span class="nav-text">单点登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#秒杀平台设计"><span class="nav-number">5.</span> <span class="nav-text">秒杀平台设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">6.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群与分布式"><span class="nav-number">7.</span> <span class="nav-text">集群与分布式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linkedhashmap实现lru算法"><span class="nav-number">8.</span> <span class="nav-text">LinkedHashMap实现LRU算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试"><span class="nav-number">9.</span> <span class="nav-text">面试</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自动装箱和拆箱"><span class="nav-number">1.1.</span> <span class="nav-text">自动装箱和拆箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合"><span class="nav-number">1.2.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#list"><span class="nav-number">1.2.1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map"><span class="nav-number">1.2.2.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#set"><span class="nav-number">1.2.3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#threadlocal"><span class="nav-number">1.2.4.</span> <span class="nav-text">ThreadLocal</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常"><span class="nav-number">1.3.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spring"><span class="nav-number">1.4.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dubbo或其他rpc框架"><span class="nav-number">1.5.</span> <span class="nav-text">Dubbo（或其他Rpc框架）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rocketmq或其他消息中间件"><span class="nav-number">1.6.</span> <span class="nav-text">RocketMq（或其他消息中间件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis或其他缓存系统"><span class="nav-number">1.7.</span> <span class="nav-text">Redis（或其他缓存系统）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql"><span class="nav-number">1.8.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java传参方式"><span class="nav-number">1.9.</span> <span class="nav-text">java传参方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qps估算"><span class="nav-number">1.10.</span> <span class="nav-text">QPS估算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电脑部件处理时间数量级对比"><span class="nav-number">1.11.</span> <span class="nav-text">电脑部件处理时间数量级对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-hashmap多线程不安全"><span class="nav-number">1.12.</span> <span class="nav-text">1.8 HashMap多线程不安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-concurrenthashmap-bug"><span class="nav-number">1.13.</span> <span class="nav-text">1.8 ConcurrentHashMap Bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程"><span class="nav-number">1.14.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程池"><span class="nav-number">1.15.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm"><span class="nav-number">1.16.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm命令行参数"><span class="nav-number">1.17.</span> <span class="nav-text">JVM命令行参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm生命周期"><span class="nav-number">1.18.</span> <span class="nav-text">JVM生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jni_createjavavm执行流程"><span class="nav-number">1.18.1.</span> <span class="nav-text">JNI_CreateJavaVM执行流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#destroyjavavm执行流程"><span class="nav-number">1.18.2.</span> <span class="nav-text">DestroyJavaVM执行流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类加载"><span class="nav-number">1.18.3.</span> <span class="nav-text">类加载</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#netty"><span class="nav-number">1.19.</span> <span class="nav-text">Netty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#epoll惊群"><span class="nav-number">1.20.</span> <span class="nav-text">epoll惊群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springboot启动流程"><span class="nav-number">1.21.</span> <span class="nav-text">SpringBoot启动流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springmvc执行流程"><span class="nav-number">1.22.</span> <span class="nav-text">SpringMVC执行流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-hyperloglog"><span class="nav-number">2.</span> <span class="nav-text">Redis-HyperLogLog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去重数据结构"><span class="nav-number">3.</span> <span class="nav-text">去重数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志框架使用"><span class="nav-number">4.</span> <span class="nav-text">日志框架使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单点登录"><span class="nav-number">5.</span> <span class="nav-text">单点登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#秒杀平台设计"><span class="nav-number">6.</span> <span class="nav-text">秒杀平台设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">7.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群与分布式"><span class="nav-number">8.</span> <span class="nav-text">集群与分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式技术"><span class="nav-number">8.1.</span> <span class="nav-text">分布式技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式一致性"><span class="nav-number">8.2.</span> <span class="nav-text">分布式一致性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#云上容灾架构"><span class="nav-number">8.3.</span> <span class="nav-text">云上容灾架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linkedhashmap实现lru算法"><span class="nav-number">9.</span> <span class="nav-text">LinkedHashMap实现LRU算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot-java-jar-执行原理"><span class="nav-number">10.</span> <span class="nav-text">Springboot java -jar 执行原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springmvc-执行流程"><span class="nav-number">11.</span> <span class="nav-text">SpringMVC 执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高性能队列disruptor"><span class="nav-number">12.</span> <span class="nav-text">高性能队列Disruptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#caffeine本地缓存"><span class="nav-number">13.</span> <span class="nav-text">Caffeine本地缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java类加载与卸载"><span class="nav-number">14.</span> <span class="nav-text">java类加载与卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试"><span class="nav-number">15.</span> <span class="nav-text">面试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-cmd"><span class="nav-number">15.1.</span> <span class="nav-text">Linux CMD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-停止restart-always容器"><span class="nav-number">16.</span> <span class="nav-text">docker 停止restart  always容器</span></a></li></ol></div>
             
 
           </div>
