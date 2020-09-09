@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%BC%82%E5%9C%B0%E5%AE%B9%E7%81%BE.jpg">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E%E5%AE%B9%E7%81%BE.jpg">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E&%E5%BC%82%E5%9C%B0.jpg">
-<meta property="og:updated_time" content="2020-07-22T10:15:32.647Z">
+<meta property="og:updated_time" content="2020-09-04T08:38:06.872Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识点">
 <meta name="twitter:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-22 18:15:32" itemprop="dateModified" datetime="2020-07-22T18:15:32+08:00">2020-07-22</time>
+                <time title="修改时间：2020-09-04 16:38:06" itemprop="dateModified" datetime="2020-09-04T16:38:06+08:00">2020-09-04</time>
               </span>
             
           
@@ -494,6 +494,8 @@
 <p>HashMap、LinkedHashMap、TreeMap</p>
 <p>LinkedHashMap：了解基本原理、哪两种有序、如何用它实现LRU</p>
 <p>TreeMap：了解数据结构、了解其key对象为什么必须要实现Compare接口、如何用它实现一致性哈希</p>
+<h5 id="treemap实现一致性hash">TreeMap实现一致性Hash</h5>
+<p>参考 <a href="https://www.cnblogs.com/DengGao/p/6387708.html" target="_blank" rel="noopener">https://www.cnblogs.com/DengGao/p/6387708.html</a></p>
 <h5 id="set">Set</h5>
 <p>由对应的map实现</p>
 <h5 id="threadlocal">ThreadLocal</h5>
@@ -501,11 +503,12 @@
 <li>魔数</li>
 </ol>
 <p>魔数：0x61c88647 （32bit无符号数：2654435769，32bit有符号数：-1640531527），是2^32*0.618（黄金分割点）</p>
-<p>目的：使用非波拉契散列法，是的散列出的值更均匀</p>
+<p>目的：使用斐波拉契散列法，使得散列出的值更均匀</p>
 <ol start="2">
 <li>ThreadLocalMap</li>
 </ol>
 <p>ThreadLocaMap存储的key-value是key为ThreadLocal对象的弱引用，在ThreadLocal被设置为null后，在下次gc时ThreadLocal被回收掉，但是value还被线程的ThreadLocalMap强引用，导致内存泄露。</p>
+<p>一般在使用ThreadLocal时一般将ThreadLocal定义为static属性，这样ThreadLocal一直存在着强引用，key也不能为null，然后在任何时候都可以手动调用remove进行清除。所以在使用时也要注意手动remove。</p>
 <p>​	2.1 ThreadLocalMap在扩容的时候会将entry的key为null所对应的value设为null，help the gc（减轻内存泄露）</p>
 <p>​    2.2 在每次get、set时都会清除key为null所对应的value为null，减轻内存泄露</p>
 <p>​	2.3 不再使用set进ThreadLocal的值后，调用ThreadLocal的remove方法显式地从ThreadLocalMap删除掉，避免内存泄露</p>
@@ -658,10 +661,10 @@ zk</p>
 <p>并发标记：GC线程和用户线程并发执行</p>
 </li>
 <li>
-<p>重新标记：STW</p>
+<p>重新标记：STW（为什么要进行重新标记，因为并发标记过程中，用户线程会修改对象间的引用关系，会导致浮动垃圾的产生以及对象的误删除。浮动垃圾可以忍受，但对象的误删除是不能接受的。所以重新标记阶段主要是防止对象引用关系变化导致的误删除，当然也能减少浮动垃圾 。参考：<a href="https://zhuanlan.zhihu.com/p/108706654%EF%BC%89" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/108706654）</a></p>
 </li>
 <li>
-<p>并发清除：GC线程和用户线程并发执行</p>
+<p>并发清除：GC线程和用户线程并发执行（会继续产生浮动垃圾）</p>
 <p>提高了并发度的同时，CPU、内存占用增加，提供CMSInitiatingOccupancyFraction参数表示老年代使用量达到多大比例就进行FullGC，默认为68%</p>
 <p>基于标记清除算法，导致内存碎片，提供UseCMSCompactAtFullCollection参数表示在FullGC时执行内存碎片整理，提高CMSFullGCBeforeCompaction参数表示几次FullGC后才执行一次内存碎片整理。</p>
 </li>
@@ -690,7 +693,7 @@ zk</p>
 <p>不要设置年轻代-Xmn大小</p>
 </li>
 <li>
-<p>设置STW最大停顿时间（参考值）：-XX:MaxGCPauseMillis=n</p>
+<p>设置STW最大停顿时间（默认值200ms）：-XX:MaxGCPauseMillis=n</p>
 </li>
 <li>
 <p>设置堆内存占用百分比达到多少时触发并发GC周期，默认值45：-XX:InitiatingHeapOccupancyPercent=n</p>
@@ -699,7 +702,11 @@ zk</p>
 <p>增大标记线程数量：-XX:ConcGCThreads=n</p>
 </li>
 <li>
-<p>打印GC日志：-XX:PrintGCDetails、-XX:+PrintGCDateStamps、-Xloggc:path</p>
+<p>打印GC日志：</p>
+<ul>
+<li>滚动输出：-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:path-to-gc-log/gc-%t.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=5 -XX:GCLogFileSize=20M</li>
+<li>每天输出一个日志文件：-XX:+PrintGCDetails -XX:+PrintGCTimeStamps -Xloggc:path-to-gc-log/gc-%t.log</li>
+</ul>
 </li>
 <li>
 <p>关闭显示GC：-XX:+DisableExplicitGC</p>
@@ -768,6 +775,20 @@ zk</p>
 <p>java -XX:+PrintCommandLineFlags -version 只打印JVM启动时有修改的参数</p>
 <p>java -XX:+PrintFlagsInitial -version 打印JVM所有默认的初始参数</p>
 <p>java -XX:+PrintFlagsFinal -version 打印JVM启动后的最终设置的所有参数</p>
+<h4 id="jvm监控">JVM监控</h4>
+<ol>
+<li>
+<p>jmx（线上环境不推荐）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Djava.rmi.server.hostname=127.0.0.1 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=1234 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>登陆线上机器cmd</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">top</span><br><span class="line">jps</span><br><span class="line">jinfo</span><br><span class="line">jstack</span><br><span class="line">jmap</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>arthas（推荐）</p>
+</li>
+</ol>
 <h4 id="jvm命令行参数">JVM命令行参数</h4>
 <p>标准选项： - 开头</p>
 <p>非标准选项： -X开头</p>
@@ -847,13 +868,22 @@ zk</p>
 <p>BIO、NIO、Netty</p>
 <p>nc、strace</p>
 <h4 id="netty">Netty</h4>
-<p>高性能特性：</p>
+<h5 id="特性">特性</h5>
 <ol>
 <li>
 <p>IO模型（Linux epoll）</p>
 </li>
 <li>
-<p>线程模型（reactor模式）</p>
+<p>线程模型（reactor模式），ChannelPipeline.addLast添加handler时可以提供一个处理业务的线程池（类型：EventExecutorGroup），也可以使用netty之外的自定义业务线程池</p>
+<p>区别：</p>
+<ol>
+<li>netty提供的业务线程池可以保证同一个channel的消息可以顺序处理</li>
+<li>自定义业务线程池，不可以保证以上的顺序，所以要处理资源竞争的问题。</li>
+</ol>
+</li>
+<li>
+<p>高性能队列框架Jctools（类似Disruptor，环形数组+缓存伪共享解决+CAS操作）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">环形数组：内存连续分配充分利用缓存</span><br><span class="line">解决缓存伪共享：属性之间插入long pading，空间换时间，防止属性变化使得不必要的相邻属性缓存失效</span><br><span class="line">CAS操作：MPSC队列（多生产者单消费者队列），在生产者入队列时，需要操作数组使用CAS操作避免锁竞争</span><br></pre></td></tr></table></figure>
 </li>
 <li>
 <p>零拷贝</p>
@@ -866,7 +896,7 @@ zk</p>
 <p>提供各种开箱即用的Handler （编解码Codec，流分割LengthFieldBasedFrameDecoder等，空闲检测IdleStateHandler，序列化）</p>
 </li>
 </ol>
-<h4 id="epoll惊群">epoll惊群</h4>
+<h5 id="epoll惊群">epoll惊群</h5>
 <p>​	惊群：多个线程等待同一个事件发生，在事件到来时，所有线程都被唤醒来竞争事件的处理，最后只有1个线程成功获得事件处理，其他线程又回到等待状态，等待下次事件的发生。</p>
 <p>epoll_wait设计为等待多种类型事件（accept、read、write、connect）的发生，accept事件只能由1个线程处理，但其他事件比如read事件是可以由多个线程处理的，所以内核对此不做处理，由用户程序处理。</p>
 <p>所以在epoll_wait处理accept事件时依然会有惊群问题，netty自己限制只有1个boss线程来处理accept事件，避免了惊群问题。</p>
@@ -1010,6 +1040,8 @@ $$<br>
 <li>Interceptor.afterCompletion拦截器完成处理</li>
 <li>Filter过滤链后置处理</li>
 </ol>
+<h3 id="缓存一致性协议mesi">缓存一致性协议MESI</h3>
+<p><a href="https://www.scss.tcd.ie/Jeremy.Jones/VivioJS/caches/MESIHelp.htm" target="_blank" rel="noopener">https://www.scss.tcd.ie/Jeremy.Jones/VivioJS/caches/MESIHelp.htm</a></p>
 <h3 id="高性能队列disruptor">高性能队列Disruptor</h3>
 <p>ArrayBlockingQueue，入队列和出队列都要加锁。</p>
 <p>Disruptor：</p>
@@ -1130,8 +1162,6 @@ $$<br>
 <li>再提升性能，就要上分布式+集群了</li>
 </ul>
 </li>
-</ol>
-<ol start="15">
 <li>
 <p>压力测试</p>
 </li>
@@ -1143,8 +1173,8 @@ $$<br>
 <p>自己完成的最有挑战性、最难忘、最成功的事</p>
 </li>
 </ol>
-<h4 id="linux-cmd">Linux CMD</h4>
-<p>pcstat</p>
+<h3 id="linux-cmd">Linux CMD</h3>
+<p>pcstat（page cache统计）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go get golang.org/x/sys/unix</span><br><span class="line">go get github.com/tobert/pcstat/pcstat</span><br></pre></td></tr></table></figure>
 <p>strace</p>
 <p>nc</p>
@@ -1157,8 +1187,29 @@ $$<br>
 <p>系统文件描述符限制查看修改：</p>
 <p>查看系统配置项意义：man 5 proc</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 1. 系统级</span><br><span class="line">系统内所有进程可打开的fd总限制（一般设置为内存Kb大小的10%）：/proc/sys/fs/file-max （echo 123456 &gt; /proc/sys/fs/file-max）</span><br><span class="line">sysctl fs.file-max</span><br><span class="line">//系统当前已使用fd：</span><br><span class="line">sysctl fs.file-nr</span><br><span class="line">cat /proc/sys/fs/file-nr</span><br><span class="line">// 2. 进程级</span><br><span class="line">ulimit -SHn</span><br><span class="line">vim /etc/security/limits.conf</span><br><span class="line">//单个进程可分配的最大fd数目</span><br><span class="line">sysctl fs.nr_open</span><br><span class="line">cat /proc/sys/fs/nr_open</span><br><span class="line">// 3. 应用级</span><br></pre></td></tr></table></figure>
-<h3 id="docker-停止restart-always容器">docker 停止restart  always容器</h3>
+<h3 id="docker-update容器">docker update容器</h3>
 <p>docker update --restart=no container-name</p>
+<p>docker update --restart=always container-name</p>
+<h3 id="mac本机压测">Mac本机压测</h3>
+<ol>
+<li>
+<p>launchctl limit 查看打开文件进程限制</p>
+</li>
+<li>
+<p>修改打开文件进程限制，解决too many open files</p>
+<p>sudo vim /Library/LaunchDaemons/limit.maxfiles.plist</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>limit.maxfiles<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>launchctl<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>limit<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>maxfiles<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>65536<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">string</span>&gt;</span>65536<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>RunAtLoad<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">true</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">key</span>&gt;</span>ServiceIPC<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">false</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>sudo vim /Library/LaunchDaemons/limit.maxproc.plist</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE plist PUBLIC &quot;-//Apple/DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;</span><br><span class="line">  &lt;plist version=&quot;1.0&quot;&gt;</span><br><span class="line">    &lt;dict&gt;</span><br><span class="line">      &lt;key&gt;Label&lt;/key&gt;</span><br><span class="line">        &lt;string&gt;limit.maxproc&lt;/string&gt;</span><br><span class="line">      &lt;key&gt;ProgramArguments&lt;/key&gt;</span><br><span class="line">        &lt;array&gt;</span><br><span class="line">          &lt;string&gt;launchctl&lt;/string&gt;</span><br><span class="line">          &lt;string&gt;limit&lt;/string&gt;</span><br><span class="line">          &lt;string&gt;maxproc&lt;/string&gt;</span><br><span class="line">          &lt;string&gt;4096&lt;/string&gt;</span><br><span class="line">          &lt;string&gt;4096&lt;/string&gt;</span><br><span class="line">        &lt;/array&gt;</span><br><span class="line">      &lt;key&gt;RunAtLoad&lt;/key&gt;</span><br><span class="line">        &lt;true /&gt;</span><br><span class="line">      &lt;key&gt;ServiceIPC&lt;/key&gt;</span><br><span class="line">        &lt;false /&gt;</span><br><span class="line">    &lt;/dict&gt;</span><br><span class="line">  &lt;/plist&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>空接口压测到最高8500QPS的参数</p>
+</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[qiaojian@Mac Documents ]% wrk -t5 -c500 -d30s http://127.0.0.1:9091/hello/test1\?name\=qiaojian</span><br><span class="line">Running 30s test @ http://127.0.0.1:9091/hello/test1?name=qiaojian</span><br><span class="line">  5 threads and 500 connections</span><br><span class="line">  Thread Stats   Avg      Stdev     Max   +/- Stdev</span><br><span class="line">    Latency    59.07ms   35.59ms   1.41s    91.11%</span><br><span class="line">    Req/Sec     1.70k   266.61     2.74k    75.99%</span><br><span class="line">  254568 requests in 30.09s, 31.60MB read</span><br><span class="line">  Socket errors: connect 0, read 246, write 41, timeout 0</span><br><span class="line">Requests/sec:   8459.55</span><br><span class="line">Transfer/sec:      1.05MB</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>使用上一步的参数作为本机压测的基准参数和基准值，去压测其他接口</li>
+</ol>
 
       
     </div>
@@ -1423,7 +1474,7 @@ $$<br>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自动装箱和拆箱"><span class="nav-number">1.1.</span> <span class="nav-text">自动装箱和拆箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合"><span class="nav-number">1.2.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#list"><span class="nav-number">1.2.1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map"><span class="nav-number">1.2.2.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#set"><span class="nav-number">1.2.3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#threadlocal"><span class="nav-number">1.2.4.</span> <span class="nav-text">ThreadLocal</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常"><span class="nav-number">1.3.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spring"><span class="nav-number">1.4.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dubbo或其他rpc框架"><span class="nav-number">1.5.</span> <span class="nav-text">Dubbo（或其他Rpc框架）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rocketmq或其他消息中间件"><span class="nav-number">1.6.</span> <span class="nav-text">RocketMq（或其他消息中间件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis或其他缓存系统"><span class="nav-number">1.7.</span> <span class="nav-text">Redis（或其他缓存系统）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql"><span class="nav-number">1.8.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java传参方式"><span class="nav-number">1.9.</span> <span class="nav-text">java传参方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qps估算"><span class="nav-number">1.10.</span> <span class="nav-text">QPS估算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电脑部件处理时间数量级对比"><span class="nav-number">1.11.</span> <span class="nav-text">电脑部件处理时间数量级对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-hashmap多线程不安全"><span class="nav-number">1.12.</span> <span class="nav-text">1.8 HashMap多线程不安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-concurrenthashmap-bug"><span class="nav-number">1.13.</span> <span class="nav-text">1.8 ConcurrentHashMap Bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程"><span class="nav-number">1.14.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程池"><span class="nav-number">1.15.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm"><span class="nav-number">1.16.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm命令行参数"><span class="nav-number">1.17.</span> <span class="nav-text">JVM命令行参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm生命周期"><span class="nav-number">1.18.</span> <span class="nav-text">JVM生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jni_createjavavm执行流程"><span class="nav-number">1.18.1.</span> <span class="nav-text">JNI_CreateJavaVM执行流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#destroyjavavm执行流程"><span class="nav-number">1.18.2.</span> <span class="nav-text">DestroyJavaVM执行流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类加载"><span class="nav-number">1.18.3.</span> <span class="nav-text">类加载</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#netty"><span class="nav-number">1.19.</span> <span class="nav-text">Netty</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#epoll惊群"><span class="nav-number">1.20.</span> <span class="nav-text">epoll惊群</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springboot启动流程"><span class="nav-number">1.21.</span> <span class="nav-text">SpringBoot启动流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springmvc执行流程"><span class="nav-number">1.22.</span> <span class="nav-text">SpringMVC执行流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-hyperloglog"><span class="nav-number">2.</span> <span class="nav-text">Redis-HyperLogLog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去重数据结构"><span class="nav-number">3.</span> <span class="nav-text">去重数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志框架使用"><span class="nav-number">4.</span> <span class="nav-text">日志框架使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单点登录"><span class="nav-number">5.</span> <span class="nav-text">单点登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#秒杀平台设计"><span class="nav-number">6.</span> <span class="nav-text">秒杀平台设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">7.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群与分布式"><span class="nav-number">8.</span> <span class="nav-text">集群与分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式技术"><span class="nav-number">8.1.</span> <span class="nav-text">分布式技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式一致性"><span class="nav-number">8.2.</span> <span class="nav-text">分布式一致性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#云上容灾架构"><span class="nav-number">8.3.</span> <span class="nav-text">云上容灾架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linkedhashmap实现lru算法"><span class="nav-number">9.</span> <span class="nav-text">LinkedHashMap实现LRU算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot-java-jar-执行原理"><span class="nav-number">10.</span> <span class="nav-text">Springboot java -jar 执行原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springmvc-执行流程"><span class="nav-number">11.</span> <span class="nav-text">SpringMVC 执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高性能队列disruptor"><span class="nav-number">12.</span> <span class="nav-text">高性能队列Disruptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#caffeine本地缓存"><span class="nav-number">13.</span> <span class="nav-text">Caffeine本地缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java类加载与卸载"><span class="nav-number">14.</span> <span class="nav-text">java类加载与卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试"><span class="nav-number">15.</span> <span class="nav-text">面试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux-cmd"><span class="nav-number">15.1.</span> <span class="nav-text">Linux CMD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-停止restart-always容器"><span class="nav-number">16.</span> <span class="nav-text">docker 停止restart  always容器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自动装箱和拆箱"><span class="nav-number">1.1.</span> <span class="nav-text">自动装箱和拆箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集合"><span class="nav-number">1.2.</span> <span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#list"><span class="nav-number">1.2.1.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#map"><span class="nav-number">1.2.2.</span> <span class="nav-text">Map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#treemap实现一致性hash"><span class="nav-number">1.2.3.</span> <span class="nav-text">TreeMap实现一致性Hash</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#set"><span class="nav-number">1.2.4.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#threadlocal"><span class="nav-number">1.2.5.</span> <span class="nav-text">ThreadLocal</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常"><span class="nav-number">1.3.</span> <span class="nav-text">异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#spring"><span class="nav-number">1.4.</span> <span class="nav-text">Spring</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dubbo或其他rpc框架"><span class="nav-number">1.5.</span> <span class="nav-text">Dubbo（或其他Rpc框架）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rocketmq或其他消息中间件"><span class="nav-number">1.6.</span> <span class="nav-text">RocketMq（或其他消息中间件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis或其他缓存系统"><span class="nav-number">1.7.</span> <span class="nav-text">Redis（或其他缓存系统）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql"><span class="nav-number">1.8.</span> <span class="nav-text">Mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java传参方式"><span class="nav-number">1.9.</span> <span class="nav-text">java传参方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qps估算"><span class="nav-number">1.10.</span> <span class="nav-text">QPS估算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#电脑部件处理时间数量级对比"><span class="nav-number">1.11.</span> <span class="nav-text">电脑部件处理时间数量级对比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-hashmap多线程不安全"><span class="nav-number">1.12.</span> <span class="nav-text">1.8 HashMap多线程不安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18-concurrenthashmap-bug"><span class="nav-number">1.13.</span> <span class="nav-text">1.8 ConcurrentHashMap Bug</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程"><span class="nav-number">1.14.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#线程池"><span class="nav-number">1.15.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm"><span class="nav-number">1.16.</span> <span class="nav-text">JVM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm监控"><span class="nav-number">1.17.</span> <span class="nav-text">JVM监控</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm命令行参数"><span class="nav-number">1.18.</span> <span class="nav-text">JVM命令行参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#jvm生命周期"><span class="nav-number">1.19.</span> <span class="nav-text">JVM生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#jni_createjavavm执行流程"><span class="nav-number">1.19.1.</span> <span class="nav-text">JNI_CreateJavaVM执行流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#destroyjavavm执行流程"><span class="nav-number">1.19.2.</span> <span class="nav-text">DestroyJavaVM执行流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类加载"><span class="nav-number">1.19.3.</span> <span class="nav-text">类加载</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#netty"><span class="nav-number">1.20.</span> <span class="nav-text">Netty</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#特性"><span class="nav-number">1.20.1.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#epoll惊群"><span class="nav-number">1.20.2.</span> <span class="nav-text">epoll惊群</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springboot启动流程"><span class="nav-number">1.21.</span> <span class="nav-text">SpringBoot启动流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#springmvc执行流程"><span class="nav-number">1.22.</span> <span class="nav-text">SpringMVC执行流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-hyperloglog"><span class="nav-number">2.</span> <span class="nav-text">Redis-HyperLogLog</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去重数据结构"><span class="nav-number">3.</span> <span class="nav-text">去重数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志框架使用"><span class="nav-number">4.</span> <span class="nav-text">日志框架使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单点登录"><span class="nav-number">5.</span> <span class="nav-text">单点登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#秒杀平台设计"><span class="nav-number">6.</span> <span class="nav-text">秒杀平台设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算法"><span class="nav-number">7.</span> <span class="nav-text">算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群与分布式"><span class="nav-number">8.</span> <span class="nav-text">集群与分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式技术"><span class="nav-number">8.1.</span> <span class="nav-text">分布式技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分布式一致性"><span class="nav-number">8.2.</span> <span class="nav-text">分布式一致性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#云上容灾架构"><span class="nav-number">8.3.</span> <span class="nav-text">云上容灾架构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linkedhashmap实现lru算法"><span class="nav-number">9.</span> <span class="nav-text">LinkedHashMap实现LRU算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springboot-java-jar-执行原理"><span class="nav-number">10.</span> <span class="nav-text">Springboot java -jar 执行原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#springmvc-执行流程"><span class="nav-number">11.</span> <span class="nav-text">SpringMVC 执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存一致性协议mesi"><span class="nav-number">12.</span> <span class="nav-text">缓存一致性协议MESI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高性能队列disruptor"><span class="nav-number">13.</span> <span class="nav-text">高性能队列Disruptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#caffeine本地缓存"><span class="nav-number">14.</span> <span class="nav-text">Caffeine本地缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java类加载与卸载"><span class="nav-number">15.</span> <span class="nav-text">java类加载与卸载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#面试"><span class="nav-number">16.</span> <span class="nav-text">面试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux-cmd"><span class="nav-number">17.</span> <span class="nav-text">Linux CMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker-update容器"><span class="nav-number">18.</span> <span class="nav-text">docker update容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mac本机压测"><span class="nav-number">19.</span> <span class="nav-text">Mac本机压测</span></a></li></ol></div>
             
 
           </div>

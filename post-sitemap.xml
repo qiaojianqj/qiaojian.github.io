@@ -7,16 +7,40 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/article/java1-8-HashMap/</loc>
-        <lastmod>2020-06-09T06:17:10.523Z</lastmod>
+        <loc>https://qiaojiande.cn/article/%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
+        <lastmod>2020-09-04T08:38:06.872Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/article/%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
-        <lastmod>2020-06-08T03:13:46.960Z</lastmod>
+        <loc>https://qiaojiande.cn/article/mysql%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2020-08-24T02:49:26.645Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/Redis%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2020-07-08T01:37:50.877Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/java1-8-HashMap/</loc>
+        <lastmod>2020-07-07T10:18:38.708Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/java%E9%9B%86%E5%90%88-ArrayList/</loc>
+        <lastmod>2020-07-03T06:14:38.558Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -33,22 +57,6 @@
     <url>
         <loc>https://qiaojiande.cn/article/java%E9%9B%86%E5%90%88-LinkedList/</loc>
         <lastmod>2020-06-04T06:04:36.627Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://qiaojiande.cn/article/mysql%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2020-05-26T07:16:24.098Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://qiaojiande.cn/article/java%E9%9B%86%E5%90%88-ArrayList/</loc>
-        <lastmod>2020-05-25T11:53:29.770Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -153,14 +161,6 @@
     <url>
         <loc>https://qiaojiande.cn/article/Controller-vs-RestController/</loc>
         <lastmod>2020-02-25T09:48:53.330Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://qiaojiande.cn/article/Redis%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2020-02-24T15:13:59.545Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
