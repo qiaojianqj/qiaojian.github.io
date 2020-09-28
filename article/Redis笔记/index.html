@@ -108,7 +108,7 @@
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/redis-sds.jpg">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E5%9F%BA%E6%95%B0%E6%A0%91.jpg">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E5%AD%97%E5%85%B8%E6%A0%91.jpg">
-<meta property="og:updated_time" content="2020-07-08T01:37:50.877Z">
+<meta property="og:updated_time" content="2020-07-08T01:37:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis笔记">
 <meta name="twitter:description" content="SDS SDS是Redis里的动态字符串表示方式，但是，查看Redis6.0.5源码SDS定义： 1typedef char *sds; what？这不就是简单的字符串指针吗？怎么就动态了？且慢，往后看。 Redis里面定义五种类型的SDS，他们的区别是header大小不一样，字符串指针sds始终指向buf的位置，然后通过指针移位来操作header里的字段。这里有个gcc c语言的属性__attr">

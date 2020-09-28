@@ -114,7 +114,7 @@
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%BC%82%E5%9C%B0%E5%AE%B9%E7%81%BE.jpg">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E%E5%AE%B9%E7%81%BE.jpg">
 <meta property="og:image" content="https://qiaojiande-1259482780.cos.ap-chengdu.myqcloud.com/201908/%E4%BA%91%E4%B8%8A%E5%AE%B9%E7%81%BE%E6%9E%B6%E6%9E%84-%E5%90%8C%E5%9F%8E&%E5%BC%82%E5%9C%B0.jpg">
-<meta property="og:updated_time" content="2020-09-04T08:38:06.872Z">
+<meta property="og:updated_time" content="2020-09-28T10:58:15.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="知识点">
 <meta name="twitter:description" content="语言：java 知识点： 基础、集合、并发、多线程、NIO（Netty）、JVM 协议：TCP/IP、HTTP、WEBSOCKET 编程：设计模式 基础 自动装箱和拆箱 部分基础数据类型与对应的包装类进行运算时，编译器自动进行转换（装箱：valueOf，拆箱：intValue、floatValue…） int对应包装类Integer会缓存-128～127范围的整型 short对应包装类Short会">
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-09-04 16:38:06" itemprop="dateModified" datetime="2020-09-04T16:38:06+08:00">2020-09-04</time>
+                <time title="修改时间：2020-09-28 18:58:15" itemprop="dateModified" datetime="2020-09-28T18:58:15+08:00">2020-09-28</time>
               </span>
             
           
@@ -535,7 +535,9 @@
 <p>​	继承自Exception：checked异常，必须被捕获或抛出</p>
 <p>​	继承自RuntimeException：unchecked异常，不需要被捕获，如果抛出异常则静默报错</p>
 <h4 id="spring">Spring</h4>
-<p>bean的生命周期、循环依赖问题、spring cloud 全家桶、AOP的实现、spring事务传播<br>
+<p>bean的生命周期</p>
+<p>循环依赖问题： <a href="https://developer.aliyun.com/article/766880" target="_blank" rel="noopener">https://developer.aliyun.com/article/766880</a></p>
+<p>spring cloud 全家桶、AOP的实现、spring事务传播<br>
 常见问题</p>
 <p>java动态代理和cglib动态代理的区别（经常结合spring一起问所以就放这里了）<br>
 属性注入和构造器注入哪种会有循环依赖的问题？</p>
@@ -543,10 +545,21 @@
 <h4 id="dubbo或其他rpc框架">Dubbo（或其他Rpc框架）</h4>
 <p>了解一个常用RPC框架如Dubbo的实现：服务发现、路由、异步调用、限流降级、失败重试</p>
 <p>常见问题</p>
-<p>Dubbo如何做负载均衡？<br>
-Dubbo如何做限流降级？<br>
-Dubbo如何优雅的下线服务？<br>
-Dubbo如何实现异步调用的？</p>
+<p>Dubbo如何做负载均衡？随机、加权轮询、一致性hash、最少活跃</p>
+<p>Dubbo如何做限流降级？超时、故障、重试（幂等性）、降级（mock）、熔断（开、关、半开关状态）<br>
+Dubbo如何优雅的下线服务？<a href="https://www.cnkirito.moe/dubbo-gracefully-shutdown/" target="_blank" rel="noopener">https://www.cnkirito.moe/dubbo-gracefully-shutdown/</a></p>
+<ol>
+<li>
+<p>JVM提供了优雅停机的接口：Runtime.getRuntime().addShutdownHook</p>
+</li>
+<li>
+<p>Dubbo层面注册优雅停机接口：进行服务下线和资源释放</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Registry 注销</span><br><span class="line">等待 -Ddubbo.service.shutdown.wait 秒，等待消费方收到下线通知</span><br><span class="line">Protocol 注销</span><br><span class="line">    DubboProtocol 注销</span><br><span class="line">		NettyServer 注销</span><br><span class="line">			等待处理中的请求完毕</span><br><span class="line">            停止发送心跳</span><br><span class="line">            关闭 Netty 相关资源</span><br><span class="line">		NettyClient 注销</span><br><span class="line">            停止发送心跳</span><br><span class="line">            等待处理中的请求完毕</span><br><span class="line">            关闭 Netty 相关资源</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Dubbo如何实现异步调用的？</p>
+<p>​	1. Future：获取结果只能阻塞获取或者轮询</p>
+<p>​	2. CompletableFuture：多个异步串联、组合执行，异步指定回调结果处理lambda等</p>
 <h4 id="rocketmq或其他消息中间件">RocketMq（或其他消息中间件）</h4>
 <p>了解一个常用消息中间件如RocketMq的实现：如何保证高可用和高吞吐、消息顺序、重复消费、事务消息、延迟消息、死信队列<br>
 常见问题</p>
@@ -637,9 +650,14 @@ zk</p>
 <li>
 <p>年轻代：<u>Serial</u>、<u>ParNew</u>、Parallel Scavenge、G1</p>
 <pre><code>	* Serial特点：单线程收集，适合单CPU场景，执行GC时完全STW，可以与老年代CMS搭配使用
-	* ParNew特点：多线程收集，适合多CPU场景，执行GC时完全STW，关注尽量缩短GCSTW时间，可以与老年代CMS搭配使用
-	* Parallel Scavenge特点：多线程收集，适合多CPU场景，执行GC时完全STW，关注吞吐量优先，可以使用自适应策略调整年轻代、老年代大小
-	* G1特点：分代收集，年轻代使用复制算法；将内存分成大小不等的Region，只对需要回收的Region执行GC，提高了并发程度。缺点：Region大小固定对应连续大内存的分配容易导致OOM
+</code></pre>
+</li>
+<li>
+<p>ParNew特点：多线程收集，适合多CPU场景，执行GC时完全STW，关注尽量缩短GCSTW时间，可以与老年代CMS搭配使用</p>
+</li>
+<li>
+<p>Parallel Scavenge特点：多线程收集，适合多CPU场景，执行GC时完全STW，关注吞吐量优先，可以使用自适应策略调整年轻代、老年代大小</p>
+<pre><code>	* G1特点：分代收集，年轻代使用复制算法；将内存分成大小不等的Region，只对需要回收的Region执行GC，提高了并发程度。缺点：Region大小固定对应连续大内存的分配容易导致OOM
 </code></pre>
 </li>
 <li>
@@ -661,7 +679,7 @@ zk</p>
 <p>并发标记：GC线程和用户线程并发执行</p>
 </li>
 <li>
-<p>重新标记：STW（为什么要进行重新标记，因为并发标记过程中，用户线程会修改对象间的引用关系，会导致浮动垃圾的产生以及对象的误删除。浮动垃圾可以忍受，但对象的误删除是不能接受的。所以重新标记阶段主要是防止对象引用关系变化导致的误删除，当然也能减少浮动垃圾 。参考：<a href="https://zhuanlan.zhihu.com/p/108706654%EF%BC%89" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/108706654）</a></p>
+<p>重新标记：STW（为什么要进行重新标记，因为并发标记过程中，用户线程会修改对象间的引用关系，会导致浮动垃圾的产生以及对象的误删除。浮动垃圾可以忍受，但对象的误删除是不能接受的。所以重新标记阶段主要是防止对象引用关系变化导致的误删除，当然也能减少浮动垃圾 。参考：<a href="https://zhuanlan.zhihu.com/p/108706654" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/108706654</a></p>
 </li>
 <li>
 <p>并发清除：GC线程和用户线程并发执行（会继续产生浮动垃圾）</p>
@@ -671,7 +689,7 @@ zk</p>
 </ul>
 </li>
 <li>
-<p>G1特点：分代收集，老年代使用标记整理算法，没有内存碎片。引入可预测的的停顿模型来降低STW时间，提供MaxGCPauseMillis参数设置最大GC停顿时间供JVM参考</p>
+<p>G1特点：分代收集，老年代使用标记整理算法，没有内存碎片。引入可预测的的停顿模型来降低STW时间，提供MaxGCPauseMillis参数设置最大GC停顿时间供JVM参考。参考：<a href="https://zhuanlan.zhihu.com/p/54048685" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/54048685</a></p>
 </li>
 </ul>
 </li>
@@ -682,6 +700,9 @@ zk</p>
 </li>
 <li>
 <p>G1对大内存更有优势（4核8G以上），java9以上的 默认GC是G1</p>
+</li>
+<li>
+<p><strong>java10以前FullGC都是单线程的，所以调优目标是尽量不要触发FullGC</strong></p>
 </li>
 <li>
 <p>G1最佳实践：</p>
@@ -696,7 +717,13 @@ zk</p>
 <p>设置STW最大停顿时间（默认值200ms）：-XX:MaxGCPauseMillis=n</p>
 </li>
 <li>
-<p>设置堆内存占用百分比达到多少时触发并发GC周期，默认值45：-XX:InitiatingHeapOccupancyPercent=n</p>
+<p>设置堆内存占用百分比达到多少时触发一次并发周期（一个并发周期相当于CMS整个周期，期间进行的GC叫混合GC），默认值45：-XX:InitiatingHeapOccupancyPercent=n</p>
+</li>
+<li>
+<p>设置混合GC判定Region为垃圾分区的存活对象比例阈值：-XX:G1MixedGCLiveThresholdPercent=n</p>
+</li>
+<li>
+<p>设置一个并发周期内最多经历几次（默认8）混合GC：-XX:G1MixedGCCountTarget=n</p>
 </li>
 <li>
 <p>增大标记线程数量：-XX:ConcGCThreads=n</p>
