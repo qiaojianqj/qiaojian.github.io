@@ -105,7 +105,7 @@
 <meta property="og:site_name" content="谯剑的小站">
 <meta property="og:description" content="启动类 SpringBoot应用启动类SpringApplication，提供了两种启动方式（其实底层是一种），如下： 第一种：提供了静态run方法，传入main函数所在类class作为参数 1SpringApplication.run(Main.class); //底层调用 new SpringApplication(primarySources).run(args); 第二种：提供实例run方">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-05-18T09:45:42.000Z">
+<meta property="og:updated_time" content="2020-10-13T10:28:08.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot启动流程">
 <meta name="twitter:description" content="启动类 SpringBoot应用启动类SpringApplication，提供了两种启动方式（其实底层是一种），如下： 第一种：提供了静态run方法，传入main函数所在类class作为参数 1SpringApplication.run(Main.class); //底层调用 new SpringApplication(primarySources).run(args); 第二种：提供实例run方">
@@ -425,7 +425,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-05-18 17:45:42" itemprop="dateModified" datetime="2020-05-18T17:45:42+08:00">2020-05-18</time>
+                <time title="修改时间：2020-10-13 18:28:08" itemprop="dateModified" datetime="2020-10-13T18:28:08+08:00">2020-10-13</time>
               </span>
             
           
@@ -477,7 +477,7 @@
 <p>根据classpath下是否包含web相关类推断web环境：reactive、servlet、none</p>
 </li>
 <li>
-<p>根据classpath下jar包资源路径下META-INF/spring.factories文件得到工厂类全路径名称并缓存到String[] cache，后续需要从cache里根据key（接口全路径名称）找到实现类全路径名称并实例化实现类</p>
+<p>根据classpath下jar包资源路径下META-INF/spring.factories文件得到工厂类全路径名称并缓存到Map&lt;ClassLoader, MultiValueMap&lt;String, String&gt;&gt; cache，后续需要从cache里根据key（接口全路径名称）找到实现类全路径名称并实例化实现类</p>
 </li>
 <li>
 <p>从2中cache查找接口org.springframework.context.ApplicationContextInitializer的所有实现类全路径名称并实例化存入initializers列表</p>
