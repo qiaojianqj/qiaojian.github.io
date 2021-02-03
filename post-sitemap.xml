@@ -7,8 +7,8 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/article/mysql%E7%AC%94%E8%AE%B0/</loc>
-        <lastmod>2020-12-29T12:29:27.600Z</lastmod>
+        <loc>https://qiaojiande.cn/article/Linux%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E5%91%BD%E4%BB%A4/</loc>
+        <lastmod>2021-02-03T02:37:10.514Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,15 @@
 
     <url>
         <loc>https://qiaojiande.cn/article/%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
-        <lastmod>2020-12-21T12:24:09.408Z</lastmod>
+        <lastmod>2021-01-27T09:50:52.658Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/article/mysql%E7%AC%94%E8%AE%B0/</loc>
+        <lastmod>2020-12-29T12:29:27.600Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -105,14 +113,6 @@
     <url>
         <loc>https://qiaojiande.cn/article/%E6%AD%A3%E7%A1%AE%E4%BD%BF%E7%94%A8volatile/</loc>
         <lastmod>2020-05-09T07:52:32.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://qiaojiande.cn/article/Linux%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E5%91%BD%E4%BB%A4/</loc>
-        <lastmod>2020-04-27T03:49:05.000Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
