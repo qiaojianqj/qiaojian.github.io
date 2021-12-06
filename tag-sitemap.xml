@@ -135,13 +135,6 @@
     </url>
 
     <url>
-        <loc>https://qiaojiande.cn/tags/mysql/</loc>
-        <lastmod>2020-12-29T12:29:27.600Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://qiaojiande.cn/tags/linux/</loc>
         <lastmod>2021-02-03T02:37:10.514Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -165,6 +158,13 @@
     <url>
         <loc>https://qiaojiande.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
         <lastmod>2021-11-29T03:13:48.906Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://qiaojiande.cn/tags/mysql/</loc>
+        <lastmod>2021-12-06T03:50:15.077Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
